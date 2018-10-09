@@ -1,0 +1,12 @@
+*.gitattributes
+*.vcxproj*
+.metadata/*
+.cproject
+.project
+AEDAHotel-part1/.settings
+AEDAHotel-part1/boost
+AEDAHotel-part1/Debug
+AEDAHotel-part2/.settings
+AEDAHotel-part2/boost
+AEDAHotel-part2/Debug
+
