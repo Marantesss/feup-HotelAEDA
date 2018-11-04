@@ -10,7 +10,6 @@ using namespace std;
 
 // Client Class
 class Client {
-protected:
 	string name;
 	vector<Reservation> reservations;
 public:
@@ -19,7 +18,7 @@ public:
 	string getName() const;
 	vector<Reservation> getReservations() const;
 	void setName(string name);
-
+	void addReservation(Reservation reservation);
 };
 
 // NonExistingClient exception

@@ -26,6 +26,9 @@ void Client::setName(string name) {
 	this->name = name;
 }
 
+void Client::addReservation(Reservation reservation) {
+	reservations.push_back(reservation);
+}
 
 /********************************/
 /* NonExistingClient exception **/

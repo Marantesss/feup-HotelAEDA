@@ -27,6 +27,10 @@ Implemente outras funcionalidades que considere relevantes, para além dos requi
 * **João Fransisco Santos** - [ExSchYte](https://github.com/ExSchYte)
 * **Luís Gonçalves** - [lalex92](https://github.com/lalex92)
 
+## UML Diagrams
+
+* [Class Diagram](https://www.lucidchart.com/invitations/accept/88c9b8c1-f1f1-413f-8a78-2902d4b6901d) 
+
 ## License
 
 This project is not licensed under any license.

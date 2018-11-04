@@ -6,13 +6,13 @@
 #include "room.h"
 
 class Hotel {
-protected:
 	vector<Client> clients;
 	vector<Reservation> reservations;
 	vector<Room> rooms;
 public:
 	Hotel();
 	~Hotel();
+	vector<Client> getClients() const;
 	vector<Reservation> getReservations() const;
 	vector<Room> getRooms() const;
 

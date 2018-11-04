@@ -9,8 +9,6 @@ Room::Room(int number, int capacity) {
 	this->capacity = capacity;
 }
 
-Room::~Room() {}
-
 int Room::getNumber() const {
 	return this->number;
 }
@@ -63,8 +61,6 @@ MeetingRoom::MeetingRoom(int number, int capacity, bool video, bool audio): Room
 	}
 }
 
-MeetingRoom::~MeetingRoom() {}
-
 bool MeetingRoom::getVideo() const {
 	return this->video;
 }
@@ -104,8 +100,6 @@ Bedroom::Bedroom(int number, int capacity, string location): Room(number, capaci
 		break;
 	}
 }
-
-Bedroom::~Bedroom() {}
 
 string Bedroom::getLocation() const {
 	return this->location;

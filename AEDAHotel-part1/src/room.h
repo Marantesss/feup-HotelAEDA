@@ -12,7 +12,7 @@ protected:
 	int capacity;
 public:
 	Room(int number, int capacity);
-	~Room();
+	virtual ~Room() {};
 	// get
 	int getNumber() const;
 	int getCapacity() const;
@@ -24,13 +24,11 @@ public:
 
 // MeetingRoom Class
 class MeetingRoom: public Room {
-protected:
 	bool video;
 	bool audio;
 	int price;
 public:
 	MeetingRoom(int number, int capacity, bool video, bool audio);
-	~MeetingRoom();
 	// get
 	bool getVideo() const;
 	bool getAudio() const;
@@ -44,12 +42,10 @@ public:
 
 // Bedroom Class
 class Bedroom: public Room {
-protected:
 	string location;
 	int price;
 public:
 	Bedroom(int number, int capacity, string location);
-	~Bedroom();
 	// get
 	string getLocation() const;
 	int getPrice() const;

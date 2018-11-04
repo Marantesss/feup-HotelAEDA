@@ -1,8 +1,5 @@
 #include "hotel.h"
 
-using namespace std;
-
-
 /*****************/
 /** Hotel Class **/
 /*****************/
@@ -15,6 +12,10 @@ vector<Reservation> Hotel::getReservations() const {
 	return this->reservations;
 }
 
-vector<Reservation> Hotel::getRooms() const {
+vector<Room> Hotel::getRooms() const {
 	return this->rooms;
+}
+
+vector<Client> Hotel::getClients() const {
+	return this->clients;
 }
