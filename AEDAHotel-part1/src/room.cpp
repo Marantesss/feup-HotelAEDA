@@ -9,6 +9,11 @@ Room::Room(int number, int capacity) {
 	this->capacity = capacity;
 }
 
+Room::Room() {
+	this->number = 0;
+	this->capacity = 0;
+}
+
 int Room::getNumber() const {
 	return this->number;
 }

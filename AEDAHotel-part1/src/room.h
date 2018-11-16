@@ -12,6 +12,7 @@ protected:
 	int capacity;
 public:
 	Room(int number, int capacity);
+	Room();
 	virtual ~Room() {};
 	// get
 	int getNumber() const;

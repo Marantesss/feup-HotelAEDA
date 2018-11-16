@@ -19,3 +19,11 @@ vector<Room> Hotel::getRooms() const {
 vector<Client> Hotel::getClients() const {
 	return this->clients;
 }
+
+void Hotel::sortClients() {
+	insertionSort(this->clients);
+}
+
+void Hotel::addClient(Client & c) {
+	this->clients.push_back(c);
+}

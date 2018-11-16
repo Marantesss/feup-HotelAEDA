@@ -7,9 +7,18 @@
 //============================================================================
 
 #include <iostream>
+#include "hotel.h"
+#include "client.h"
+#include "reservation.h"
+#include "room.h"
+#include "date.h"
+#include <string>
+
+
 using namespace std;
 
 int main() {
-	cout << "Estamos todos chumbados! :´)" << endl; // prints !!!Hello World!!!
+
+	system("PAUSE");
 	return 0;
 }

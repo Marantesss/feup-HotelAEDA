@@ -1,0 +1,3 @@
+﻿  hotel.cpp
+aedahotel-part1\src\hotel.cpp(36): error C2995: 'void insertionSort(std::vector<T,std::allocator<_Ty>> &)': function template has already been defined
+  c:\users\luis goncalves\source\repos\feup-hotelaeda\aedahotel-part1\src\hotel.h(22): note: see declaration of 'insertionSort'

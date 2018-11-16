@@ -19,6 +19,7 @@ public:
 	vector<Reservation> getReservations() const;
 	void setName(string name);
 	void addReservation(Reservation reservation);
+	bool operator < (Client & c2);
 };
 
 // NonExistingClient exception
