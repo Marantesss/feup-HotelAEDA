@@ -35,6 +35,13 @@ bool  Client::operator< (Client &c2) {
 	else return false;
 }
 
+// To be completed -- Add reservations
+string Client::getInfo() const {
+	stringstream ss;
+	ss << "Name: " << name;
+	return ss.str();
+}
+
 /********************************/
 /* NonExistingClient exception **/
 /********************************/

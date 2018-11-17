@@ -6,7 +6,7 @@
 
 Employee::Employee(int id, string name) {
 	this->id = id;
-	this->getName = name;
+	this->name = name;
 }
 
 void Employee::setId(int id) {
@@ -14,7 +14,7 @@ void Employee::setId(int id) {
 }
 
 void Employee::setName(string name) {
-	this->getName = name;
+	this->name = name;
 }
 
 int Employee::getId() {
@@ -25,15 +25,19 @@ string Employee::getName() {
 	return name;
 }
 
+string Employee::getInfo() const {
+	stringstream ss;
+	ss << "Name - " << name << "Id - " << id;
+	return ss.str();
+}
+
 // Supervisor Class
 
 Supervisor::Supervisor(int id, string name) :Employee(id,name)
 {}
 
-void Supervisor::addARoom(Room *r) { //!!!Finish when serch function is implemented
-	this->appointedRooms.push_back(*r);
-}
-
-vector<Room> Supervisor::getARooms() {
-	return this->appointedRooms;
+string Supervisor::getInfo() const {
+	stringstream ss;
+	ss << "Supervisor:\n" << Employee::getInfo() << endl;
+	return ss.str();
 }

@@ -13,6 +13,7 @@
 #include "room.h"
 #include "date.h"
 #include <string>
+#include <sstream>
 
 
 using namespace std;

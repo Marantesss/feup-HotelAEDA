@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "room.h"
+#include <sstream>
 
 using namespace std;
 
@@ -17,14 +17,13 @@ public:
 	void setId(int id);
 	string getName();
 	int getId();
+	virtual string getInfo() const; 
 };
 
-class Supervisor:public Employee {
-	vector<Room> appointedRooms;
+class Supervisor: public Employee {
 public:
 	Supervisor(int id, string name);
-	void addARoom(Room *r);
-	vector<Room> getARooms();
+	virtual string getInfo() const;
 };
 
 #endif /* HOTEL_H_ */

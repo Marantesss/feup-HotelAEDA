@@ -1,12 +1,13 @@
 #ifndef RESERVATION_H_
 #define RESERVATION_H_
 
+#include <sstream>
+#include <vector>
 #include "date.h"
 #include "room.h"
 
 // Reservation Class
 class Reservation {
-protected:
 	Date date;
 	Room room;
 public:
@@ -18,6 +19,8 @@ public:
 	// set
 	void setDate(Date date);
 	void setRoom(Room room);
+	
+	string getInfo();
 };
 
 // InvalidReservation exception

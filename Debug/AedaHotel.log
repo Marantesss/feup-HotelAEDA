@@ -1,0 +1,10 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (HotelAEDA.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  AEDAHotel-part1.cpp
+c:\users\lalex\source\repos\marantesss\feup-hotelaeda\aedahotel-part1\src\hotel.h(15): error C2059: syntax error: 'public'
+  employee.cpp
+c:\users\lalex\source\repos\marantesss\feup-hotelaeda\aedahotel-part1\src\employee.cpp(9): error C2659: '=': function as left operand
+c:\users\lalex\source\repos\marantesss\feup-hotelaeda\aedahotel-part1\src\employee.cpp(17): error C2659: '=': function as left operand
+  hotel.cpp
+c:\users\lalex\source\repos\marantesss\feup-hotelaeda\aedahotel-part1\src\hotel.h(15): error C2059: syntax error: 'public'
+c:\users\lalex\source\repos\marantesss\feup-hotelaeda\aedahotel-part1\src\hotel.cpp(7): error C2600: 'Hotel::Hotel': cannot define a compiler-generated special member function (must be declared in the class first)
+  Generating Code...
