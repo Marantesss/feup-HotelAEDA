@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 #include "reservation.h"
 
 using namespace std;
@@ -19,6 +20,8 @@ public:
 	vector<Reservation> getReservations() const;
 	void setName(string name);
 	void addReservation(Reservation reservation);
+	bool operator < (Client & c2);
+	string getInfo() const;
 };
 
 // NonExistingClient exception

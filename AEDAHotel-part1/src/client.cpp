@@ -9,7 +9,7 @@ using namespace std;
 
 Client::Client(string name) {
 	this->name = name;
-	this->reservations = NULL;
+	this->reservations = {};
 }
 
 Client::~Client() {}
@@ -18,7 +18,7 @@ string Client::getName() const {
 	return this->name;
 }
 
-vector<reservation> Client::getReservations() const {
+vector<Reservation> Client::getReservations() const {
 	return this->reservations;
 }
 
@@ -28,6 +28,18 @@ void Client::setName(string name) {
 
 void Client::addReservation(Reservation reservation) {
 	reservations.push_back(reservation);
+}
+
+bool  Client::operator< (Client &c2) {
+	if (this->name <= c2.name) return true;
+	else return false;
+}
+
+// To be completed -- Add reservations
+string Client::getInfo() const {
+	stringstream ss;
+	ss << "Name: " << name;
+	return ss.str();
 }
 
 /********************************/

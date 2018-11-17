@@ -54,6 +54,12 @@ void Date::showExtendedDate() {
 	cout << day << "  " << monthName[month - 1] << "  " << year << endl;
 }
 
+string Date::getInfo() {
+	stringstream ss;
+	ss << day << "/" << month << "/" << year;
+	return ss.str();
+}
+
 /********************************/
 /**** InvalidDate exception *****/
 /********************************/

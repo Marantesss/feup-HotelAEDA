@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
+
 using namespace std;
 
 // Date Class
@@ -22,6 +24,7 @@ public:
 	void setYear(int year);
 	void showDate();
 	void showExtendedDate();
+	string getInfo();
 };
 
 // InvalidDate exception

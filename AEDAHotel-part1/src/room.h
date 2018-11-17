@@ -2,6 +2,8 @@
 #define ROOM_H_
 
 #include <string>
+#include <sstream>
+#include "employee.h"
 
 using namespace std;
 
@@ -10,8 +12,11 @@ class Room {
 protected:
 	int number;
 	int capacity;
+	Supervisor *supervisor;
+
 public:
 	Room(int number, int capacity);
+	Room();
 	virtual ~Room() {};
 	// get
 	int getNumber() const;
@@ -19,6 +24,9 @@ public:
 	// set
 	void setNumber(int number);
 	void setCapacity(int capacity);
+	void setSupervisor(Supervisor *s);
+	
+	virtual string getInfo() const;
 };
 
 
@@ -37,6 +45,8 @@ public:
 	void setVideo(bool video);
 	void setAudio(bool audio);
 	void setPrice(int price);
+
+	string getInfo() const;
 };
 
 
@@ -52,6 +62,8 @@ public:
 	// set
 	void setLocation(string location);
 	void setPrice(int price);
+
+	string getInfo() const;
 };
 
 

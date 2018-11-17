@@ -25,6 +25,13 @@ void Reservation::setRoom(Room room) {
 	this->room = room;
 }
 
+string Reservation::getInfo() {
+	stringstream ss;
+	ss << "Date - " << date.getInfo() << endl;
+	ss << "Room - " << room.getInfo() << endl;
+	return ss.str();
+}
+
 /**********************************/
 /** InvalidReservation exception **/
 /**********************************/
