@@ -8,35 +8,47 @@ Hotel::Hotel() {}
 
 Hotel::~Hotel() {}
 
-vector<Reservation> Hotel::getReservations() const {
+vector<Reservation*> Hotel::getReservations() const {
 	return this->reservations;
 }
 
-vector<Room> Hotel::getRooms() const {
+vector<Room*> Hotel::getRooms() const {
 	return this->rooms;
 }
 
-vector<Client> Hotel::getClients() const {
+vector<Client*> Hotel::getClients() const {
 	return this->clients;
 }
 
-void Hotel::sortClients() {
-	insertionSort(this->clients);
-}
-
-void Hotel::addClient(Client & c) {
+void Hotel::addClient(Client * c) {
 	this->clients.push_back(c);
 }
 
-template <class T>
-void insertionSort<T>(vector<T> &v) {
-	for (size_t i = 1; i < v.size(); i++)
-	{
-		T tmp = v[i];
-		size_t j;
-		for (j = i; j > 0 && tmp < v[j - 1]; j--) {
-			v[j] = v[j - 1];
+int Hotel::removeClient(string name) {
+	for (size_t i = 0; i <= clients.size(); i++) {
+		if (clients[i]->getName() == name) {
+			this->clients.erase(clients.begin() + i);
+			return 0;
 		}
-		v[j] = tmp;
 	}
+	return -1;
 }
+
+void Hotel::addRoom(Room * r) {
+	this->rooms.push_back(r);
+}
+
+int Hotel::removeRoom(int number) {
+	for (size_t i = 0; i <= rooms.size(); i++) {
+		if (rooms[i]->getNumber() == number) {
+			this->rooms.erase(rooms.begin() + i);
+			return 0;
+		}
+	}
+	return -1;
+}
+
+void Hotel::addReservation(Reservation * R) {
+	this->reservations.push_back(R);
+}
+

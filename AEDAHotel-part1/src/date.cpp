@@ -54,7 +54,7 @@ void Date::showExtendedDate() {
 	cout << day << "  " << monthName[month - 1] << "  " << year << endl;
 }
 
-string Date::getInfo() {
+string Date::getInfo() const {
 	stringstream ss;
 	ss << day << "/" << month << "/" << year;
 	return ss.str();

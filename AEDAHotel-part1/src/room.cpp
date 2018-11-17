@@ -22,6 +22,10 @@ int Room::getCapacity() const {
 	return this->capacity;
 }
 
+int Room::getPrice() const {
+	return 0;
+}
+
 void Room::setNumber(int number) {
 	this->number = number;
 }
@@ -30,14 +34,14 @@ void Room::setCapacity(int capacity) {
 	this->capacity = capacity;
 }
 
-string Room::getInfo() const {
-	stringstream ss;
-	ss << "Number - " << number << "\nCapacity - " << capacity;
-	return ss.str();
-}
-
 void Room::setSupervisor(Supervisor *s) {
 	this->supervisor = s;
+}
+
+string Room::getInfo() const {
+	stringstream ss;
+	ss << "\tNumber - " << number << "\n\tCapacity - " << capacity;
+	return ss.str();
 }
 
 /***********************/
@@ -95,7 +99,7 @@ void MeetingRoom::setAudio(bool audio) {
 	this->capacity = capacity;
 }
 
-void MeetingRoom::setPrice(int price) {
+void MeetingRoom::setPricePerHour(int price) {
 	this->price = price;
 }
 
@@ -107,10 +111,12 @@ string MeetingRoom::getInfo() const {
 	if (video) vid = "yes"; else vid = "no";
 	if (audio) aud = "yes"; else aud = "no";
 
-	ss << "Meeting Room: \n" << Room::getInfo() << "\nVideo - " << vid << "\nAudio - " << aud << "\nPrice - " << price << " €";
+	ss << "Meeting Room: \n" << Room::getInfo() << "\n\tVideo - " << vid << "\n\tAudio - " << aud << "\n\tPrice per hour - " << price << " Euros";
 
 	return ss.str();
 }
+
+
 
 /*******************/
 /** Bedroom Class **/
@@ -147,7 +153,7 @@ void Bedroom::setPrice(int price) {
 string Bedroom::getInfo() const {
 	stringstream ss;
 
-	ss << "Bedroom: \n" << Room::getInfo() << "\nLocation - " << location << "\nPrice - " << price << " €";
+	ss << "Bedroom: \n"  << Room::getInfo() << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";
 
 	return ss.str();
 }
