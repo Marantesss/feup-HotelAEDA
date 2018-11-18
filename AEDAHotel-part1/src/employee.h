@@ -8,7 +8,8 @@
 
 using namespace std;
 
-class Employee {
+class Employee { // @suppress("Class has a virtual method and non-virtual destructor")
+protected:
 	int id;
 	string name;
 public:
@@ -17,13 +18,13 @@ public:
 	void setId(int id);
 	string getName();
 	int getId();
-	virtual string getInfo() const; 
+	virtual string getInfo() const = 0;
 };
 
-class Supervisor: public Employee {
+class Supervisor: public Employee { // @suppress("Class has a virtual method and non-virtual destructor")
 public:
 	Supervisor(int id, string name);
-	virtual string getInfo() const;
+	string getInfo() const;
 };
 
-#endif /* HOTEL_H_ */
+#endif /* EMPLOYEE_H_ */

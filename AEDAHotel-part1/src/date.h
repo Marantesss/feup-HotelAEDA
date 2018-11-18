@@ -24,7 +24,8 @@ public:
 	void setYear(int year);
 	void showDate();
 	void showExtendedDate();
-	string getInfo();
+	string getInfo() const;
+
 };
 
 // InvalidDate exception

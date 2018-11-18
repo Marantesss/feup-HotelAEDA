@@ -13,7 +13,6 @@ protected:
 	int number;
 	int capacity;
 	Supervisor *supervisor;
-
 public:
 	Room(int number, int capacity);
 	Room();
@@ -21,12 +20,13 @@ public:
 	// get
 	int getNumber() const;
 	int getCapacity() const;
+	virtual int getPrice() const;
+	virtual string getInfo() const;
 	// set
 	void setNumber(int number);
 	void setCapacity(int capacity);
 	void setSupervisor(Supervisor *s);
-	
-	virtual string getInfo() const;
+
 };
 
 
@@ -34,36 +34,35 @@ public:
 class MeetingRoom: public Room {
 	bool video;
 	bool audio;
-	int price;
+	int price; //per hour
 public:
 	MeetingRoom(int number, int capacity, bool video, bool audio);
 	// get
 	bool getVideo() const;
 	bool getAudio() const;
 	int getPrice() const;
+	string getInfo() const;
 	// set
 	void setVideo(bool video);
 	void setAudio(bool audio);
-	void setPrice(int price);
+	void setPricePerHour(int price);
 
-	string getInfo() const;
 };
 
 
 // Bedroom Class
 class Bedroom: public Room {
 	string location;
-	int price;
+	int price; //per day
 public:
 	Bedroom(int number, int capacity, string location);
 	// get
 	string getLocation() const;
 	int getPrice() const;
+	string getInfo() const;
 	// set
 	void setLocation(string location);
 	void setPrice(int price);
-
-	string getInfo() const;
 };
 
 

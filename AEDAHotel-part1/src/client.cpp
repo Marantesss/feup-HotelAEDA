@@ -9,7 +9,6 @@ using namespace std;
 
 Client::Client(string name) {
 	this->name = name;
-	this->reservations = {};
 }
 
 Client::~Client() {}
@@ -18,16 +17,8 @@ string Client::getName() const {
 	return this->name;
 }
 
-vector<Reservation> Client::getReservations() const {
-	return this->reservations;
-}
-
 void Client::setName(string name) {
 	this->name = name;
-}
-
-void Client::addReservation(Reservation reservation) {
-	reservations.push_back(reservation);
 }
 
 bool  Client::operator< (Client &c2) {
@@ -35,10 +26,22 @@ bool  Client::operator< (Client &c2) {
 	else return false;
 }
 
-// To be completed -- Add reservations
+void Client::addReservation(Reservation * R) {
+	this->reservations.push_back(R);
+}
+
 string Client::getInfo() const {
 	stringstream ss;
-	ss << "Name: " << name;
+	ss << "Name: " << name << endl;
+	if (!this->reservations.empty()) {
+		ss << "Reservations:" << endl;
+		for (size_t i = 0; i < reservations.size(); i++) {
+			ss << i + 1 << ": " << reservations[i]->getInfo() << endl;
+		}
+	}
+	else {
+		ss << "(This client has no reservations)" << endl;
+	}
 	return ss.str();
 }
 

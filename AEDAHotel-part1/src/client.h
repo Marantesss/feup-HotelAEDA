@@ -12,16 +12,15 @@ using namespace std;
 // Client Class
 class Client {
 	string name;
-	vector<Reservation> reservations;
+	vector<Reservation*> reservations;
 public:
 	Client(string name);	// constructor
 	~Client();				// destructor
 	string getName() const;
-	vector<Reservation> getReservations() const;
 	void setName(string name);
-	void addReservation(Reservation reservation);
 	bool operator < (Client & c2);
 	string getInfo() const;
+	void addReservation(Reservation * R);
 };
 
 // NonExistingClient exception
