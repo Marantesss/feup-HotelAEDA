@@ -29,7 +29,7 @@ void Hotel::addClient(Client & c) {
 }
 
 template <class T>
-void insertionSort<T>(vector<T> &v) {
+void insertionSort(vector<T> &v) {
 	for (size_t i = 1; i < v.size(); i++)
 	{
 		T tmp = v[i];
