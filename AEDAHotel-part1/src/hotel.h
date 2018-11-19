@@ -27,8 +27,11 @@ public:
 	int removeClient(string name);
 	// Rooms
 	vector<Room*> getRooms() const;
+	vector<Room*> getFloorNumberRooms(int floor) const;
+	string getRoomsInfo();
 	void addRoom(Room * r);
-	int removeRoom(int number);
+	void removeRoom(int number);
+	void removeRoomsFromFloor(int floor);
 	// Reservations
 	vector<Reservation*> getReservations() const;
 	void addReservation(Reservation * R);

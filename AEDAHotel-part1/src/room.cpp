@@ -24,8 +24,8 @@ int Room::getCapacity() const {
 	return this->capacity;
 }
 
-int Room::getPrice() const {
-	return 0;
+int Room::getFloorNumber() const {
+	return this->number/100;
 }
 
 void Room::setNumber(int number) {

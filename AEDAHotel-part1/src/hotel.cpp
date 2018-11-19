@@ -5,10 +5,6 @@
 /*****************/
 
 Hotel::Hotel(int floors, int bedrooms, int meetingRooms, string address) {
-	this->clients = NULL;
-	this->reservations = NULL;
-	this->rooms = NULL;
-	this->employees = NULL;
 	this->floors = floors;
 	this->bedrooms = bedrooms;
 	this->meetingRooms = meetingRooms;
@@ -41,20 +37,57 @@ vector<Room*> Hotel::getRooms() const {
 	return this->rooms;
 }
 
+vector<Room*> Hotel::getFloorNumberRooms(int floor) const {
+	vector<Room*> returnRooms;
+
+	for (size_t i = 0; i < rooms.size(); i++) {
+		if (rooms[i]->getFloorNumber() == floor) {
+			returnRooms.push_back(rooms[i]);
+		}
+	}
+
+	return returnRooms;
+}
+
+string Hotel::getRoomsInfo() {
+	stringstream ss;
+	for (size_t i = 1; i <= getFloors(); i++) {
+		ss << "Floor " << i << ": ";
+		for (size_t j = 0; j < rooms.size(); j++) {
+			if (rooms[i]->getFloorNumber() == i) {
+				if (j == rooms.size() - 1) {
+					ss << rooms[j]->getNumber() << endl;
+				}
+				else {
+					ss << rooms[j]->getNumber() << ", ";
+				}
+			}
+		}
+	}
+	return ss.str();
+}
+
 void Hotel::addRoom(Room * r) {
 	this->rooms.push_back(r);
 }
 
 //TO CHANGE - THROW EXCEPTION
-int Hotel::removeRoom(int number) {
-	for (size_t i = 0; i <= rooms.size(); i++) {
+void Hotel::removeRoom(int number) {
+	for (size_t i = 0; i < rooms.size(); i++) {
 		if (rooms[i]->getNumber() == number) {
 			this->rooms.erase(rooms.begin() + i);
-			return 0;
 		}
 	}
-	return -1;
 }
+
+void Hotel::removeRoomsFromFloor(int floor) {
+	for (size_t i = 0; i < rooms.size(); i++) {
+		if (floor == rooms[i]->getFloorNumber()) {
+			removeRoom(rooms[i]->getNumber());
+		}
+	}
+}
+
 
 //... Reservations
 vector<Reservation*> Hotel::getReservations() const {

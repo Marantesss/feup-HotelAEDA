@@ -7,14 +7,14 @@
 //============================================================================
 
 #include <iostream>
+#include <string>
+#include <sstream>
 #include "hotel.h"
 #include "client.h"
 #include "reservation.h"
 #include "room.h"
 #include "date.h"
 #include "AuxFunctions.h"
-#include <string>
-#include <sstream>
 
 using namespace std;
 
@@ -22,11 +22,30 @@ int menu();
 int hotelInformationMenu(Hotel *h);
 int hotelChangeInformationMenu(Hotel *h);
 
-
 int main() {
-	Hotel h;
+	int menuOption;
+	Hotel h(4, 15, 2, "Porto, Rua da Alegria 20");
 	cout << "------ Welcome to Hotel AEDA ------" << endl;
-	int menuOption = menu();
+	do {
+		menuOption = menu();
+		switch(menuOption) {
+		case 1: // Hotel Information
+			hotelInformationMenu(&h);
+			break;
+		case 2: // Clients
+			break;
+		case 3: // Reservations
+			break;
+		case 4: // Rooms
+			break;
+		case 5: // Employees
+			break;
+		}
+		if (menuOption < 0 || menuOption > 5) {
+			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
+		}
+	} while (menuOption != 0);
+
 	/* TESTES
 	Client c1("Alex");
 	Date d1(17, 11, 2018);
@@ -86,26 +105,47 @@ int hotelInformationMenu(Hotel *h) {
 }
 
 int hotelChangeInformationMenu(Hotel *h) {
-	int menuOption;
+	int menuOption, floorOperation;
+	string newAddress;
 
 	do {
 		cout << "------ CHANGE HOTEL INFORMATION ------" << endl;
-		cout << "Hotel AEDA - " << h->getAddress() << endl;
-		cout << "Total Rooms: " << h->getBedrooms() + h->getMeetingRooms() << ", ";
-		cout << "Bedrooms: " << h->getBedrooms()<< ", ";
-		cout << "Meeting Rooms: " << h->getMeetingRooms() << endl;
-		cout << "Clients: " << h->getClients().size() << endl;
-		cout << "Employees: " << h->getEmployees().size() << endl << endl;
-
-		cout << "What would you like to do?" << endl;
-		cout << "Change Information - 1 " << endl;
+		cout << "Change Address - 1" << endl;
+		cout << "Add Floor - 2" << endl;
+		cout << "Remove Floor - 3" << endl;
 		cout << "Back - 0 " << endl;
 		cout << "Option: ";
 		cin >> menuOption;
-		if (menuOption < 0 || menuOption > 1) {
+		switch (menuOption) {
+		case 1:
+			cout << "Enter new address: ";
+			cin >> newAddress;
+			// h->setAddress(newAddress);
+			cout << "Address updated!" << endl;
+			break;
+		case 2:
+			// h->addFloor();
+			cout << "Floor added!" << endl;
+			break;
+		case 3:
+			cout << "Which floor do you want to remove?" << endl;
+			cout << h->getRoomsInfo(); // Prints all rooms
+			cout << "This action will remove all existing reservations and rooms in the floor." << endl;
+			cout << "Enter floor number (or 0 to go back): ";
+			cin >> floorOperation;
+			if (floorOperation < 0 || floorOperation > h->getFloors()) {
+				cout << "ERROR: Not a valid Floor/Operation! Please try again..." << endl;
+			}
+			else if (floorOperation > 0 || floorOperation <= h->getFloors()) {
+				h->removeRoomsFromFloor(menuOption);
+				h->removeFloor();
+			}
+			break;
+		}
+		if (menuOption < 0 || menuOption > h->getFloors()) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
-	} while (menuOption < 0 || menuOption > 1);
+	} while (menuOption != 0);
 
 	return menuOption;
 }

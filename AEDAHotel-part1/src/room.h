@@ -20,6 +20,7 @@ public:
 	// get
 	int getNumber() const;
 	int getCapacity() const;
+	int getFloorNumber() const;
 	virtual int getPrice() const;
 	virtual string getInfo() const;
 	// set
