@@ -46,6 +46,10 @@ string Room::getInfo() const {
 	return ss.str();
 }
 
+int Room::getPrice() const {
+	return 0;
+}
+
 /***********************/
 /** MeetingRoom Class **/
 /***********************/
