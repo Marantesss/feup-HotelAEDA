@@ -98,7 +98,7 @@ void Hotel::addReservation(Reservation * R) {
 	this->reservations.push_back(R);
 }
 
-void Hotel::removeReservation(Date d, Room R) {
+void Hotel::removeReservation(Date *d, Room *R) {
 	//TO DO
 }
 
@@ -107,7 +107,7 @@ vector<Employee*> Hotel::getEmployees() const {
 	return this->employees;
 }
 
-void Hotel::addEmployee(Employee * E) {
+void Hotel::addEmployee(Employee *E) {
 	this->employees.push_back(E);
 }
 

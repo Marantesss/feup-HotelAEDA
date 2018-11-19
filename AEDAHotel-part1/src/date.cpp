@@ -178,7 +178,7 @@ string Date::showExtendedDate() {
 
 // calculating adjacent dates
 Date *nextDate(Date *d) {
-	Date *newDate;
+	Date *newDate = new Date();
 	// day 31
 	if (d->getDay() == 31 && (d->getMonth() == 1 || d->getMonth() == 3 || d->getMonth() == 5 || d->getMonth() == 7 || d->getMonth() == 8 || d->getMonth() == 10 || d->getMonth() == 12)) {
 		newDate->setDay(1);
@@ -229,7 +229,7 @@ Date *nextDate(Date *d) {
 }
 
 Date *previousDate(Date *d){
-	Date *newDate;
+	Date *newDate = new Date();
 	// day 1
 	if (d->getDay() == 1) {
 		// month 1
@@ -267,6 +267,7 @@ Date *previousDate(Date *d){
 
 
 // Operators
+/*
 Date *Date::operator ++() { // prefix
 	this = nextDate(this);
 	return this;
@@ -285,6 +286,7 @@ Date *Date::operator --() { // prefix
 Date *Date::operator --(int) { // postfix
 
 }
+*/
 
 bool Date::operator ==(Date *date) {
 	if (this->day == date->day && this->month == date->month && this->year == date->year)
