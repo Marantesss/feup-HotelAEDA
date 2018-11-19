@@ -51,7 +51,7 @@ vector<Room*> Hotel::getFloorNumberRooms(int floor) const {
 
 string Hotel::getRoomsInfo() {
 	stringstream ss;
-	for (size_t i = 1; i <= getFloors(); i++) {
+	for (int i = 1; i <= getFloors(); i++) {
 		ss << "Floor " << i << ": ";
 		for (size_t j = 0; j < rooms.size(); j++) {
 			if (rooms[i]->getFloorNumber() == i) {

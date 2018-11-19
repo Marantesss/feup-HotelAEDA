@@ -157,7 +157,15 @@ void Date::setMonth(int month) {
 }
 
 void Date::setYear(int year) {
-		this->year = year;
+	this->year = year;
+}
+
+void Date::setSeason(string season) {
+	this->season = season;
+}
+
+void Date::setWeekday(string weekday) {
+	this->weekday = weekday;
 }
 
 string Date::showDate() {
@@ -177,122 +185,134 @@ string Date::showExtendedDate() {
 }
 
 // calculating adjacent dates
-Date *nextDate(Date *d) {
-	Date *newDate = new Date();
+void nextDate(Date *d) {
+	int day = d->getDay();
+	int month = d->getMonth();
+	int year = d->getYear();
+
 	// day 31
-	if (d->getDay() == 31 && (d->getMonth() == 1 || d->getMonth() == 3 || d->getMonth() == 5 || d->getMonth() == 7 || d->getMonth() == 8 || d->getMonth() == 10 || d->getMonth() == 12)) {
-		newDate->setDay(1);
+	if (day == 31 && (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)) {
+		d->setDay(1);
 		// month 12
-		if (d->getMonth() == 12) {
-			newDate->setMonth(1);
-			newDate->setYear(d->getYear() + 1);
+		if (month == 12) {
+			d->setMonth(1);
+			d->setYear(year + 1);
 		}
 		else {
-			newDate->setMonth(d->getMonth() + 1);
-			newDate->setYear(d->getYear());
+			d->setMonth(month + 1);
+			d->setYear(year);
 		}
 	}
 	//day 30
-	else if (d->getDay() == 30 && (d->getMonth() == 4 || d->getMonth() == 6 || d->getMonth() == 9 || d->getMonth() == 11)) {
-		newDate->setDay(1);
-		newDate->setMonth(d->getMonth() + 1);
-		newDate->setYear(d->getYear());
+	else if (day == 30 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+		d->setDay(1);
+		d->setMonth(month + 1);
+		d->setYear(year);
 	}
 	// February
-	else if (d->getMonth() == 2 && d->getDay() >= 28) {
-		if(isLeap(d->getYear())) {
-			if (d->getDay() == 28) {
-				newDate->setDay(29);
-				newDate->setMonth(2);
-				newDate->setYear(d->getYear());
+	else if (month == 2 && day >= 28) {
+		if(isLeap(year)) {
+			if (day == 28) {
+				d->setDay(29);
+				d->setMonth(2);
+				d->setYear(year);
 			}
-			else if (d->getDay() == 29) {
-				newDate->setDay(1);
-				newDate->setMonth(3);
-				newDate->setYear(d->getYear());
+			else if (day == 29) {
+				d->setDay(1);
+				d->setMonth(3);
+				d->setYear(year);
 			}
 		}
 		else {
-			newDate->setDay(1);
-			newDate->setMonth(3);
-			newDate->setYear(d->getYear());
+			d->setDay(1);
+			d->setMonth(3);
+			d->setYear(year);
 		}
 	}
 	// generic case
 	else {
-		newDate->setDay(d->getDay() + 1);
-		newDate->setMonth(d->getMonth());
-		newDate->setYear(d->getYear());
+		d->setDay(day + 1);
+		d->setMonth(month);
+		d->setYear(year);
 	}
-
-	return newDate;
 }
 
-Date *previousDate(Date *d){
-	Date *newDate = new Date();
+void previousDate(Date *d){
+	int day = d->getDay();
+	int month = d->getMonth();
+	int year = d->getYear();
+
 	// day 1
 	if (d->getDay() == 1) {
 		// month 1
-		if (d->getMonth() == 1) {
-			newDate->setDay(31);
-			newDate->setMonth(12);
-			newDate->setYear(d->getYear() - 1);
+		if (month == 1) {
+			d->setDay(31);
+			d->setMonth(12);
+			d->setYear(year - 1);
 		}
 		else {
 			// month 3
-			if (d->getMonth() == 3) {
-				if (isLeap(d->getYear()))
-					newDate->setDay(29);
+			if (month == 3) {
+				if (isLeap(year))
+					d->setDay(29);
 				else
-					newDate->setDay(28);
+					d->setDay(28);
 			}
-			else if (d->getMonth() == 5 || d->getMonth() == 7 || d->getMonth() == 10 || d->getMonth() == 12) {
+			else if (month == 5 || month == 7 || month == 10 || month == 12) {
 				d->setDay(30);
 			}
-			else if (d->getMonth() == 4 || d->getMonth() == 6 || d->getMonth() == 8 || d->getMonth() == 9 || d->getMonth() == 11) {
+			else if (month == 4 || month == 6 || month == 8 || month == 9 || month == 11) {
 				d->setDay(31);
 			}
 		}
-		newDate->setMonth(d->getMonth() - 1);
-		newDate->setYear(d->getYear());
+		d->setMonth(month - 1);
+		d->setYear(year);
 	}
 	else {
-		newDate->setDay(d->getDay() - 1);
-		newDate->setMonth(d->getMonth());
-		newDate->setYear(d->getYear());
+		d->setDay(day - 1);
+		d->setMonth(month);
+		d->setYear(year);
 	}
-
-	return newDate;
 }
 
 
 // Operators
-/*
 Date *Date::operator ++() { // prefix
-	this = nextDate(this);
+	nextDate(this);
 	return this;
 }
 
 Date *Date::operator ++(int) { // postfix
-	Date *d = this;
-	this = nextDate(d);
+	Date *d = new Date();
+	nextDate(this);
 	return d;
 }
 
 Date *Date::operator --() { // prefix
-
+	previousDate(this);
+	return this;
 }
 
 Date *Date::operator --(int) { // postfix
-
+	Date *d = new Date();
+	previousDate(this);
+	return d;
 }
-*/
 
 bool Date::operator ==(Date *date) {
 	if (this->day == date->day && this->month == date->month && this->year == date->year)
 		return true;
 	else
 		return false;
+}
+
+Date *Date::operator =(Date *date) {
+	this->setDay(date->getDay());
+	this->setMonth(date->getMonth());
+	this->setYear(date->getYear());
+	this->setSeason(date->getSeason());
+	this->setWeekday(date->getWeekday());
+	return this;
 }
 
 /********************************/

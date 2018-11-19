@@ -29,6 +29,8 @@ public:
 	void setDay(int day);
 	void setMonth(int month);
 	void setYear(int year);
+	void setSeason(string season);
+	void setWeekday(string weekday);
 	// show
 	string showDate();
 	string showExtendedDate();
@@ -38,6 +40,7 @@ public:
 	Date *operator --(); // prefix
 	Date *operator --(int); // postfix
 	bool operator ==(Date *date);
+	Date *operator =(Date *date);
 };
 
 // InvalidDate exception

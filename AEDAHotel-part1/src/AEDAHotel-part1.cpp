@@ -84,7 +84,7 @@ int hotelInformationMenu(Hotel *h) {
 
 	do {
 		cout << "------ HOTEL INFORMATION ------" << endl;
-		cout << "Hotel AEDA - " << h->getAddress() << endl;
+		cout << "Address: " << h->getAddress() << endl;
 		cout << "Total Rooms: " << h->getBedrooms() + h->getMeetingRooms() << ", ";
 		cout << "Bedrooms: " << h->getBedrooms()<< ", ";
 		cout << "Meeting Rooms: " << h->getMeetingRooms() << endl;
@@ -96,7 +96,9 @@ int hotelInformationMenu(Hotel *h) {
 		cout << "Back - 0 " << endl;
 		cout << "Option: ";
 		cin >> menuOption;
-		if (menuOption < 0 || menuOption > 1) {
+		if (menuOption == 1)
+			hotelChangeInformationMenu(h);
+		else if (menuOption < 0 || menuOption > 1) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption < 0 || menuOption > 1);
@@ -119,8 +121,12 @@ int hotelChangeInformationMenu(Hotel *h) {
 		switch (menuOption) {
 		case 1:
 			cout << "Enter new address: ";
-			cin >> newAddress;
-			// h->setAddress(newAddress);
+			// cleaning the buffer
+			cin.clear();
+			cin.ignore(1000, '\n');
+			getline(cin,newAddress);
+			// updating the address
+			h->setAddress(newAddress);
 			cout << "Address updated!" << endl;
 			break;
 		case 2:
@@ -147,5 +153,5 @@ int hotelChangeInformationMenu(Hotel *h) {
 		}
 	} while (menuOption != 0);
 
-	return menuOption;
+	return 1;
 }
