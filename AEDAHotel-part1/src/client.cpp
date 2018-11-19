@@ -45,6 +45,11 @@ string Client::getInfo() const {
 	return ss.str();
 }
 
+bool Client::operator == (string name) {
+	if (this->name == name) return true;
+	else return false;
+}
+
 /********************************/
 /* NonExistingClient exception **/
 /********************************/

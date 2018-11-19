@@ -50,6 +50,16 @@ int Room::getPrice() const {
 	return 0;
 }
 
+bool Room::operator== (int number) {
+	if (this->number == number) return true;
+	else return false;
+}
+
+bool Room::operator< (Room & room) {
+	if (this->number < room.number) return true;
+	else return false;
+}
+
 /***********************/
 /** MeetingRoom Class **/
 /***********************/

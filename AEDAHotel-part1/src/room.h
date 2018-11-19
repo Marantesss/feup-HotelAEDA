@@ -27,7 +27,9 @@ public:
 	void setNumber(int number);
 	void setCapacity(int capacity);
 	void setSupervisor(Supervisor *s);
-
+	//operators
+	bool operator== (int number);
+	bool operator< (Room & room);
 };
 
 

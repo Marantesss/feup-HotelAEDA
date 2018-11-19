@@ -13,6 +13,14 @@ void insertionSort(vector<T> &v) {
 	}
 }
 
+template <class T, class A>
+int sequencialSearch(vector<T> vec, A x) {
+	for (unsigned int i = 0; i < vec.size(); i++)
+		if (v[i] == x)
+			return i;
+	return -1;
+}
+
 int menu() {
 	int menuOption;
 

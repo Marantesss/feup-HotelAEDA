@@ -18,9 +18,11 @@ public:
 	~Client();				// destructor
 	string getName() const;
 	void setName(string name);
-	bool operator < (Client & c2);
 	string getInfo() const;
 	void addReservation(Reservation * R);
+	//operators
+	bool operator < (Client & c2);
+	bool operator == (string name);
 };
 
 // NonExistingClient exception
