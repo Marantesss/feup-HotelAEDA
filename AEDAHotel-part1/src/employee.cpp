@@ -31,6 +31,16 @@ string Employee::getInfo() const {
 	return ss.str();
 }
 
+bool Employee::operator == (int id) {
+	if (this->id == id) return true;
+	else return false;
+}
+
+bool Employee::operator < (Employee & e) {
+	if (this->id < e.id) return true;
+	else return false;
+}
+
 // Supervisor Class
 
 Supervisor::Supervisor(int id, string name) :Employee(id,name)

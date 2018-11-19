@@ -25,6 +25,7 @@ int hotelChangeInformationMenu(Hotel *h);
 int main() {
 	int menuOption;
 	Hotel h(4, 15, 2, "Porto, Rua da Alegria 20");
+
 	cout << "------ Welcome to Hotel AEDA ------" << endl;
 	do {
 		menuOption = menu();
@@ -46,15 +47,7 @@ int main() {
 		}
 	} while (menuOption != 0);
 
-	/* TESTES
-	Client c1("Alex");
-	Date d1(17, 11, 2018);
-	MeetingRoom *Mr = new MeetingRoom(1,10,1,1);
-	Reservation *R = new Reservation(d1, Mr,5);
-	c1.addReservation(R);
-	cout << c1.getInfo();
-	*/
-
+	system("PAUSE");
 	return 0;
 }
 

@@ -19,6 +19,9 @@ public:
 	string getName();
 	int getId();
 	virtual string getInfo() const = 0;
+	//operators
+	bool operator == (int id);
+	bool operator < (Employee & e);
 };
 
 class Supervisor: public Employee { // @suppress("Class has a virtual method and non-virtual destructor")
