@@ -15,6 +15,7 @@
 #include "room.h"
 #include "date.h"
 #include "AuxFunctions.h"
+#include "menu.h"
 
 using namespace std;
 
@@ -46,7 +47,7 @@ int main() {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption != 0);
-
+	
 	system("PAUSE");
 	return 0;
 }

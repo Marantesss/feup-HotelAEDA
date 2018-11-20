@@ -6,6 +6,7 @@
 #include "room.h"
 #include "client.h"
 #include "employee.h"
+#include "AuxFunctions.h"
 
 class Hotel {
 	vector<Client*> clients;

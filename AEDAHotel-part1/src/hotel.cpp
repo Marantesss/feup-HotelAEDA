@@ -13,6 +13,10 @@ Hotel::Hotel(int floors, int bedrooms, int meetingRooms, string address) {
 
 Hotel::~Hotel() {}
 
+void Hotel::sortClients() {
+	insertionSort(clients);
+}
+
 //... Clients
 vector<Client*> Hotel::getClients() const {
 	return this->clients;
