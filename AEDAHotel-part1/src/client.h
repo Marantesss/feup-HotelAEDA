@@ -14,8 +14,11 @@ class Client {
 	string name;
 	vector<Reservation> reservations;
 public:
-	Client(string name);	// constructor
-	~Client();				// destructor
+	// Constructors
+	Client(string name);
+	Client();
+	// destructor
+	~Client();
 	string getName() const;
 	void setName(string name);
 	string getInfo() const;

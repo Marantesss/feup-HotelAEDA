@@ -24,7 +24,7 @@ int main() {
 	int menuOption;
 	Hotel h(4, 15, 2, "Porto, Rua da Alegria 20");
 
-	cout << "------ Welcome to Hotel AEDA ------" << endl;
+	cout << "------ Welcome to Hotel AEDA ------" << endl << endl;
 	do {
 		menuOption = menu();
 		switch(menuOption) {
@@ -32,6 +32,7 @@ int main() {
 			hotelInformationMenu(&h);
 			break;
 		case 2: // Clients
+			clientMenu(&h);
 			break;
 		case 3: // Reservations
 			break;
@@ -44,7 +45,6 @@ int main() {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption != 0);
-	
-	system("PAUSE");
+
 	return 0;
 }

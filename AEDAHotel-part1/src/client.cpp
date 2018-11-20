@@ -11,6 +11,9 @@ Client::Client(string name) {
 	this->name = name;
 }
 
+Client::Client() {
+}
+
 Client::~Client() {}
 
 string Client::getName() const {

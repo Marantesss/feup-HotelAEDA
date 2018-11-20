@@ -11,7 +11,7 @@ class Reservation {
 	Date date;
 	Room *room;
 	int duration; // In days for Bedrooms and in hours for the Meeting Rooms
-	int price;
+	double price;
 public:
 	Reservation(Date date, Room *room, int duration);
 	~Reservation() {};

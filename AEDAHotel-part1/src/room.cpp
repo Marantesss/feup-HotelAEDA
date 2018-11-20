@@ -46,7 +46,7 @@ string Room::getInfo() const {
 	return ss.str();
 }
 
-int Room::getPrice() const {
+double Room::getPrice() const {
 	return 0;
 }
 
@@ -103,7 +103,7 @@ bool MeetingRoom::getAudio() const {
 	return this->audio;
 }
 
-int MeetingRoom::getPrice() const {
+double MeetingRoom::getPrice() const {
 	return this->price;
 }
 
@@ -115,7 +115,7 @@ void MeetingRoom::setAudio(bool audio) {
 	this->capacity = capacity;
 }
 
-void MeetingRoom::setPricePerHour(int price) {
+void MeetingRoom::setPricePerHour(double price) {
 	this->price = price;
 }
 
@@ -154,7 +154,7 @@ string Bedroom::getLocation() const {
 	return this->location;
 }
 
-int Bedroom::getPrice() const {
+double Bedroom::getPrice() const {
 	return this->price;
 }
 
@@ -162,7 +162,7 @@ void Bedroom::setLocation(string location) {
 	this->location = location;
 }
 
-void Bedroom::setPrice(int price) {
+void Bedroom::setPrice(double price) {
 	this->price = price;
 }
 

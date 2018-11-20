@@ -21,7 +21,7 @@ public:
 	int getNumber() const;
 	int getCapacity() const;
 	int getFloorNumber() const;
-	virtual int getPrice() const;
+	virtual double getPrice() const;
 	virtual string getInfo() const;
 	// set
 	void setNumber(int number);
@@ -37,18 +37,18 @@ public:
 class MeetingRoom: public Room {
 	bool video;
 	bool audio;
-	int price; //per hour
+	double price; //per hour
 public:
 	MeetingRoom(int number, int capacity, bool video, bool audio);
 	// get
 	bool getVideo() const;
 	bool getAudio() const;
-	int getPrice() const;
+	double getPrice() const;
 	string getInfo() const;
 	// set
 	void setVideo(bool video);
 	void setAudio(bool audio);
-	void setPricePerHour(int price);
+	void setPricePerHour(double price);
 
 };
 
@@ -56,16 +56,16 @@ public:
 // Bedroom Class
 class Bedroom: public Room {
 	string location;
-	int price; //per day
+	double price; //per day
 public:
 	Bedroom(int number, int capacity, string location);
 	// get
 	string getLocation() const;
-	int getPrice() const;
+	double getPrice() const;
 	string getInfo() const;
 	// set
 	void setLocation(string location);
-	void setPrice(int price);
+	void setPrice(double price);
 };
 
 
