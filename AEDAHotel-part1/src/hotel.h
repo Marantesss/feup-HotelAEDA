@@ -9,10 +9,10 @@
 #include "AuxFunctions.h"
 
 class Hotel {
-	vector<Client*> clients;
-	vector<Reservation*> reservations;
-	vector<Room*> rooms;
-	vector<Employee*> employees;
+	vector<Client> clients;
+	vector<Reservation> reservations;
+	vector<Room> rooms;
+	vector<Employee> employees;
 	int floors;
 	int bedrooms;
 	int meetingRooms;
@@ -21,24 +21,24 @@ public:
 	Hotel(int floors, int bedrooms, int meetingRooms, string address);
 	~Hotel();
 	// Clients
-	vector<Client*> getClients() const;
+	vector<Client> getClients() const;
 	void sortClients();
-	void addClient(Client * c);
+	void addClient(Client c);
 	int removeClient(string name);
 	// Rooms
-	vector<Room*> getRooms() const;
-	vector<Room*> getFloorNumberRooms(int floor) const;
+	vector<Room> getRooms() const;
+	vector<Room> getFloorNumberRooms(int floor) const;
 	string getRoomsInfo();
-	void addRoom(Room * r);
+	void addRoom(Room r);
 	void removeRoom(int number);
 	void removeRoomsFromFloor(int floor);
 	// Reservations
-	vector<Reservation*> getReservations() const;
-	void addReservation(Reservation * R);
-	void removeReservation(Date *d, Room *R);
+	vector<Reservation> getReservations() const;
+	void addReservation(Reservation  R);
+	void removeReservation(Date d, Room R);
 	// Employees
-	vector<Employee*> getEmployees() const;
-	void addEmployee(Employee * E);
+	vector<Employee> getEmployees() const;
+	void addEmployee(Employee E);
 	void removeEmployee(string name);
 	// Building Information
 	// Floors

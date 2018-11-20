@@ -38,10 +38,17 @@ int hotelInformationMenu(Hotel *h) {
 		cout << "Back - 0 " << endl;
 		cout << "Option: ";
 		cin >> menuOption;
+		switch (menuOption) {
+		case 0:
+			break;
+		case 1:
+			hotelChangeInformationMenu(h);
+			break;
+		}
 		if (menuOption < 0 || menuOption > 1) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
-	} while (menuOption < 0 || menuOption > 1);
+	} while (menuOption != 0);
 
 	return menuOption;
 }
@@ -62,11 +69,11 @@ int hotelChangeInformationMenu(Hotel *h) {
 		case 1:
 			cout << "Enter new address: ";
 			cin >> newAddress;
-			// h->setAddress(newAddress);
+			h->setAddress(newAddress);
 			cout << "Address updated!" << endl;
 			break;
 		case 2:
-			// h->addFloor();
+			h->addFloor();
 			cout << "Floor added!" << endl;
 			break;
 		case 3:
@@ -84,7 +91,7 @@ int hotelChangeInformationMenu(Hotel *h) {
 			}
 			break;
 		}
-		if (menuOption < 0 || menuOption > h->getFloors()) {
+		if (menuOption < 0 || menuOption > 3) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption != 0);

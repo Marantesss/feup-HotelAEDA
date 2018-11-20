@@ -12,14 +12,14 @@ using namespace std;
 // Client Class
 class Client {
 	string name;
-	vector<Reservation*> reservations;
+	vector<Reservation> reservations;
 public:
 	Client(string name);	// constructor
 	~Client();				// destructor
 	string getName() const;
 	void setName(string name);
 	string getInfo() const;
-	void addReservation(Reservation * R);
+	void addReservation(Reservation R);
 	//operators
 	bool operator < (Client & c2);
 	bool operator == (string name);

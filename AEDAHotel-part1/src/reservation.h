@@ -8,30 +8,30 @@
 
 // Reservation Class
 class Reservation {
-	Date *date;
+	Date date;
 	Room *room;
 	int duration; // In days for Bedrooms and in hours for the Meeting Rooms
 	int price;
 public:
-	Reservation(Date *date, Room *room, int duration);
+	Reservation(Date date, Room *room, int duration);
 	~Reservation() {};
 	// get
-	Date *getDate() const;
+	Date getDate() const;
 	Room *getRoom() const;
 	string getInfo() const;
 	// set
-	void setDate(Date *date);
+	void setDate(Date date);
 	void setRoom(Room *room);
 };
 
 // InvalidReservation exception
 class InvalidReservation {
 protected:
-	Date *date;
+	Date date;
 	Room *room;
 public:
-	InvalidReservation(Date *date, Room *room);
-	Date *getDate() const;
+	InvalidReservation(Date date, Room *room);
+	Date getDate() const;
 	Room *getRoom() const;
 };
 
