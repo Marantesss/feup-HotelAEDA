@@ -55,7 +55,7 @@ vector<Room*> Hotel::getFloorNumberRooms(int floor) const {
 
 string Hotel::getRoomsInfo() {
 	stringstream ss;
-	for (size_t i = 1; i <= getFloors(); i++) {
+	for (int i = 1; i <= getFloors(); i++) {
 		ss << "Floor " << i << ": ";
 		for (size_t j = 0; j < rooms.size(); j++) {
 			if (rooms[i]->getFloorNumber() == i) {
@@ -102,7 +102,7 @@ void Hotel::addReservation(Reservation * R) {
 	this->reservations.push_back(R);
 }
 
-void Hotel::removeReservation(Date d, Room R) {
+void Hotel::removeReservation(Date *d, Room *R) {
 	//TO DO
 }
 
@@ -111,7 +111,7 @@ vector<Employee*> Hotel::getEmployees() const {
 	return this->employees;
 }
 
-void Hotel::addEmployee(Employee * E) {
+void Hotel::addEmployee(Employee *E) {
 	this->employees.push_back(E);
 }
 

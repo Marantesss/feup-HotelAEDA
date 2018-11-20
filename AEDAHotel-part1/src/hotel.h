@@ -35,7 +35,7 @@ public:
 	// Reservations
 	vector<Reservation*> getReservations() const;
 	void addReservation(Reservation * R);
-	void removeReservation(Date d, Room R);
+	void removeReservation(Date *d, Room *R);
 	// Employees
 	vector<Employee*> getEmployees() const;
 	void addEmployee(Employee * E);
