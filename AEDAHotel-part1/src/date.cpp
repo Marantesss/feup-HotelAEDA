@@ -61,6 +61,51 @@ int calculateWeekday(int day, int month, int year) {
 	return (((5*a)/4) + c + day - (2*(s%4)) + 7) % 7;
 }
 
+bool validDate(int day, int month, int year) {
+	if (month < 1 || month > 12) return false;
+	if (year < 2018) return false;
+	switch(month) {
+		case 1: // January
+			if (day < 0 || day > 31) return false;
+			break;
+		case 2: // February
+			if (isLeap(year) && (day < 0 || day > 29)) return false;
+			else if (!isLeap(year) && (day < 0 || day > 28)) return false;
+			break;
+		case 3: // March
+			if (day < 0 || day > 31) return false;
+			break;
+		case 4: // April
+			if (day < 0 || day > 30) return false;
+			break;
+		case 5: // May
+			if (day < 0 || day > 31) return false;
+			break;
+		case 6: // June
+			if (day < 0 || day > 30) return false;
+			break;
+		case 7: // July
+			if (day < 0 || day > 31) return false;
+			break;
+		case 8: // August
+			if (day < 0 || day > 31) return false;
+			break;
+		case 9: // September
+			if (day < 0 || day > 30) return false;
+			break;
+		case 10: // October
+			if (day < 0 || day > 31) return false;
+			break;
+		case 11: // November
+			if (day < 0 || day > 30) return false;
+			break;
+		case 12: // December
+			if (day < 0 || day > 31) return false;
+			break;
+		}
+	return true;
+}
+
 
 /******************/
 /*** Date Class ***/
@@ -80,41 +125,46 @@ Date::Date() {
  */
 
 Date::Date(int day, int month, int year) {
-	this->day = day;
-	this->month = month;
-	this->year = year;
-	// Calculating season
-	if (month >= 3 && month <= 5)
-		this->season = "Spring";
-	else if (month >= 6 && month <= 8)
-		this->season = "Summer";
-	else if (month >= 9 && month <= 11)
-		this->season = "Autumn";
-	else
-		this->season = "Winter";
-	// Calculating weekday
-	switch(calculateWeekday(day, month, year)) {
-	case 0:
-		this->weekday = "Saturday";
-		break;
-	case 1:
-		this->weekday = "Sunday";
-		break;
-	case 2:
-		this->weekday = "Monday";
-		break;
-	case 3:
-		this->weekday = "Tuesday";
-		break;
-	case 4:
-		this->weekday = "Wednesday";
-		break;
-	case 5:
-		this->weekday = "Thursday";
-		break;
-	case 6:
-		this->weekday = "Friday";
-		break;
+	if (!validDate(day, month, year)) {
+		throw (InvalidDate(day, month, year));
+	}
+	else {
+		this->day = day;
+		this->month = month;
+		this->year = year;
+		// Calculating season
+		if (month >= 3 && month <= 5)
+			this->season = "Spring";
+		else if (month >= 6 && month <= 8)
+			this->season = "Summer";
+		else if (month >= 9 && month <= 11)
+			this->season = "Autumn";
+		else
+			this->season = "Winter";
+		// Calculating weekday
+		switch(calculateWeekday(day, month, year)) {
+		case 0:
+			this->weekday = "Saturday";
+			break;
+		case 1:
+			this->weekday = "Sunday";
+			break;
+		case 2:
+			this->weekday = "Monday";
+			break;
+		case 3:
+			this->weekday = "Tuesday";
+			break;
+		case 4:
+			this->weekday = "Wednesday";
+			break;
+		case 5:
+			this->weekday = "Thursday";
+			break;
+		case 6:
+			this->weekday = "Friday";
+			break;
+		}
 	}
 }
 

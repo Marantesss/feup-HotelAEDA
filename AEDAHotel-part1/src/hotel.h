@@ -151,11 +151,9 @@ public:
 	void removeRoom(int number);
 
 	/**
-	* @brief Member function to remove the rooms from a floor.
-	*
-	* @param floor The number of the floor of the hotel's removed rooms.
+	* @brief Member function to remove the rooms from the top floor.
 	*/
-	void removeRoomsFromFloor(int floor);
+	void removeRoomsFromTopFloor();
 
 	// Reservations
 	/**

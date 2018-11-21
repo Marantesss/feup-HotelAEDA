@@ -140,10 +140,16 @@ Bedroom::Bedroom(int number, int capacity, string location): Room(number, capaci
 	this->location = location;
 	switch(capacity) {
 	case 1:
-		this->price = 50;
+		if (location == "Front")
+			this->price = 50;
+		else if (location == "Back")
+			this->price = 40;
 		break;
 	case 2:
-		this->price = 75;
+		if (location == "Front")
+			this->price = 75;
+		else if (location == "Back")
+			this->price = 60;
 		break;
 	}
 }
