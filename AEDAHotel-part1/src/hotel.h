@@ -203,6 +203,11 @@ public:
 	*/
 	void removeEmployee(string name);
 
+	/**
+	* @brief Member function that equally distributes the supervisors over all the rooms.
+	*/
+	void allocateEmployees();
+
 	// Building Information
 	// Floors
 	/**

@@ -155,3 +155,38 @@ int clientMenu(Hotel *h) {
 
 	return menuOption;
 }
+
+int employeesMenu(Hotel *h) {
+	int menuOption;
+
+	do {
+		cout << "------ EMPLOYEE MENU ------" << endl;
+		cout << "No. of Employees - " << h->getEmployees.size()  << endl;
+		cout << "No. of Supervisors: " <<  << endl;
+
+		cout << "\nWhat would you like to do?" << endl;
+		cout << "Add Employee - 1 " << endl;
+		cout << "Remove Employee - 2 " << endl;
+		cout << "See Employees - 3 " << endl;
+		cout << "Back - 0 " << endl;
+		cout << "\nOption: ";
+		cin >> menuOption;
+		cout << endl;
+		switch (menuOption) {
+		case 0:
+			break;
+		case 1:
+			hotelChangeInformationMenu(h);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		}
+		if (menuOption < 0 || menuOption > 1) {
+			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
+		}
+	} while (menuOption != 0);
+
+	return menuOption;
+}

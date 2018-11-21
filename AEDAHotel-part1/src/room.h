@@ -15,7 +15,7 @@ class Room {
 protected:
 	int number;		/**< int number. The room's name. */
 	int capacity;	/**< int capacity. The room's maximum capacity. */
-	Supervisor *supervisor;		/**< Supervisor *supervisor. The room's assigned supervisor */
+	Employee supervisor;		/**< Employee supervisor. The room's assigned supervisor */
 public:
 	/**
 	* A default constructor.
@@ -39,7 +39,7 @@ public:
 	// set
 	void setNumber(int number);
 	void setCapacity(int capacity);
-	void setSupervisor(Supervisor *s);
+	void setSupervisor(Employee e);
 	//operators
 	bool operator== (int number);
 	bool operator< (Room & room);

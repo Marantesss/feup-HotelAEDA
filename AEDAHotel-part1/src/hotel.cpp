@@ -119,6 +119,20 @@ void Hotel::removeEmployee(string name) {
 	//TO DO
 }
 
+void Hotel::allocateEmployees() {
+	vector<Employee> tmp;
+
+	for (int i = 0;  i < this->employees.size(); i++) {
+		if (this->employees.at(i).getIsSupervisor()) {
+			tmp.push_back(this->employees.at(i));
+		}
+	}
+
+	for (unsigned int i = 0; i < rooms.size(); i++)
+		this->rooms.at(i).setSupervisor(tmp.at(i%tmp.size()));
+}
+
+
 //... Hotel Information
 // Floors
 int Hotel::getFloors() const { return this->floors; }

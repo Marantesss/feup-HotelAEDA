@@ -7,13 +7,11 @@
 Room::Room(int number, int capacity) {
 	this->number = number;
 	this->capacity = capacity;
-	this->supervisor = NULL;
 }
 
 Room::Room() {
 	this->number = 0;
 	this->capacity = 0;
-	this->supervisor = NULL;
 }
 
 int Room::getNumber() const {
@@ -36,8 +34,8 @@ void Room::setCapacity(int capacity) {
 	this->capacity = capacity;
 }
 
-void Room::setSupervisor(Supervisor *s) {
-	this->supervisor = s;
+void Room::setSupervisor(Employee e) {
+	this->supervisor = e;
 }
 
 string Room::getInfo() const {

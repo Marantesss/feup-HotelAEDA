@@ -17,4 +17,6 @@ int hotelChangeInformationMenu(Hotel *h);
 
 int clientMenu(Hotel *h);
 
+int employeesMenu(Hotel *h);
+
 #endif /* MENU_H_ */
