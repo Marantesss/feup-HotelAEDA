@@ -77,16 +77,20 @@ void Hotel::addRoom(Room r) {
 
 //TO CHANGE - THROW EXCEPTION
 void Hotel::removeRoom(int number) {
+	bool foundRoom = false;
 	for (size_t i = 0; i < rooms.size(); i++) {
 		if (rooms[i].getNumber() == number) {
 			this->rooms.erase(rooms.begin() + i);
+			foundRoom = true;
 		}
 	}
+	if (!foundRoom)
+		throw(NonExistingRoom(number));
 }
 
-void Hotel::removeRoomsFromFloor(int floor) {
+void Hotel::removeRoomsFromTopFloor() {
 	for (size_t i = 0; i < rooms.size(); i++) {
-		if (floor == rooms[i].getFloorNumber()) {
+		if (floors == rooms[i].getFloorNumber()) {
 			removeRoom(rooms[i].getNumber());
 		}
 	}

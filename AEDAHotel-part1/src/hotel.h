@@ -31,7 +31,7 @@ public:
 	string getRoomsInfo();
 	void addRoom(Room r);
 	void removeRoom(int number);
-	void removeRoomsFromFloor(int floor);
+	void removeRoomsFromTopFloor();
 	// Reservations
 	vector<Reservation> getReservations() const;
 	void addReservation(Reservation  R);
