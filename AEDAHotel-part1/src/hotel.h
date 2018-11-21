@@ -197,14 +197,19 @@ public:
 	/**
 	* @brief Member function to remove a employee.
 	*
-	* @param name The name of the hotel's removed employee.
+	* @param i index of the employee to remove.
 	*/
-	void removeEmployee(string name);
+	void removeEmployee(int id);
 
 	/**
 	* @brief Member function that equally distributes the supervisors over all the rooms.
 	*/
 	void allocateEmployees();
+
+	/**
+	* @brief Member function that shows all the employees information.	
+	*/
+	void showEmployees();
 
 	// Building Information
 	// Floors
@@ -275,6 +280,11 @@ public:
 	* @param address The hotel's new address.
 	*/
 	void setAddress(string address);
+
+	/**
+	* @brief Member function that returns the number of the supervisors among the employees
+	*/
+	int getNoSupervisors();
 };
 
 #endif /* HOTEL_H_ */

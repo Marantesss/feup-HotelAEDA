@@ -19,12 +19,14 @@ public:
 	~Employee() {};
 	void setName(string name);
 	void setId(int id);
+	void setIsSupervisor(bool supervisor);
 	string getName();
 	int getId();
 	bool getIsSupervisor() const;
 	virtual string getInfo() const;
 	//operators
 	bool operator == (int id);
+	bool operator == (string name);
 	bool operator < (Employee & e);
 };
 

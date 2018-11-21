@@ -119,14 +119,24 @@ void Hotel::addEmployee(Employee E) {
 	this->employees.push_back(E);
 }
 
-void Hotel::removeEmployee(string name) {
-	//TO DO
+void Hotel::removeEmployee(int id) {
+	int i;
+	if (i = sequencialSearch(this->getEmployees(), id) == -1) {
+		cout << "Error - Employee with the id " << id << " not found!" << endl;
+	}
+	this->employees.erase(this->employees.begin() + i);
+}
+
+void Hotel::showEmployees() {
+	for (int i = 0; i < employees.size(); i++) {
+		cout << i+1 << "- " << employees.at(i).getInfo() << endl;
+	}
 }
 
 void Hotel::allocateEmployees() {
 	vector<Employee> tmp;
 
-	for (int i = 0;  i < this->employees.size(); i++) {
+	for (size_t i = 0;  i < this->employees.size(); i++) {
 		if (this->employees.at(i).getIsSupervisor()) {
 			tmp.push_back(this->employees.at(i));
 		}
@@ -135,6 +145,18 @@ void Hotel::allocateEmployees() {
 	for (unsigned int i = 0; i < rooms.size(); i++)
 		this->rooms.at(i).setSupervisor(tmp.at(i%tmp.size()));
 }
+
+int Hotel::getNoSupervisors() {
+	int counter = 0;
+
+	for (size_t i = 0; i < this->employees.size(); i++) {
+		if (this->employees.at(i).getIsSupervisor()) {
+			counter++;
+		}
+	}
+	return counter;
+}
+
 
 
 //... Hotel Information

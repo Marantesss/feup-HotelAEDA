@@ -13,7 +13,7 @@ int menu();
 
 int hotelInformationMenu(Hotel *h);
 
-int hotelChangeInformationMenu(Hotel *h);
+int hotelInformationMenu(Hotel *h);
 
 int clientMenu(Hotel *h);
 

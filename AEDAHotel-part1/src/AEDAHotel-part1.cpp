@@ -138,7 +138,7 @@ int main() {
 		case 4: // Rooms
 			break;
 		case 5: // Employees
-			
+			employeesMenu(&h);
 			break;
 		}
 		if (menuOption < 0 || menuOption > 5) {
