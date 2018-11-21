@@ -89,7 +89,11 @@ public:
 	*/
 	vector<Client> getClients() const;
 
-
+	/**
+	* @brief Member function to sort the clients in the clients vector.
+	*
+	* Clients get sorted by alphabetical order
+	*/
 	void sortClients();
 
 	/**
