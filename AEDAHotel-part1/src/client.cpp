@@ -29,7 +29,7 @@ bool  Client::operator< (Client &c2) {
 	else return false;
 }
 
-void Client::addReservation(Reservation R) {
+void Client::addReservation(Reservation * R) {
 	this->reservations.push_back(R);
 }
 
@@ -39,7 +39,7 @@ string Client::getInfo() const {
 	if (!this->reservations.empty()) {
 		ss << "Reservations:" << endl;
 		for (size_t i = 0; i < reservations.size(); i++) {
-			ss << i + 1 << ": " << reservations[i].getInfo() << endl;
+			ss << i + 1 << ": " << reservations[i]->getInfo() << endl;
 		}
 	}
 	else {
@@ -48,8 +48,8 @@ string Client::getInfo() const {
 	return ss.str();
 }
 
-bool Client::operator == (string name) {
-	if (this->name == name) return true;
+bool Client::operator == (Client & c2) {
+	if (this->name == c2.name) return true;
 	else return false;
 }
 

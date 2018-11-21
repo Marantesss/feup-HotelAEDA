@@ -7,15 +7,28 @@
 
 using namespace std;
 
-// Room Class
+/**
+*  An abstract class used to represent a room.
+*  Each room object has a room number, a room capacity and an assigned supervisor (further explanation on the Employee Class).
+*/
 class Room {
 protected:
-	int number;
-	int capacity;
-	Supervisor *supervisor;
+	int number;		/**< int number. The room's name. */
+	int capacity;	/**< int capacity. The room's maximum capacity. */
+	Supervisor *supervisor;		/**< Supervisor *supervisor. The room's assigned supervisor */
 public:
-	Room(int number, int capacity);
+	/**
+	* A default constructor.
+	*/
 	Room();
+
+	/**
+	* A constructor.
+	* The constructor creates a Room object with the data passed as argument.
+	* @param name The Rooms's number.
+	* @param capacity The Rooms's number.
+	*/
+	Room(int number, int capacity);
 	virtual ~Room() {};
 	// get
 	int getNumber() const;
@@ -69,11 +82,24 @@ public:
 };
 
 
-// NonExistingRoom exception
+/**
+*  A class used to represent an exception.
+*  The exception object contains the invalid room.
+*/
 class NonExistingRoom {
-	int number;
+	int number;	/**< int number. The NonExistingRoom's number. */
 public:
+	/**
+	* A constructor.
+	* The constructor creates a NonExistingRoom object with the supplied number.
+	* @param An int, the number of the NonExistingRoom.
+	*/
 	NonExistingRoom(int num);
+
+	/**
+	* A const member function with no arguments to get the object's number.
+	* @return An int, the number that originated the creation of this object.
+	*/
 	int getNumber() const;
 };
 
