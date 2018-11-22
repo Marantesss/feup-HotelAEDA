@@ -49,12 +49,12 @@ class Hotel {
 	/**
 	* int bedrooms The hotel's total number of bedrooms
 	*/
-	int bedrooms;
+	int nbedrooms;
 
 	/**
 	* int meetingRooms The hotel's total number of meeting rooms
 	*/
-	int meetingRooms;
+	int nmeetingrooms;
 
 	/**
 	* string address The hotel's address
@@ -148,10 +148,12 @@ public:
 	*
 	* @param number The number of the hotel's removed room.
 	*/
-	void removeRoom(int number);
+	void removeRoom(int i);
 
 	/**
-	* @brief Member function to remove the rooms from the top floor.
+	* @brief Member function to remove the rooms from a floor.
+	*
+	* @param floor The number of the floor of the hotel's removed rooms.
 	*/
 	void removeRoomsFromTopFloor();
 
@@ -195,11 +197,15 @@ public:
 	void addEmployee(Employee E);
 
 	/**
-	* @brief Member function to remove a employee.
+	* @brief Member function to remove an employee.
 	*
-	* @param name The name of the hotel's removed employee.
+	* @param id The Id of the hotel's removed employee.
 	*/
-	void removeEmployee(string name);
+	void removeEmployee(int id);
+
+	void showEmployees();
+
+	void showRooms();
 
 	/**
 	* @brief Member function that equally distributes the supervisors over all the rooms.
@@ -231,17 +237,12 @@ public:
 	*
 	* @return The total number of hotel's bedrooms.
 	*/
-	int getBedrooms() const;
+	int getnBedrooms() const;
 
 	/**
 	* @brief Member function to add a new bedroom.
 	*/
 	void addBedroom();
-
-	/**
-	* @brief Member function to remove a bedroom.
-	*/
-	void removeBedroom();
 
 	// MeetingRooms
 	/**
@@ -249,17 +250,12 @@ public:
 	*
 	* @return The total number of hotel's meeting rooms.
 	*/
-	int getMeetingRooms() const;
+	int getnMeetingRooms() const;
 
 	/**
 	* @brief Member function to add a new meeting room.
 	*/
 	void addMeetingRoom();
-
-	/**
-	* @brief Member function to remove a meeting room.
-	*/
-	void removeMeetingRoom();
 
 	// Address
 	/**
@@ -275,6 +271,16 @@ public:
 	* @param address The hotel's new address.
 	*/
 	void setAddress(string address);
+
+	/**
+	*/
+	int getNoSupervisors();
+
+	int getNoMeetingRooms();
+
+	int getNoBedrooms();
+
+
 };
 
 #endif /* HOTEL_H_ */

@@ -91,12 +91,12 @@ public:
 	/**
 	 * @brief Overload of Operator == for class Client.
 	 *
-	 * @param c2 The other client to be compared to.
+	 * @param name The other client's name to be compared to.
 	 *
-	 * @return true, if both the clients' name is the same
+	 * @return true, if the Clients name is the same as the parameter
 	 * 		  false, if otherwise
 	 */
-	bool operator == (Client & c2);
+	bool operator == (string name);
 };
 
 /**

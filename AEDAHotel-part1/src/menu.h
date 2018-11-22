@@ -13,10 +13,12 @@ int menu();
 
 int hotelInformationMenu(Hotel *h);
 
-int hotelChangeInformationMenu(Hotel *h);
+int hotelInformationMenu(Hotel *h);
 
 int clientMenu(Hotel *h);
 
 int employeesMenu(Hotel *h);
+
+int roomsMenu(Hotel *h);
 
 #endif /* MENU_H_ */

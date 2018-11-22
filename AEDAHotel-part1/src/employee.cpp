@@ -20,6 +20,10 @@ void Employee::setId(int id) {
 	this->id = id;
 }
 
+void Employee::setIsSupervisor(bool supervisor) {
+	this->isSupervisor = supervisor;
+}
+
 void Employee::setName(string name) {
 	this->name = name;
 }
@@ -34,7 +38,13 @@ string Employee::getName() {
 
 string Employee::getInfo() const {
 	stringstream ss;
-	ss << "Name - " << name << "Id - " << id;
+	string sup;
+	if (this->isSupervisor) {
+		sup = "yes";
+	}
+	else sup = "no";
+
+	ss << "Name - " << name << "   Id - " << id << "   Supervisor - " << sup << endl;
 	return ss.str();
 }
 
@@ -47,23 +57,12 @@ bool Employee::operator == (int id) {
 	else return false;
 }
 
+bool Employee::operator == (string name) {
+	if (this->name == name) return true;
+	else return false;
+}
+
 bool Employee::operator < (Employee & e) {
 	if (this->id < e.id) return true;
 	else return false;
 }
-
-
-/* Supervisor Class
-
-Supervisor::Supervisor(int id, string name) :Employee(id,name)
-{}
-
-string Supervisor::getInfo() const {
-	stringstream ss;
-	ss << "Supervisor:\n" << Employee::getInfo() << endl;
-	return ss.str();
-}
-
-bool Supervisor::isSupervisor() const {
-	return true;
-}*/

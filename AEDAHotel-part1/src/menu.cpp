@@ -31,9 +31,9 @@ int hotelInformationMenu(Hotel *h) {
 		cout << "_____________________________________" << endl;
 		cout << " -------- HOTEL INFORMATION -------- " << endl;
 		cout << "Address - " << h->getAddress() << endl;
-		cout << "Total Rooms: " << h->getBedrooms() + h->getMeetingRooms() << endl;
-		cout << "Bedrooms: " << h->getBedrooms() << ", ";
-		cout << "Meeting Rooms: " << h->getMeetingRooms() << endl;
+		cout << "Total Rooms: " << h->getnBedrooms() + h->getnMeetingRooms() << endl;
+		cout << "Bedrooms: " << h->getnBedrooms() << ", ";
+		cout << "Meeting Rooms: " << h->getnMeetingRooms() << endl;
 		cout << "Total Clients: " << h->getClients().size() << endl;
 		cout << "Total Employees: " << h->getEmployees().size() << endl;
 		cout << "_____________________________________" << endl;
@@ -43,7 +43,6 @@ int hotelInformationMenu(Hotel *h) {
 		cout << " 2 - Add floor" << endl;
 		cout << " 3 - Remove top floor" << endl;
 		cout << " 0 - Back" << endl;
-		cout << "Back - 0 " << endl;
 		cout << "Option: ";
 		cin >> menuOption;
 		switch (menuOption) {
@@ -98,7 +97,8 @@ int clientMenu(Hotel *h) {
 		cout << "\nWhat would you like to do?" << endl;
 		cout << "Add Client - 1 " << endl;
 		cout << "Remove Client - 2 " << endl;
-		cout << "Search Client - 3 " << endl;
+		cout << "Search Client by name- 3 " << endl;
+		cout << "Import Clients - 4 [NOT IMPLEMENTED YET]" << endl;
 		cout << "Back - 0 " << endl;
 		cout << "\nOption: ";
 		cin >> menuOption;
@@ -113,7 +113,7 @@ int clientMenu(Hotel *h) {
 			h->addClient(c);
 			break;
 		case 2:
-			/*cout << "Name - ";
+			cout << "Name - ";
 			cin >> name;
 			
 			if (h->getClients().empty()) {
@@ -127,10 +127,25 @@ int clientMenu(Hotel *h) {
 					break;
 				}
 				h->getClients().erase(h->getClients().begin() + i);
-			}*/
+			}
 			break;
 		case 3:
+			cout << "Name - ";
+			cin >> name;
 
+			if (h->getClients().empty()) {
+				cout << "The hotel has no Clients yet" << endl;
+				break;
+			}
+			else {
+				int i;
+				if (i = sequencialSearch(h->getClients(), name) == -1) {
+					cout << "Error - Client with the name " << name << " not found!" << endl;
+					break;
+				}
+				h->getClients().at(i).getInfo();
+			}
+			break;
 			break;
 		}
 		if (menuOption < 0 || menuOption > 1) {
@@ -141,19 +156,29 @@ int clientMenu(Hotel *h) {
 	return menuOption;
 }
 
-int employeesMenu(Hotel *h) {
-	int menuOption;
+int roomsMenu(Hotel *h) {
+	int menuOption, num, capacity,i;
+	string location;
+	char type, tmp;
+	bool audio, video;
+	Bedroom b = Bedroom();
+	MeetingRoom m = MeetingRoom();
 
 	do {
-		cout << "------ EMPLOYEE MENU ------" << endl;
-		cout << "No. of Employees - " << h->getEmployees.size()  << endl;
-		cout << "No. of Supervisors: " <<  << endl;
-
-		cout << "\nWhat would you like to do?" << endl;
-		cout << "Add Employee - 1 " << endl;
-		cout << "Remove Employee - 2 " << endl;
-		cout << "See Employees - 3 " << endl;
-		cout << "Back - 0 " << endl;
+		cout << "_____________________________________" << endl;
+		cout << "------------- ROOM MENU -------------" << endl;
+		cout << "No. of Rooms: " << h->getRooms().size() << endl;
+		cout << "No. of Meeting Rooms: " << h->getNoMeetingRooms() << endl;
+		cout << "No. of bedrooms: " << h->getNoBedrooms() << endl;
+		cout << "_____________________________________" << endl;
+		cout << " ---- What would you like to do? ---- " << endl;
+		cout << "1 - Add Room" << endl;
+		cout << "2 - Remove Room" << endl;
+		cout << "3 - See Rooms [NOT IMPLEMENTED YET]" << endl;
+		cout << "4 - Distribute supervisors"<< endl;
+		cout << "5 - Search Room by number" << endl;
+		cout << "6 - Import Rooms [NOT IMPLEMENTED YET]" << endl;
+		cout << "0 - Back" << endl;
 		cout << "\nOption: ";
 		cin >> menuOption;
 		cout << endl;
@@ -161,14 +186,145 @@ int employeesMenu(Hotel *h) {
 		case 0:
 			break;
 		case 1:
-			hotelChangeInformationMenu(h);
+			cout << "Number - ";
+			cin >> num;
+
+			cout << "Meeting Room or Bedroom (m/b) - ";
+			cin >> type;
+			if (type == 'm') {
+				m.setNumber(num);
+				cout << "Capacity (10/15/50) - ";
+				cin >> capacity;
+				m.setCapacity(capacity);
+				cout << "Audio (y/n) - ";
+				cin >> tmp;
+				if (tmp == 'y') audio = true; else audio = false;
+				m.setAudio(audio);
+				cout << "Video (y/n) - ";
+				cin >> tmp;
+				if (tmp == 'y') video = true; else video = false;
+				m.setVideo(video);
+				m.setDefaultPrice();
+				h->addRoom(m);
+			}
+			else if (type == 'b') {
+				b.setNumber(num);
+				cout << "Capacity (1/2) - ";
+				cin >> capacity;
+				b.setCapacity(capacity);
+				cout << "Location (front/back) - ";
+				cin >> location;
+				b.setLocation(location);
+				b.setDefaultPrice();
+				h->addRoom(b);
+			}
 			break;
 		case 2:
+			cout << "Room number - ";
+			cin >> num;
+			if (i = sequencialSearch(h->getRooms(), num) == -1) {
+				cout << "Error - Room number " << num << " not found!" << endl;
+				break;
+			}
+			h->removeRoom(i);
 			break;
 		case 3:
+			//h->showRooms(); //getinfo nao funciona
 			break;
+		case 4:
+			h->allocateEmployees();
+			break;
+		case 5:
+			cout << "Room number - ";
+			cin >> num;
+
+			if (i = sequencialSearch(h->getRooms(), num) == -1) {
+				cout << "Error - Room number " << num << " not found!" << endl;
+				break;
+			}
+			h->getRooms().at(i).getInfo(); //getinfo nao funciona
+			break;
+		case 6:
+			break;
+		default:
+			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
-		if (menuOption < 0 || menuOption > 1) {
+	} while (menuOption != 0);
+
+	return menuOption;
+}
+
+int employeesMenu(Hotel *h) {
+	int menuOption, id, i;
+	string name, SclientOpt;
+	Employee e = Employee();
+	char supervisor;
+
+	do {
+		cout << "_____________________________________" << endl;
+		cout << "----------- EMPLOYEE MENU -----------" << endl;
+		cout << "No. of Employees: " << h->getEmployees().size()  << endl;
+		cout << "No. of Supervisors: " << h->getNoSupervisors() << endl;
+		cout << "_____________________________________" << endl;
+		cout << " ---- What would you like to do? ---- " << endl;
+		cout << "1 - Add Employee" << endl;
+		cout << "2 - Remove Employee" << endl;
+		cout << "3 - See Employees" << endl;
+		cout << "4 - Search Employee by ID" << endl;
+		cout << "5 - Search Employee by name" << endl;
+		cout << "6 - Import Employees [NOT IMPLEMENTED YET]" << endl;
+		cout << "0 - Back" << endl;
+		cout << "\nOption: ";
+		cin >> menuOption;
+		cout << endl;
+		switch (menuOption) {
+		case 0:
+			break;
+		case 1:
+			cout << "ID - ";
+			cin >> id;
+			e.setId(id);
+			cout << "Name - ";
+			cin >> name;
+			e.setName(name);
+			cout << "Supervisor (y/n) - ";
+			cin >> supervisor;
+			if (supervisor == 'y') {
+				e.setIsSupervisor(true);
+			}
+			else e.setIsSupervisor(false);
+			h->addEmployee(e);
+			break;
+		case 2:
+			cout << "ID - ";
+			cin >> id;
+			h->removeEmployee(id);
+			break;
+		case 3:
+			h->showEmployees();
+			break;
+		case 4:
+			cout << "ID - ";
+			cin >> id;
+			if (i = sequencialSearch(h->getEmployees(), id) == -1) {
+				cout << "Error - Employee with the id " << id << " not found!" << endl;
+			}
+			else {
+				cout << h->getEmployees().at(i).getInfo() << endl;
+			}
+			break;
+		case 5:
+			cout << "Name - ";
+			cin >> name;
+			int i;
+			if (i = sequencialSearch(h->getEmployees(), name) == -1) {
+				cout << "Error - Employee with the name " << name << " not found!" << endl;
+			}
+			else {
+				cout << h->getEmployees().at(i).getInfo() << endl;
+			}
+			break;
+		default:
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption != 0);

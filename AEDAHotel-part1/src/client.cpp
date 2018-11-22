@@ -48,8 +48,8 @@ string Client::getInfo() const {
 	return ss.str();
 }
 
-bool Client::operator == (Client & c2) {
-	if (this->name == c2.name) return true;
+bool Client::operator == (string name) {
+	if (this->name == name) return true;
 	else return false;
 }
 

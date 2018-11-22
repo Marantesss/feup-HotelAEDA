@@ -38,14 +38,28 @@ void Room::setSupervisor(Employee e) {
 	this->supervisor = e;
 }
 
+string Bedroom::getInfo() const {
+	stringstream ss;
+
+	ss << "Bedroom: \n" << Room::getInfo() << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";
+
+	return ss.str();
+}
+
 string Room::getInfo() const {
 	stringstream ss;
-	ss << "\tNumber - " << number << "\n\tCapacity - " << capacity;
+	if (isBedroom) {
+		ss << "\tNumber - " << number << "\n\tCapacity - " << capacity;
+	}
 	return ss.str();
 }
 
 double Room::getPrice() const {
 	return 0;
+}
+
+bool Room::getisBedRoom() const {
+	return isBedroom;
 }
 
 bool Room::operator== (int number) {
@@ -91,6 +105,14 @@ MeetingRoom::MeetingRoom(int number, int capacity, bool video, bool audio): Room
 			this->price = 300;
 		break;
 	}
+	Room::isBedroom = false;
+}
+
+MeetingRoom::MeetingRoom():Room(0,0) {
+	this->video = false;
+	this->audio = false;
+	this->price = 0;
+	Room::isBedroom = false;
 }
 
 bool MeetingRoom::getVideo() const {
@@ -117,6 +139,43 @@ void MeetingRoom::setPricePerHour(double price) {
 	this->price = price;
 }
 
+void MeetingRoom::setDefaultPrice() {
+	switch (capacity) {
+	case 10:
+		if (video && audio)
+			this->price = 120;
+		else if (video || audio)
+			this->price = 110;
+		else
+			this->price = 100;
+		break;
+	case 25:
+		if (video && audio)
+			this->price = 220;
+		else if (video || audio)
+			this->price = 210;
+		else
+			this->price = 200;
+		break;
+	case 50:
+		if (video && audio)
+			this->price = 320;
+		else if (video || audio)
+			this->price = 310;
+		else
+			this->price = 300;
+		break;
+	}
+}
+
+void MeetingRoom::setNumber(int number) {
+	Room::setNumber(number);
+}
+
+void MeetingRoom::setCapacity(int capacity) {
+	Room::setCapacity(capacity);
+}
+
 string MeetingRoom::getInfo() const {
 	stringstream ss;
 	string vid;
@@ -129,8 +188,6 @@ string MeetingRoom::getInfo() const {
 
 	return ss.str();
 }
-
-
 
 /*******************/
 /** Bedroom Class **/
@@ -152,6 +209,13 @@ Bedroom::Bedroom(int number, int capacity, string location): Room(number, capaci
 			this->price = 60;
 		break;
 	}
+	Room::isBedroom = true;
+}
+
+Bedroom::Bedroom():Room(0,0) {
+	this->location = { };
+	this->price = 0;
+	Room::isBedroom = false;
 }
 
 string Bedroom::getLocation() const {
@@ -166,18 +230,34 @@ void Bedroom::setLocation(string location) {
 	this->location = location;
 }
 
-void Bedroom::setPrice(double price) {
+void Bedroom::setPricePerDay(double price) {
 	this->price = price;
 }
 
-string Bedroom::getInfo() const {
-	stringstream ss;
-
-	ss << "Bedroom: \n"  << Room::getInfo() << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";
-
-	return ss.str();
+void Bedroom::setDefaultPrice() {
+	switch (capacity) {
+	case 1:
+		if (location == "Front")
+			this->price = 50;
+		else if (location == "Back")
+			this->price = 40;
+		break;
+	case 2:
+		if (location == "Front")
+			this->price = 75;
+		else if (location == "Back")
+			this->price = 60;
+		break;
+	}
 }
 
+void Bedroom::setNumber(int number) {
+	Room::setCapacity(capacity);
+}
+
+void Bedroom::setCapacity(int capacity) {
+	Room::setCapacity(capacity);
+}
 
 /*******************************/
 /** NonExistingRoom exception **/
