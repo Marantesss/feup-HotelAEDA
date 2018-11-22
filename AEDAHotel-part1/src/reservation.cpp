@@ -50,7 +50,7 @@ void Reservation::setDuration(int duration) {
 string Reservation::getInfo() const {
 	stringstream ss;
 	ss << "\nDate - " << date.getInfo() << endl;
-	//ss << "Room - " << room.getInfo() << endl;
+	ss << "Room - " << room.getInfo() << endl;
 	ss << "Price - " << price << " Euros" << endl;
 	return ss.str();
 }
