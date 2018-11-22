@@ -71,7 +71,7 @@ void Hotel::importClientsandReservations(string filename) {
 				r.setDuration(duration);
 				this->reservations.push_back(r);
 			}
-
+			getline(file, line);
 		}
 		file.close();
 	}
@@ -266,6 +266,7 @@ void Hotel::importEmployees(string filename){
 			else if (line == "false") supervisor = false;
 			e.setIsSupervisor(supervisor);
 			this->employees.push_back(e);
+			getline(file, line);
 		}
 		file.close();
 	}

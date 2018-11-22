@@ -149,8 +149,12 @@ int clientMenu(Hotel *h) {
 		case 4:
 			cout << "File name - ";
 			cin >> filename;
+<<<<<<< HEAD
 			//h->importClientsandReservations(filename);
 			break;
+=======
+			h->importClientsandReservations(filename);
+>>>>>>> 31f20a0cc2b21a62592187a9ae10faf98c3bd12f
 		case 5:
 
 			break;
