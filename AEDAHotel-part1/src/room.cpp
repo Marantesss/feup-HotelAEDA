@@ -19,6 +19,9 @@ Room::Room(int number, int capacity) {
 	//this->isBedroom = true;
 }
 
+Room::~Room() {};
+
+
 int Room::getNumber() const {
 	return this->number;
 }

@@ -60,7 +60,7 @@ public:
 	/**
 	 * @brief Default destructor.
 	 */
-	virtual ~Room() {};
+	virtual ~Room();
 
 	/**
 	 * @brief Const member function to get the rooms's number.
