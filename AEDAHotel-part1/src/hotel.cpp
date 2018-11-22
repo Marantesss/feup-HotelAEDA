@@ -82,12 +82,17 @@ void Hotel::importClientsandReservations(string filename) {
 				r.setDuration(duration);
 				this->reservations.push_back(r);
 			}
-
 		}
 		file.close();
 	}
-
 	else cout << "Unable to open file";
+}
+
+int Hotel::sequencialSearchClients(string name) {
+	for (unsigned int i = 0; i < clients.size(); i++)
+		if (clients[i].getName() == name)
+			return i;
+	return -1;
 }
 
 //... Rooms
@@ -95,7 +100,7 @@ vector<Room> Hotel::getRooms() const{
 	return this->rooms;
 }
 
-void Hotel::addRoom(Room r) {
+void Hotel::addRoom(Room & r) {
 	this->rooms.push_back(r);
 
 	if (typeid(r) == typeid(Bedroom)) {
@@ -167,6 +172,12 @@ void Hotel::showRooms() {
 	}
 }
 
+int Hotel::sequencialSearchRooms(int num) {
+	for (unsigned int i = 0; i < rooms.size(); i++)
+		if (rooms[i].getNumber() == num)
+			return i;
+	return -1;
+}
 
 //... Reservations
 vector<Reservation> Hotel::getReservations() const {
@@ -258,6 +269,13 @@ void Hotel::importEmployees(string filename){
 	}
 
 	else cout << "Unable to open file";
+}
+
+int Hotel::sequencialSearchEmployees(int id) {
+	for (unsigned int i = 0; i < employees.size(); i++)
+		if (employees[i].getId() == id)
+			return i;
+	return -1;
 }
 
 //... Hotel Information

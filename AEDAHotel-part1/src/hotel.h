@@ -122,6 +122,18 @@ public:
 	void importClientsandReservations(string filename);
 
 	/**
+	 * @brief Function to search a specific client given its name.
+	 *
+	 * @param vec Vector containing all the clients.
+	 *
+	 * @param name The desired clients's name.
+	 *
+	 * @return The desired client's index in the vector,
+	 * or -1 if not found
+	 */
+	int sequencialSearchClients(string name);
+
+	/**
 	 * @brief Const member function to get the room's vector.
 	 *
 	 * @return The hotel's rooms.
@@ -133,7 +145,7 @@ public:
 	 *
 	 * @param r The hotel's new room.
 	 */
-	void addRoom(Room r);
+	void addRoom(Room & r);
 
 	/**
 	 * @brief Member function to remove a room.
@@ -172,6 +184,18 @@ public:
 	 * @brief Member function to print all rooms' information.
 	 */
 	void showRooms();
+
+	/**
+	 * @brief Function to search a specific room given its number.
+	 *
+	 * @param vec Vector containing all the rooms.
+	 *
+	 * @param num The room's number.
+	 *
+	 * @return The desired rooms's index in the vector,
+	 * or -1 if not found
+	 */
+	int sequencialSearchRooms(int num);
 
 	/**
 	 * @brief Const member function to get the reservation's vector.
@@ -240,6 +264,18 @@ public:
 	 * @param filename The file location containing all the employees information.
 	 */
 	void importEmployees(string filename);
+
+	/**
+	 * @brief Function to search a specific employee given its id.
+	 *
+	 * @param vec Vector containing all the employees.
+	 *
+	 * @param id The desired employee's id.
+	 *
+	 * @return The desired employee's index in the vector,
+	 * or -1 if not found
+	 */
+	int sequencialSearchEmployees(int id);
 
 	/**
 	 * @brief Const member function to get the total number of the hotel's floors.

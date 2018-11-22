@@ -4,7 +4,6 @@
 #include <iostream>
 #include <vector>
 #include "hotel.h"
-#include "client.h"
 #include "AuxFunctions.h"
 
 using namespace std;

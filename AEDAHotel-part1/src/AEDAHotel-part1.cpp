@@ -20,9 +20,6 @@
 using namespace std;
 
 Hotel buildDemoHotel() {
-	// 4 floors
-	// 15 bedrooms (5 per floor)
-	// 2 meeting rooms in the upper floor
 	Hotel h(4, "Porto, Rua da Alegria 20");
 
 	//... Building Rooms
@@ -81,14 +78,14 @@ Hotel buildDemoHotel() {
 	Reservation r5(summer1, &b105, 4);
 	h.addReservation(r5);
 	Date summer2(14, 7, 2019);
-	Reservation r6(summer2, &b202, 4);
+	Reservation r6(summer2, &b202, 5);
 	h.addReservation(r6);
 	// Autumn
 	Date autumn1(11, 9, 2019);
-	Reservation r7(autumn1, &b301, 4);
+	Reservation r7(autumn1, &b301, 10);
 	h.addReservation(r7);
 	Date autumn2(17, 10, 2019);
-	Reservation r8(autumn2, &b203, 4);
+	Reservation r8(autumn2, &b203, 2);
 	h.addReservation(r8);
 
 	//... creating clients

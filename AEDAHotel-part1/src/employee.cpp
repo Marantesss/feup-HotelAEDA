@@ -73,4 +73,3 @@ NonExistingEmployee::NonExistingEmployee(int id): id(id) {}
 int NonExistingEmployee::getId() const {
 	return this->id;
 }
-

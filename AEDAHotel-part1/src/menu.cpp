@@ -121,7 +121,7 @@ int clientMenu(Hotel *h) {
 				break;
 			}
 			else {
-				int i = sequencialSearch(h->getClients(), name);
+				int i = h->sequencialSearchClients(name);
 				if (i == -1) {
 					cout << "Error - Client with the name " << name << " not found!" << endl;
 					break;
@@ -138,7 +138,7 @@ int clientMenu(Hotel *h) {
 				break;
 			}
 			else {
-				int i = sequencialSearch(h->getClients(), name);
+				int i = h->sequencialSearchClients(name);
 				if (i == -1) {
 					cout << "Error - Client with the name " << name << " not found!" << endl;
 					break;
@@ -228,7 +228,7 @@ int roomsMenu(Hotel *h) {
 		case 2:
 			cout << "Room number - ";
 			cin >> num;
-			i = sequencialSearch(h->getRooms(), num);
+			i = h->sequencialSearchRooms(num);
 			if (i == -1) {
 				cout << "Error - Room number " << num << " not found!" << endl;
 				break;
@@ -244,12 +244,12 @@ int roomsMenu(Hotel *h) {
 		case 5:
 			cout << "Room number - ";
 			cin >> num;
-			i = sequencialSearch(h->getRooms(), num);
+			i = h->sequencialSearchRooms(num);
 			if (i == -1) {
 				cout << "Error - Room number " << num << " not found!" << endl;
 				break;
 			}
-			h->getRooms().at(i).getInfo();
+			cout << h->getRooms().at(i).getInfo() << endl;
 			break;
 		case 6:
 			cout << "File name - ";
@@ -317,7 +317,7 @@ int employeesMenu(Hotel *h) {
 		case 4:
 			cout << "ID - ";
 			cin >> id;
-			i = sequencialSearch(h->getEmployees(), id);
+			i = h->sequencialSearchEmployees(id);
 			if (i == -1) {
 				cout << "Error - Employee with the id " << id << " not found!" << endl;
 			}
@@ -328,7 +328,7 @@ int employeesMenu(Hotel *h) {
 		case 5:
 			cout << "Name - ";
 			cin >> name;
-			i = sequencialSearch(h->getEmployees(), id);
+			i = h->sequencialSearchEmployees(id);
 			if (i == -1) {
 				cout << "Error - Employee with the name " << name << " not found!" << endl;
 			}

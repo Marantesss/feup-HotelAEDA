@@ -125,5 +125,4 @@ public:
 	string getName() const;
 };
 
-
 #endif /* CLIENT_H_ */

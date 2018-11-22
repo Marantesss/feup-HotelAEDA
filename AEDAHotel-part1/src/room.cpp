@@ -38,6 +38,10 @@ double Room::getPrice() const {
 	return this->price;
 }
 
+string Room::getInfo() const {
+	return NULL;
+}
+
 void Room::setNumber(int number) {
 	this->number = number;
 }
