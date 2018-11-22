@@ -88,7 +88,7 @@ int hotelInformationMenu(Hotel *h) {
 
 int clientMenu(Hotel *h) {
 	int menuOption;
-	string name;
+	string name, filename;
 	Client c = Client();
 	do {
 		cout << "_____________________________________" << endl;
@@ -98,7 +98,7 @@ int clientMenu(Hotel *h) {
 		cout << "Add Client - 1 " << endl;
 		cout << "Remove Client - 2 " << endl;
 		cout << "Search Client by name- 3 " << endl;
-		cout << "Import Clients - 4 [NOT IMPLEMENTED YET]" << endl;
+		cout << "Import Clients/Reservations - 4" << endl;
 		cout << "Back - 0 " << endl;
 		cout << "\nOption: ";
 		cin >> menuOption;
@@ -146,10 +146,15 @@ int clientMenu(Hotel *h) {
 				h->getClients().at(i).getInfo();
 			}
 			break;
+		case 4:
+			cout << "File name - ";
+			cin >> filename;
+			//h->importClientsandReservations(filename);
+		case 5:
+
 			break;
-		}
-		if (menuOption < 0 || menuOption > 1) {
-			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
+		default:
+			break;
 		}
 	} while (menuOption != 0);
 
@@ -158,7 +163,7 @@ int clientMenu(Hotel *h) {
 
 int roomsMenu(Hotel *h) {
 	int menuOption, num, capacity,i;
-	string location;
+	string location, filename;
 	char type, tmp;
 	bool audio, video;
 	Bedroom b = Bedroom();
@@ -229,7 +234,7 @@ int roomsMenu(Hotel *h) {
 			h->removeRoom(i);
 			break;
 		case 3:
-			//h->showRooms(); //getinfo nao funciona
+			h->showRooms();
 			break;
 		case 4:
 			h->allocateEmployees();
@@ -242,9 +247,12 @@ int roomsMenu(Hotel *h) {
 				cout << "Error - Room number " << num << " not found!" << endl;
 				break;
 			}
-			h->getRooms().at(i).getInfo(); //getinfo nao funciona
+			h->getRooms().at(i).getInfo();
 			break;
 		case 6:
+			cout << "File name - ";
+			cin >> filename;
+			h->importClientsandReservations(filename);
 			break;
 		default:
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
@@ -254,9 +262,10 @@ int roomsMenu(Hotel *h) {
 	return menuOption;
 }
 
+//Done
 int employeesMenu(Hotel *h) {
 	int menuOption, id, i;
-	string name, SclientOpt;
+	string name, SclientOpt, filename;
 	Employee e = Employee();
 	char supervisor;
 
@@ -272,7 +281,7 @@ int employeesMenu(Hotel *h) {
 		cout << "3 - See Employees" << endl;
 		cout << "4 - Search Employee by ID" << endl;
 		cout << "5 - Search Employee by name" << endl;
-		cout << "6 - Import Employees [NOT IMPLEMENTED YET]" << endl;
+		cout << "6 - Import Employees" << endl;
 		cout << "0 - Back" << endl;
 		cout << "\nOption: ";
 		cin >> menuOption;
@@ -324,6 +333,10 @@ int employeesMenu(Hotel *h) {
 				cout << h->getEmployees().at(i).getInfo() << endl;
 			}
 			break;
+		case 6:
+			cout << "File name - ";
+			cin >> filename;
+			h->importEmployees(filename);
 		default:
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}

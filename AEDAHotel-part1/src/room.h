@@ -37,7 +37,7 @@ public:
 	int getCapacity() const;
 	int getFloorNumber() const;
 	virtual double getPrice() const;
-	virtual string getInfo() const;
+	string getInfo() const ;
 	bool getisBedRoom() const;
 	// set
 	void setNumber(int number);

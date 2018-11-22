@@ -26,6 +26,52 @@ void Hotel::addClient(Client c) {
 	this->clients.push_back(c);
 }
 
+void Hotel::importClientsandReservations(string filename) {
+	ifstream file;
+	int noReservations, room, duration;
+	string line,name;
+	file.open(filename);
+	Client c = Client();
+	Date d = Date();
+	Reservation r = Reservation();
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			name = line;
+			c.setName(name);
+			this->clients.push_back(c);
+			getline(file, line);
+			noReservations = atoi(line.c_str());
+			getline(file, line);
+			for (int i = 1; i <= noReservations; i++) {
+				getline(file, line);
+				d.setDay(atoi(line.c_str()));
+				getline(file, line);
+				d.setMonth(atoi(line.c_str()));
+				getline(file, line);
+				d.setYear(atoi(line.c_str()));
+				getline(file, line);
+				room = atoi(line.c_str());
+				for (int i = 0; i < rooms.size(); i++) {
+					if (rooms.at(i) == room) {
+						Room c =  rooms.at(i);
+						r.setRoom(&c);
+					}
+				}
+				getline(file, line);
+				duration = atoi(line.c_str());
+				r.setDuration(duration);
+				this->reservations.push_back(r);
+			}
+
+		}
+		file.close();
+	}
+
+	else cout << "Unable to open file";
+}
+
 int Hotel::removeClient(string name) {
 	for (size_t i = 0; i <= clients.size(); i++) {
 		if (clients[i].getName() == name) {
@@ -90,7 +136,7 @@ void Hotel::removeRoomsFromTopFloor() {
 
 void Hotel::showRooms() {
 	for (int i = 0; i < rooms.size(); i++) {
-		cout << i + 1 << "- " << rooms.at(i).getInfo() << endl;
+		cout << i + 1 << "- " << this->rooms.at(i).getInfo() << endl;
 	}
 }
 
@@ -153,6 +199,34 @@ int Hotel::getNoSupervisors() {
 		}
 	}
 	return counter;
+}
+
+void Hotel::importEmployees(string filename){
+	string name,line;
+	ifstream file;
+	int id;
+	bool supervisor;
+	Employee e = Employee();
+	file.open(filename);
+	if (file.is_open())
+	{
+		while(getline(file, line))
+		{
+			id = atoi(line.c_str());
+			e.setId(id);
+			getline(file, line);
+			name = line;
+			e.setName(name);
+			getline(file, line);
+			if (line == "true") supervisor = true;
+			else if (line == "false") supervisor = false;
+			e.setIsSupervisor(supervisor);
+			this->employees.push_back(e);
+		}
+		file.close();
+	}
+
+	else cout << "Unable to open file";
 }
 
 int Hotel::getNoMeetingRooms() {
