@@ -23,7 +23,7 @@ Hotel buildDemoHotel() {
 	// 4 floors
 	// 15 bedrooms (5 per floor)
 	// 2 meeting rooms in the upper floor
-	Hotel h(4, 15, 2, "Porto, Rua da Alegria 20");
+	Hotel h(4, "Porto, Rua da Alegria 20");
 
 	//... Building Rooms
 	Bedroom b101(101, 2, "Back");

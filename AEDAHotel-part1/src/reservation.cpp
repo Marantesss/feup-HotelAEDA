@@ -59,15 +59,15 @@ string Reservation::getInfo() const {
 /** InvalidReservation exception **/
 /**********************************/
 
-InvalidReservation::InvalidReservation(Date date, Room *room) {
+NonExistingReservation::NonExistingReservation(Date date, Room *room) {
 	this->date = date;
 	this->room = room;
 }
 
-Date InvalidReservation::getDate() const {
+Date NonExistingReservation::getDate() const {
 	return this->date;
 }
 
-Room *InvalidReservation::getRoom() const {
+Room *NonExistingReservation::getRoom() const {
 	return this->room;
 }

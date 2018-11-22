@@ -8,6 +8,8 @@
 #include "client.h"
 #include "employee.h"
 #include "AuxFunctions.h"
+#include <typeinfo>       // std::bad_cast
+
 
 /**
 *  A class used to represent a hotel.
@@ -50,12 +52,12 @@ class Hotel {
 	/**
 	* int bedrooms The hotel's total number of bedrooms
 	*/
-	int nbedrooms;
+	int bedrooms;
 
 	/**
 	* int meetingRooms The hotel's total number of meeting rooms
 	*/
-	int nmeetingrooms;
+	int meetingrooms;
 
 	/**
 	* string address The hotel's address
@@ -74,13 +76,9 @@ public:
 	*
 	* @param floors The hotel's total number of floors.
 	*
-	* @param bedrooms The hotel's total number of bedrooms.
-	*
-	* @param meetingRooms The hotel's total number of meeting rooms.
-	*
 	* @param address The hotel's address.
 	*/
-	Hotel(int floors, int bedrooms, int meetingRooms, string address);
+	Hotel(int floors, string address);
 
 	/**
 	* @brief Default destructor.
@@ -108,12 +106,9 @@ public:
 	/**
 	* @brief Member function to remove a client.
 	*
-	* @param c The hotel's removed client.
-	*
-	* @return 0 if the client is removed
-	* 		  -1, if otherwise
+	* @param name The hotel's removed client's name.
 	*/
-	int removeClient(string name);
+	void removeClient(string name);
 
 	void importClientsandReservations(string filename);
 
@@ -245,12 +240,7 @@ public:
 	*
 	* @return The total number of hotel's bedrooms.
 	*/
-	int getnBedrooms() const;
-
-	/**
-	* @brief Member function to add a new bedroom.
-	*/
-	void addBedroom();
+	int getBedrooms() const;
 
 	// MeetingRooms
 	/**
@@ -258,12 +248,8 @@ public:
 	*
 	* @return The total number of hotel's meeting rooms.
 	*/
-	int getnMeetingRooms() const;
+	int getMeetingRooms() const;
 
-	/**
-	* @brief Member function to add a new meeting room.
-	*/
-	void addMeetingRoom();
 
 	// Address
 	/**
@@ -285,10 +271,6 @@ public:
 	int getNoSupervisors();
 
 	void importEmployees(string filename);
-
-	int getNoMeetingRooms();
-
-	int getNoBedrooms();
 };
 
 #endif /* HOTEL_H_ */

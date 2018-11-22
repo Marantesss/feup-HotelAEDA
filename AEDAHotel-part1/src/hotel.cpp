@@ -6,15 +6,15 @@
 
 Hotel::Hotel() {
 	this->floors = 0;
-	this->nbedrooms = 0;
-	this->nmeetingrooms = 0;
+	this->bedrooms = 0;
+	this->meetingrooms = 0;
 	this->address = "";
 };
 
-Hotel::Hotel(int floors, int bedrooms, int meetingRooms, string address) {
+Hotel::Hotel(int floors, string address) {
 	this->floors = floors;
-	this->nbedrooms = bedrooms;
-	this->nmeetingrooms = meetingRooms;
+	this->bedrooms = 0;
+	this->meetingrooms = 0;
 	this->address = address;
 }
 
@@ -60,7 +60,7 @@ void Hotel::importClientsandReservations(string filename) {
 				d.setYear(atoi(line.c_str()));
 				getline(file, line);
 				room = atoi(line.c_str());
-				for (int i = 0; i < rooms.size(); i++) {
+				for (size_t i = 0; i < rooms.size(); i++) {
 					if (rooms.at(i) == room) {
 						Room c =  rooms.at(i);
 						r.setRoom(&c);
@@ -79,30 +79,29 @@ void Hotel::importClientsandReservations(string filename) {
 	else cout << "Unable to open file";
 }
 
-int Hotel::removeClient(string name) {
-	for (size_t i = 0; i <= clients.size(); i++) {
-		if (clients[i].getName() == name) {
-			this->clients.erase(clients.begin() + i);
-			return 0;
+void Hotel::removeClient(string name) {
+	vector<Client>::iterator it;
+	for (it = clients.begin(); it != clients.end(); it++) {
+		if (it->getName() == name) {
+			this->clients.erase(it);
+			return;
 		}
 	}
-	return -1;
+	throw (NonExistingClient(name));
 }
 
 //... Rooms
 vector<Room> Hotel::getRooms() const{
-	return rooms;
+	return this->rooms;
 }
 
 vector<Room> Hotel::getFloorNumberRooms(int floor) const {
 	vector<Room> returnRooms;
-
 	for (size_t i = 0; i < rooms.size(); i++) {
 		if (rooms[i].getFloorNumber() == floor) {
 			returnRooms.push_back(rooms[i]);
 		}
 	}
-
 	return returnRooms;
 }
 
@@ -127,23 +126,54 @@ string Hotel::getRoomsInfo() {
 
 void Hotel::addRoom(Room r) {
 	this->rooms.push_back(r);
+
+	if (typeid(r) == typeid(Bedroom)) {
+		bedrooms++;
+	}
+	else if (typeid(r) == typeid(MeetingRoom)) {
+		meetingrooms++;
+	}
+
+	/*
+	try {
+		dynamic_cast<Bedroom&>(r); // if room is not Bedroom, throws Exception
+		bedrooms++;
+	}
+	catch (bad_cast& bc) {
+		meetingrooms++;
+	}
+	*/
 }
 
 void Hotel::removeRoom(int i) {
-	this->rooms.erase(rooms.begin() + 1);
+	vector<Room>::iterator it;
+	for (it = rooms.begin(); it != rooms.end(); it++) {
+		if (it->getNumber() == i) {
+			if (typeid(*it) == typeid(Bedroom)) {
+				bedrooms--;
+			}
+			else if (typeid(*it) == typeid(MeetingRoom)) {
+				meetingrooms--;
+			}
+			this->rooms.erase(it);
+			return;
+		}
+	}
+	throw (NonExistingRoom(i));
 }
 
 void Hotel::removeRoomsFromTopFloor() {
-	for (size_t i = 0; i < rooms.size(); i++) {
-		if (floors == rooms[i].getFloorNumber()) {
-			removeRoom(rooms[i].getNumber());
+	vector<Room>::iterator it;
+		for (it = rooms.begin(); it != rooms.end(); it++) {
+			if (it->getFloorNumber() == this->floors) {
+			removeRoom(it->getNumber());
 		}
 	}
 }
 
 void Hotel::showRooms() {
-	for (int i = 0; i < rooms.size(); i++) {
-		cout << i + 1 << "- " << this->rooms.at(i).getInfo() << endl;
+	for (size_t i = 0; i < rooms.size(); i++) {
+		cout << i + 1 << " - " << this->rooms.at(i).getInfo() << endl;
 	}
 }
 
@@ -158,7 +188,14 @@ void Hotel::addReservation(Reservation R) {
 }
 
 void Hotel::removeReservation(Date d, Room R) {
-	//TO DO
+	vector<Reservation>::iterator it;
+	for (it = reservations.begin(); it != reservations.end(); it++) {
+		if (it->getDate() == d && it->getRoom() == &R) {
+			this->rooms.erase(rooms.begin());
+			return;
+		}
+	}
+	throw (NonExistingReservation(d, &R));
 }
 
 //... Employees
@@ -171,15 +208,15 @@ void Hotel::addEmployee(Employee E) {
 }
 
 void Hotel::removeEmployee(int id) {
-	int i;
-	if (i = sequencialSearch(this->getEmployees(), id) == -1) {
+	int i = sequencialSearch(this->getEmployees(), id);
+	if (i == -1) {
 		cout << "Error - Employee with the id " << id << " not found!" << endl;
 	}
 	this->employees.erase(this->employees.begin() + i);
 }
 
 void Hotel::showEmployees() {
-	for (int i = 0; i < employees.size(); i++) {
+	for (size_t i = 0; i < employees.size(); i++) {
 		cout << i+1 << "- " << employees.at(i).getInfo() << endl;
 	}
 }
@@ -199,9 +236,9 @@ void Hotel::allocateEmployees() {
 
 int Hotel::getNoSupervisors() {
 	int counter = 0;
-
-	for (size_t i = 0; i < this->employees.size(); i++) {
-		if (this->employees.at(i).getIsSupervisor()) {
+	vector<Employee>::iterator it;
+	for (it = employees.begin(); it != employees.end(); it++) {
+		if (it->getIsSupervisor()) {
 			counter++;
 		}
 	}
@@ -236,33 +273,15 @@ void Hotel::importEmployees(string filename){
 	else cout << "Unable to open file";
 }
 
-int Hotel::getNoMeetingRooms() {
-	int counter = 0;
-	for (int i = 0; i < rooms.size(); i++) {
-		if (!rooms.at(i).getisBedRoom()) counter++;
-	}
-	return counter;
-}
-
-int Hotel::getNoBedrooms() {
-	int counter = 0;
-	for (int i = 0; i < rooms.size(); i++) {
-		if (rooms.at(i).getisBedRoom()) counter++;
-	}
-	return counter;
-}
-
 //... Hotel Information
 // Floors
 int Hotel::getFloors() const { return this->floors; }
 void Hotel::addFloor() { this->floors++; }
 void Hotel::removeFloor() { this->floors--; }
 // Bedrooms
-int Hotel::getnBedrooms() const { return this->nbedrooms; }
-void Hotel::addBedroom() { this->nbedrooms++; }
+int Hotel::getBedrooms() const { return this->bedrooms; }
 // MeetingRooms
-int Hotel::getnMeetingRooms() const { return this->nmeetingrooms; }
-void Hotel::addMeetingRoom() { this->nmeetingrooms++; }
+int Hotel::getMeetingRooms() const { return this->meetingrooms; }
 // Address
 string Hotel::getAddress() const { return this->address; }
 void Hotel::setAddress(string address) { this->address = address; }

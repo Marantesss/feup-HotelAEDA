@@ -27,16 +27,15 @@ public:
 	void setDuration(int duration);
 };
 
-// InvalidReservation exception
-class InvalidReservation {
+// NonExistingReservation exception
+class NonExistingReservation {
 protected:
 	Date date;
 	Room* room;
 public:
-	InvalidReservation(Date date, Room *room);
+	NonExistingReservation(Date date, Room *room);
 	Date getDate() const;
 	Room *getRoom() const;
 };
-
 
 #endif /* RESERVATION_H_ */

@@ -28,12 +28,16 @@ void Employee::setIsSupervisor(bool supervisor) {
 	this->isSupervisor = supervisor;
 }
 
-int Employee::getId() {
-	return id;
+string Employee::getName() {
+	return this->name;
 }
 
-string Employee::getName() {
-	return name;
+int Employee::getId() {
+	return this->id;
+}
+
+bool Employee::getIsSupervisor() const {
+	return this->isSupervisor;
 }
 
 string Employee::getInfo() const {
@@ -43,10 +47,6 @@ string Employee::getInfo() const {
 	else isSupervisor = "no";
 	ss << "Name - " << name << "   Id - " << id << "   Supervisor - " << isSupervisor;
 	return ss.str();
-}
-
-bool Employee::getIsSupervisor() const {
-	return this->isSupervisor;
 }
 
 bool Employee::operator == (int id) {
@@ -64,18 +64,13 @@ bool Employee::operator < (Employee & e) {
 	else return false;
 }
 
+/***********************************/
+/** NonExistingEmployee exception **/
+/***********************************/
 
-/* Supervisor Class
+NonExistingEmployee::NonExistingEmployee(int id): id(id) {}
 
-Supervisor::Supervisor(int id, string name) :Employee(id,name)
-{}
-
-string Supervisor::getInfo() const {
-	stringstream ss;
-	ss << "Supervisor:\n" << Employee::getInfo() << endl;
-	return ss.str();
+int NonExistingEmployee::getId() const {
+	return this->id;
 }
 
-bool Supervisor::isSupervisor() const {
-	return true;
-}*/

@@ -17,7 +17,7 @@ protected:
 	int number;		/**< int number. The room's name. */
 	int capacity;	/**< int capacity. The room's maximum capacity. */
 	Employee supervisor;		/**< Employee supervisor. The room's assigned supervisor */
-	bool isBedroom;
+	double price;
 public:
 	/**
 	* A default constructor.
@@ -36,9 +36,9 @@ public:
 	int getNumber() const;
 	int getCapacity() const;
 	int getFloorNumber() const;
-	virtual double getPrice() const;
+	double getPrice() const;
 	virtual string getInfo() const;
-	bool getisBedRoom() const;
+	//bool getisBedRoom() const;
 	// set
 	void setNumber(int number);
 	void setCapacity(int capacity);
@@ -53,42 +53,35 @@ public:
 class MeetingRoom : public Room {
 	bool video;
 	bool audio;
-	double price; //per hour
 public:
 	MeetingRoom(int number, int capacity, bool video, bool audio);
 	MeetingRoom();
 	// get
 	bool getVideo() const;
 	bool getAudio() const;
-	double getPrice() const;
 	string getInfo() const;
 	// set
 	void setVideo(bool video);
 	void setAudio(bool audio);
 	void setPricePerHour(double price);
 	void setDefaultPrice();
-	// void setNumber(int number);
-	// void setCapacity(int capacity);
+
 };
 
 
 // Bedroom Class
 class Bedroom : public Room {
 	string location;
-	double price; //per day
 public:
 	Bedroom(int number, int capacity, string location);
 	Bedroom();
 	// get
 	string getLocation() const;
-	double getPrice() const;
 	string getInfo() const;
 	// set
 	void setLocation(string location);
 	void setPricePerDay(double price);
 	void setDefaultPrice();
-	// void setNumber(int number);
-	// void setCapacity(int capacity);
 };
 
 

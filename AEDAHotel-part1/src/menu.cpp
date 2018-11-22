@@ -31,9 +31,9 @@ int hotelInformationMenu(Hotel *h) {
 		cout << "_____________________________________" << endl;
 		cout << " -------- HOTEL INFORMATION -------- " << endl;
 		cout << "Address - " << h->getAddress() << endl;
-		cout << "Total Rooms: " << h->getnBedrooms() + h->getnMeetingRooms() << endl;
-		cout << "Bedrooms: " << h->getnBedrooms() << ", ";
-		cout << "Meeting Rooms: " << h->getnMeetingRooms() << endl;
+		cout << "Total Rooms: " << h->getBedrooms() + h->getMeetingRooms() << endl;
+		cout << "Bedrooms: " << h->getBedrooms() << ", ";
+		cout << "Meeting Rooms: " << h->getMeetingRooms() << endl;
 		cout << "Total Clients: " << h->getClients().size() << endl;
 		cout << "Total Employees: " << h->getEmployees().size() << endl;
 		cout << "_____________________________________" << endl;
@@ -121,8 +121,8 @@ int clientMenu(Hotel *h) {
 				break;
 			}
 			else {
-				int i;
-				if (i = sequencialSearch(h->getClients(), name) == -1) {
+				int i = sequencialSearch(h->getClients(), name);
+				if (i == -1) {
 					cout << "Error - Client with the name " << name << " not found!" << endl;
 					break;
 				}
@@ -138,8 +138,8 @@ int clientMenu(Hotel *h) {
 				break;
 			}
 			else {
-				int i;
-				if (i = sequencialSearch(h->getClients(), name) == -1) {
+				int i = sequencialSearch(h->getClients(), name);
+				if (i == -1) {
 					cout << "Error - Client with the name " << name << " not found!" << endl;
 					break;
 				}
@@ -150,6 +150,7 @@ int clientMenu(Hotel *h) {
 			cout << "File name - ";
 			cin >> filename;
 			//h->importClientsandReservations(filename);
+			break;
 		case 5:
 
 			break;
@@ -173,8 +174,8 @@ int roomsMenu(Hotel *h) {
 		cout << "_____________________________________" << endl;
 		cout << "------------- ROOM MENU -------------" << endl;
 		cout << "No. of Rooms: " << h->getRooms().size() << endl;
-		cout << "No. of Meeting Rooms: " << h->getNoMeetingRooms() << endl;
-		cout << "No. of bedrooms: " << h->getNoBedrooms() << endl;
+		cout << "No. of Meeting Rooms: " << h->getMeetingRooms() << endl;
+		cout << "No. of bedrooms: " << h->getBedrooms() << endl;
 		cout << "_____________________________________" << endl;
 		cout << " ---- What would you like to do? ---- " << endl;
 		cout << "1 - Add Room" << endl;
@@ -198,7 +199,7 @@ int roomsMenu(Hotel *h) {
 			cin >> type;
 			if (type == 'm') {
 				m.setNumber(num);
-				cout << "Capacity (10/15/50) - ";
+				cout << "Capacity (10/25/50) - ";
 				cin >> capacity;
 				m.setCapacity(capacity);
 				cout << "Audio (y/n) - ";
@@ -227,7 +228,8 @@ int roomsMenu(Hotel *h) {
 		case 2:
 			cout << "Room number - ";
 			cin >> num;
-			if (i = sequencialSearch(h->getRooms(), num) == -1) {
+			i = sequencialSearch(h->getRooms(), num);
+			if (i == -1) {
 				cout << "Error - Room number " << num << " not found!" << endl;
 				break;
 			}
@@ -242,8 +244,8 @@ int roomsMenu(Hotel *h) {
 		case 5:
 			cout << "Room number - ";
 			cin >> num;
-
-			if (i = sequencialSearch(h->getRooms(), num) == -1) {
+			i = sequencialSearch(h->getRooms(), num);
+			if (i == -1) {
 				cout << "Error - Room number " << num << " not found!" << endl;
 				break;
 			}
@@ -315,7 +317,8 @@ int employeesMenu(Hotel *h) {
 		case 4:
 			cout << "ID - ";
 			cin >> id;
-			if (i = sequencialSearch(h->getEmployees(), id) == -1) {
+			i = sequencialSearch(h->getEmployees(), id);
+			if (i == -1) {
 				cout << "Error - Employee with the id " << id << " not found!" << endl;
 			}
 			else {
@@ -325,8 +328,8 @@ int employeesMenu(Hotel *h) {
 		case 5:
 			cout << "Name - ";
 			cin >> name;
-			int i;
-			if (i = sequencialSearch(h->getEmployees(), name) == -1) {
+			i = sequencialSearch(h->getEmployees(), id);
+			if (i == -1) {
 				cout << "Error - Employee with the name " << name << " not found!" << endl;
 			}
 			else {
@@ -337,6 +340,7 @@ int employeesMenu(Hotel *h) {
 			cout << "File name - ";
 			cin >> filename;
 			h->importEmployees(filename);
+			break;
 		default:
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}

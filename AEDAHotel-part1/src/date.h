@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 
+
 using namespace std;
 
 // Date Class
@@ -40,7 +41,7 @@ public:
 	Date *operator ++(int); // postfix
 	Date *operator --(); // prefix
 	Date *operator --(int); // postfix
-	bool operator ==(Date *date);
+	bool operator ==(Date &date);
 	Date *operator =(Date *date);
 };
 

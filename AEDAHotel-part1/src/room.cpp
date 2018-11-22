@@ -4,14 +4,19 @@
 /** Room Class **/
 /****************/
 
-Room::Room(int number, int capacity) {
-	this->number = number;
-	this->capacity = capacity;
-}
-
 Room::Room() {
 	this->number = 0;
 	this->capacity = 0;
+	this->price = 0;
+	//this->isBedroom = true;
+
+}
+
+Room::Room(int number, int capacity) {
+	this->number = number;
+	this->capacity = capacity;
+	this->price = 0;
+	//this->isBedroom = true;
 }
 
 int Room::getNumber() const {
@@ -38,33 +43,8 @@ void Room::setSupervisor(Employee e) {
 	this->supervisor = e;
 }
 
-/*string Bedroom::getInfo() const {
-	stringstream ss;
-
-	ss << "Bedroom: \n" << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";
-
-	return ss.str();
-}
-*/
-
-string Room::getInfo() const {
-	stringstream ss;
-	if (isBedroom) {
-		ss << "Bedroom:\tNumber - " << number << "\tCapacity - " << capacity;
-	}
-	else {
-		ss << "Meeting Room:\tNumber - " << number << "\tCapacity - " << capacity;
-	}
-		
-	return ss.str();
-}
-
 double Room::getPrice() const {
-	return 0;
-}
-
-bool Room::getisBedRoom() const {
-	return isBedroom;
+	return this->price;
 }
 
 bool Room::operator== (int number) {
@@ -110,14 +90,14 @@ MeetingRoom::MeetingRoom(int number, int capacity, bool video, bool audio): Room
 			this->price = 300;
 		break;
 	}
-	Room::isBedroom = false;
+	// Room::isBedroom = false;
 }
 
-MeetingRoom::MeetingRoom():Room(0,0) {
+MeetingRoom::MeetingRoom():Room() {
 	this->video = false;
 	this->audio = false;
 	this->price = 0;
-	Room::isBedroom = false;
+	// Room::isBedroom = false;
 }
 
 bool MeetingRoom::getVideo() const {
@@ -126,10 +106,6 @@ bool MeetingRoom::getVideo() const {
 
 bool MeetingRoom::getAudio() const {
 	return this->audio;
-}
-
-double MeetingRoom::getPrice() const {
-	return this->price;
 }
 
 void MeetingRoom::setVideo(bool video) {
@@ -173,15 +149,7 @@ void MeetingRoom::setDefaultPrice() {
 	}
 }
 
-void MeetingRoom::setNumber(int number) {
-	Room::setNumber(number);
-}
-
-void MeetingRoom::setCapacity(int capacity) {
-	Room::setCapacity(capacity);
-}
-
-/*string MeetingRoom::getInfo() const {
+string MeetingRoom::getInfo() const {
 	stringstream ss;
 	string vid;
 	string aud;
@@ -193,7 +161,7 @@ void MeetingRoom::setCapacity(int capacity) {
 
 	return ss.str();
 }
-*/
+
 
 /*******************/
 /** Bedroom Class **/
@@ -215,21 +183,26 @@ Bedroom::Bedroom(int number, int capacity, string location): Room(number, capaci
 			this->price = 60;
 		break;
 	}
-	Room::isBedroom = true;
+	//Room::isBedroom = true;
 }
 
-Bedroom::Bedroom():Room(0,0) {
+Bedroom::Bedroom():Room() {
 	this->location = { };
-	this->price = 0;
-	Room::isBedroom = false;
+	//Room::isBedroom = false;
 }
+
+
+string Bedroom::getInfo() const {
+	stringstream ss;
+
+	ss << "Bedroom: \n" << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";
+
+	return ss.str();
+}
+
 
 string Bedroom::getLocation() const {
 	return this->location;
-}
-
-double Bedroom::getPrice() const {
-	return this->price;
 }
 
 void Bedroom::setLocation(string location) {
@@ -257,13 +230,6 @@ void Bedroom::setDefaultPrice() {
 	}
 }
 
-void Bedroom::setNumber(int number) {
-	Room::setCapacity(capacity);
-}
-
-void Bedroom::setCapacity(int capacity) {
-	Room::setCapacity(capacity);
-}
 
 /*******************************/
 /** NonExistingRoom exception **/
