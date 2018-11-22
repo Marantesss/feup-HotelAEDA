@@ -4,6 +4,13 @@
 /** Hotel Class **/
 /*****************/
 
+Hotel::Hotel() {
+	this->floors = 0;
+	this->nbedrooms = 0;
+	this->nmeetingrooms = 0;
+	this->address = "";
+};
+
 Hotel::Hotel(int floors, int bedrooms, int meetingRooms, string address) {
 	this->floors = floors;
 	this->nbedrooms = bedrooms;
