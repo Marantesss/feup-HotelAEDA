@@ -170,15 +170,15 @@ Date::Date(int day, int month, int year) {
 
 // get
 int Date::getDay() {
-	return this->day;
+	return day;
 }
 
 int Date::getMonth() {
-	return this->month;
+	return month;
 }
 
 int Date::getYear() {
-	return this->year;
+	return year;
 }
 
 string Date::getSeason() {
@@ -208,6 +208,22 @@ void Date::setMonth(int month) {
 
 void Date::setYear(int year) {
 	this->year = year;
+}
+
+void Date::setDate(string &date) { // (D M Y)
+	string delimiter = " ";
+	int data[3], counter = 0;
+	size_t pos = 0;
+	string token;
+	while ((pos = date.find(delimiter)) != string::npos) {
+		token = date.substr(0, pos);
+		data[counter] = atoi(token.c_str());
+		counter++;
+		date.erase(0, pos + delimiter.length());
+	}
+	this->setDay(data[0]);
+	this->setMonth(data[1]);
+	this->setYear(data[2]);
 }
 
 void Date::setSeason(string season) {

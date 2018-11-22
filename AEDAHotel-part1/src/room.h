@@ -36,7 +36,7 @@ public:
 	int getNumber() const;
 	int getCapacity() const;
 	int getFloorNumber() const;
-	// virtual double getPrice() const; NAO E NECESSARIO PQ NAO TEM VARIAVEL PRICE
+	virtual double getPrice() const;
 	virtual string getInfo() const;
 	bool getisBedRoom() const;
 	// set
