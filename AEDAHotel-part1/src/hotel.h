@@ -62,6 +62,11 @@ class Hotel {
 	string address;
 public:
 	/**
+	* @brief Default Constructor.
+	*/
+	Hotel();
+
+	/**
 	* @brief Constructor.
 	*
 	* The constructor creates an Hotel object with the data passed as argument.
@@ -279,8 +284,6 @@ public:
 	int getNoMeetingRooms();
 
 	int getNoBedrooms();
-
-
 };
 
 #endif /* HOTEL_H_ */

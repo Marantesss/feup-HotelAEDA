@@ -36,7 +36,7 @@ public:
 	int getNumber() const;
 	int getCapacity() const;
 	int getFloorNumber() const;
-	virtual double getPrice() const;
+	// virtual double getPrice() const; NAO E NECESSARIO PQ NAO TEM VARIAVEL PRICE
 	virtual string getInfo() const;
 	bool getisBedRoom() const;
 	// set
@@ -67,8 +67,8 @@ public:
 	void setAudio(bool audio);
 	void setPricePerHour(double price);
 	void setDefaultPrice();
-	void setNumber(int number);
-	void setCapacity(int capacity);
+	// void setNumber(int number);
+	// void setCapacity(int capacity);
 };
 
 
@@ -87,8 +87,8 @@ public:
 	void setLocation(string location);
 	void setPricePerDay(double price);
 	void setDefaultPrice();
-	void setNumber(int number);
-	void setCapacity(int capacity);
+	// void setNumber(int number);
+	// void setCapacity(int capacity);
 };
 
 
