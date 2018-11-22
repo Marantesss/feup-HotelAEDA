@@ -231,11 +231,7 @@ public:
 
 
 	void setDefaultPrice();
-
-
 	void setNumber(int number);
-
-
 	void setCapacity(int capacity);
 };
 
@@ -316,11 +312,7 @@ public:
 	* @brief Member function to change the bedroom's price.
 	*/
 	void setDefaultPrice();
-
-
 	void setNumber(int number);
-
-
 	void setCapacity(int capacity);
 };
 
@@ -354,3 +346,15 @@ public:
 };
 
 #endif /* ROOM_H_ */
+
+	void setCapacity(int capacity);
+
+
+	void setNumber(int number);
+
+
+
+	void setCapacity(int capacity);
+
+
+	void setNumber(int number);

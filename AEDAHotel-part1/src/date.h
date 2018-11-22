@@ -29,6 +29,7 @@ public:
 	void setDay(int day);
 	void setMonth(int month);
 	void setYear(int year);
+	void setDate(string &date); // (D M Y)
 	void setSeason(string season);
 	void setWeekday(string weekday);
 	// show

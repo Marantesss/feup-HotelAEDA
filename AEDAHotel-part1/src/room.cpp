@@ -38,19 +38,24 @@ void Room::setSupervisor(Employee e) {
 	this->supervisor = e;
 }
 
-string Bedroom::getInfo() const {
+/*string Bedroom::getInfo() const {
 	stringstream ss;
 
-	ss << "Bedroom: \n" << Room::getInfo() << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";
+	ss << "Bedroom: \n" << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";
 
 	return ss.str();
 }
+*/
 
 string Room::getInfo() const {
 	stringstream ss;
 	if (isBedroom) {
-		ss << "\tNumber - " << number << "\n\tCapacity - " << capacity;
+		ss << "Bedroom:\tNumber - " << number << "\tCapacity - " << capacity;
 	}
+	else {
+		ss << "Meeting Room:\tNumber - " << number << "\tCapacity - " << capacity;
+	}
+		
 	return ss.str();
 }
 
@@ -176,7 +181,7 @@ void MeetingRoom::setCapacity(int capacity) {
 	Room::setCapacity(capacity);
 }
 
-string MeetingRoom::getInfo() const {
+/*string MeetingRoom::getInfo() const {
 	stringstream ss;
 	string vid;
 	string aud;
@@ -184,10 +189,11 @@ string MeetingRoom::getInfo() const {
 	if (video) vid = "yes"; else vid = "no";
 	if (audio) aud = "yes"; else aud = "no";
 
-	ss << "Meeting Room: \n" << Room::getInfo() << "\n\tVideo - " << vid << "\n\tAudio - " << aud << "\n\tPrice per hour - " << price << " Euros";
+	ss << "Meeting Room: \n" << "\n\tVideo - " << vid << "\n\tAudio - " << aud << "\n\tPrice per hour - " << price << " Euros";
 
 	return ss.str();
 }
+*/
 
 /*******************/
 /** Bedroom Class **/

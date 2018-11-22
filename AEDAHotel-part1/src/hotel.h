@@ -1,6 +1,7 @@
 #ifndef HOTEL_H_
 #define HOTEL_H_
 
+#include <fstream>
 #include "reservation.h"
 #include "client.h"
 #include "room.h"
@@ -62,6 +63,11 @@ class Hotel {
 	string address;
 public:
 	/**
+	* @brief Default Constructor.
+	*/
+	Hotel();
+
+	/**
 	* @brief Constructor.
 	*
 	* The constructor creates an Hotel object with the data passed as argument.
@@ -108,6 +114,8 @@ public:
 	* 		  -1, if otherwise
 	*/
 	int removeClient(string name);
+
+	void importClientsandReservations(string filename);
 
 	// Rooms
 	/**
@@ -276,11 +284,11 @@ public:
 	*/
 	int getNoSupervisors();
 
+	void importEmployees(string filename);
+
 	int getNoMeetingRooms();
 
 	int getNoBedrooms();
-
-
 };
 
 #endif /* HOTEL_H_ */
