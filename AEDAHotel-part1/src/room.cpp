@@ -31,6 +31,10 @@ int Room::getFloorNumber() const {
 	return this->number/100;
 }
 
+double Room::getPrice() const {
+	return this->price;
+}
+
 void Room::setNumber(int number) {
 	this->number = number;
 }
@@ -41,10 +45,6 @@ void Room::setCapacity(int capacity) {
 
 void Room::setSupervisor(Employee e) {
 	this->supervisor = e;
-}
-
-double Room::getPrice() const {
-	return this->price;
 }
 
 bool Room::operator== (int number) {
@@ -60,6 +60,13 @@ bool Room::operator< (Room & room) {
 /***********************/
 /** MeetingRoom Class **/
 /***********************/
+
+MeetingRoom::MeetingRoom():Room() {
+	this->video = false;
+	this->audio = false;
+	this->price = 0;
+	// Room::isBedroom = false;
+}
 
 MeetingRoom::MeetingRoom(int number, int capacity, bool video, bool audio): Room(number, capacity) {
 	this->video = video;
@@ -93,19 +100,25 @@ MeetingRoom::MeetingRoom(int number, int capacity, bool video, bool audio): Room
 	// Room::isBedroom = false;
 }
 
-MeetingRoom::MeetingRoom():Room() {
-	this->video = false;
-	this->audio = false;
-	this->price = 0;
-	// Room::isBedroom = false;
-}
-
 bool MeetingRoom::getVideo() const {
 	return this->video;
 }
 
 bool MeetingRoom::getAudio() const {
 	return this->audio;
+}
+
+string MeetingRoom::getInfo() const {
+	stringstream ss;
+	string vid;
+	string aud;
+
+	if (video) vid = "yes"; else vid = "no";
+	if (audio) aud = "yes"; else aud = "no";
+
+	ss << "Meeting Room: \n" << "\n\tVideo - " << vid << "\n\tAudio - " << aud << "\n\tPrice per hour - " << price << " Euros";
+
+	return ss.str();
 }
 
 void MeetingRoom::setVideo(bool video) {
@@ -149,23 +162,13 @@ void MeetingRoom::setDefaultPrice() {
 	}
 }
 
-string MeetingRoom::getInfo() const {
-	stringstream ss;
-	string vid;
-	string aud;
-
-	if (video) vid = "yes"; else vid = "no";
-	if (audio) aud = "yes"; else aud = "no";
-
-	ss << "Meeting Room: \n" << "\n\tVideo - " << vid << "\n\tAudio - " << aud << "\n\tPrice per hour - " << price << " Euros";
-
-	return ss.str();
-}
-
-
 /*******************/
 /** Bedroom Class **/
 /*******************/
+
+Bedroom::Bedroom():Room() {
+	this->location = { };
+}
 
 Bedroom::Bedroom(int number, int capacity, string location): Room(number, capacity) {
 	this->location = location;
@@ -183,14 +186,11 @@ Bedroom::Bedroom(int number, int capacity, string location): Room(number, capaci
 			this->price = 60;
 		break;
 	}
-	//Room::isBedroom = true;
 }
 
-Bedroom::Bedroom():Room() {
-	this->location = { };
-	//Room::isBedroom = false;
+string Bedroom::getLocation() const {
+	return this->location;
 }
-
 
 string Bedroom::getInfo() const {
 	stringstream ss;
@@ -198,11 +198,6 @@ string Bedroom::getInfo() const {
 	ss << "Bedroom: \n" << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";
 
 	return ss.str();
-}
-
-
-string Bedroom::getLocation() const {
-	return this->location;
 }
 
 void Bedroom::setLocation(string location) {

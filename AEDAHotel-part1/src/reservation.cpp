@@ -5,7 +5,7 @@
 /***********************/
 
 Reservation::Reservation() {
-	this->date = 0;
+	this->date = Date(1,1,2018);
 	this->room = 0;
 	this->duration = 0;
 	this->price = 0;
@@ -15,10 +15,54 @@ Reservation::Reservation(Date date, Room *room, int duration) {
 	this->date = date;
 	this->room = room;
 	this->duration = duration;
-	this->price = duration * room->getPrice();
-	// Date influences time
-	if (date.getSeason() == "Summer" || date.getSeason() == "Winter") {
-		price = price * 1.1;
+	this->price = 0;
+	// If the room is a bedroom
+	if(typeid(room) == typeid(Bedroom)) {
+		for (int i = 0; i < duration; i++) {
+			// high season
+			if (date.getSeason() == "Summer" || date.getSeason() == "Winter") {
+				// weekend
+				if (date.getWeekday() == "Saturday" || date.getWeekday() == "Sunday")
+					price += room->getPrice() * 1.2;
+				// weekday
+				else
+					price += room->getPrice() * 1.1;
+			}
+			// off-season
+			else {
+				// weekend
+				if (date.getWeekday() == "Saturday" || date.getWeekday() == "Sunday")
+					price += room->getPrice() * 1.1;
+				//weekday
+				else
+					price += room->getPrice();
+			}
+			date++;
+		}
+		// getting date back to normal
+		for (int i = 0; i < duration; i++)
+			date--;
+	}
+	// If the room is a MeetingRoom
+	else if(typeid(room) == typeid(MeetingRoom)) {
+		// high season
+		if (date.getSeason() == "Summer" || date.getSeason() == "Winter") {
+			// weekend
+			if (date.getWeekday() == "Saturday" || date.getWeekday() == "Sunday")
+				price += room->getPrice() * 1.2 * duration;
+			// weekday
+			else
+				price += room->getPrice() * 1.1 * duration;
+		}
+		// off-season
+		else {
+			// weekend
+			if (date.getWeekday() == "Saturday" || date.getWeekday() == "Sunday")
+				price += room->getPrice() * 1.1 * duration;
+			// weekday
+			else
+				price += room->getPrice() * duration;
+		}
 	}
 }
 

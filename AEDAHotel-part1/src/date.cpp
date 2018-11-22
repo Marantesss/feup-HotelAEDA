@@ -251,117 +251,92 @@ string Date::showExtendedDate() {
 }
 
 // calculating adjacent dates
-void nextDate(Date *d) {
-	int day = d->getDay();
-	int month = d->getMonth();
-	int year = d->getYear();
+void nextDate(Date &d) {
+	int day = d.getDay();
+	int month = d.getMonth();
+	int year = d.getYear();
 
-	// day 31
-	if (day == 31 && (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)) {
-		d->setDay(1);
-		// month 12
-		if (month == 12) {
-			d->setMonth(1);
-			d->setYear(year + 1);
-		}
-		else {
-			d->setMonth(month + 1);
-			d->setYear(year);
-		}
+	// Adding one day
+	if (validDate(day + 1, month, year)) {
+		d.setDay(day + 1);
+		return;
 	}
-	//day 30
-	else if (day == 30 && (month == 4 || month == 6 || month == 9 || month == 11)) {
-		d->setDay(1);
-		d->setMonth(month + 1);
-		d->setYear(year);
+	// Adding one month
+	if (validDate(1, month + 1, year)) {
+		d.setDay(1);
+		d.setMonth(month + 1);
+		return;
 	}
-	// February
-	else if (month == 2 && day >= 28) {
-		if(isLeap(year)) {
-			if (day == 28) {
-				d->setDay(29);
-				d->setMonth(2);
-				d->setYear(year);
-			}
-			else if (day == 29) {
-				d->setDay(1);
-				d->setMonth(3);
-				d->setYear(year);
-			}
-		}
-		else {
-			d->setDay(1);
-			d->setMonth(3);
-			d->setYear(year);
-		}
-	}
-	// generic case
-	else {
-		d->setDay(day + 1);
-		d->setMonth(month);
-		d->setYear(year);
+	// Adding one year
+	if (validDate(1, 1, year + 1)) {
+		d.setDay(1);
+		d.setMonth(1);
+		d.setYear(year + 1);
+		return;
 	}
 }
 
-void previousDate(Date *d){
-	int day = d->getDay();
-	int month = d->getMonth();
-	int year = d->getYear();
+void previousDate(Date &d){
+	int day = d.getDay();
+	int month = d.getMonth();
+	int year = d.getYear();
 
-	// day 1
-	if (d->getDay() == 1) {
-		// month 1
-		if (month == 1) {
-			d->setDay(31);
-			d->setMonth(12);
-			d->setYear(year - 1);
-		}
-		else {
-			// month 3
-			if (month == 3) {
-				if (isLeap(year))
-					d->setDay(29);
-				else
-					d->setDay(28);
-			}
-			else if (month == 5 || month == 7 || month == 10 || month == 12) {
-				d->setDay(30);
-			}
-			else if (month == 4 || month == 6 || month == 8 || month == 9 || month == 11) {
-				d->setDay(31);
-			}
-		}
-		d->setMonth(month - 1);
-		d->setYear(year);
+	// Minus one day
+	if (validDate(day - 1, month, year)) {
+		d.setDay(day - 1);
+		return;
 	}
-	else {
-		d->setDay(day - 1);
-		d->setMonth(month);
-		d->setYear(year);
+	// minus one month
+	if (validDate(31, month + 1, year)) {
+		d.setDay(31);
+		d.setMonth(month - 1);
+		return;
+	}
+	else if (validDate(30, month + 1, year)) {
+		d.setDay(30);
+		d.setMonth(month - 1);
+		return;
+	}
+	else if (validDate(29, month + 1, year)) {
+		d.setDay(29);
+		d.setMonth(month - 1);
+		return;
+	}
+	else if (validDate(28, month + 1, year)) {
+		d.setDay(28);
+		d.setMonth(month - 1);
+		return;
+	}
+	// Minus one year
+	if (validDate(31, 12, year - 1)) {
+		d.setDay(31);
+		d.setMonth(12);
+		d.setYear(year - 1);
+		return;
 	}
 }
 
 
 // Operators
-Date *Date::operator ++() { // prefix
-	nextDate(this);
-	return this;
+Date Date::operator ++() { // prefix
+	nextDate(*this);
+	return *this;
 }
 
-Date *Date::operator ++(int) { // postfix
-	Date *d = new Date();
-	nextDate(this);
+Date Date::operator ++(int) { // postfix
+	Date d = *this;
+	nextDate(*this);
 	return d;
 }
 
-Date *Date::operator --() { // prefix
-	previousDate(this);
-	return this;
+Date Date::operator --() { // prefix
+	previousDate(*this);
+	return *this;
 }
 
-Date *Date::operator --(int) { // postfix
-	Date *d = new Date();
-	previousDate(this);
+Date Date::operator --(int) { // postfix
+	Date d = *this;
+	previousDate(*this);
 	return d;
 }
 
@@ -372,13 +347,13 @@ bool Date::operator ==(Date &date) {
 		return false;
 }
 
-Date *Date::operator =(Date *date) {
-	this->setDay(date->getDay());
-	this->setMonth(date->getMonth());
-	this->setYear(date->getYear());
-	this->setSeason(date->getSeason());
-	this->setWeekday(date->getWeekday());
-	return this;
+Date Date::operator =(Date date) {
+	this->setDay(date.getDay());
+	this->setMonth(date.getMonth());
+	this->setYear(date.getYear());
+	this->setSeason(date.getSeason());
+	this->setWeekday(date.getWeekday());
+	return *this;
 }
 
 /********************************/

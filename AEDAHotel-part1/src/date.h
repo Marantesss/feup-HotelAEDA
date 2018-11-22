@@ -5,7 +5,6 @@
 #include <string>
 #include <sstream>
 
-
 using namespace std;
 
 // Date Class
@@ -37,12 +36,12 @@ public:
 	string showDate();
 	string showExtendedDate();
 	// Operators
-	Date *operator ++(); // prefix
-	Date *operator ++(int); // postfix
-	Date *operator --(); // prefix
-	Date *operator --(int); // postfix
+	Date operator ++(); // prefix
+	Date operator ++(int); // postfix
+	Date operator --(); // prefix
+	Date operator --(int); // postfix
 	bool operator ==(Date &date);
-	Date *operator =(Date *date);
+	Date operator =(Date date);
 };
 
 // InvalidDate exception

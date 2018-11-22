@@ -3,6 +3,7 @@
 
 #include <sstream>
 #include <vector>
+#include <typeinfo>
 #include "date.h"
 #include "room.h"
 

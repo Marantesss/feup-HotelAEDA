@@ -14,16 +14,16 @@ protected:
 	string name;
 	bool isSupervisor;
 public:
-	Employee(int id, string name, bool supervisor);
 	Employee();
+	Employee(int id, string name, bool supervisor);
 	~Employee() {};
-	void setName(string name);
-	void setId(int id);
-	void setIsSupervisor(bool supervisor);
-	string getName();
 	int getId();
+	string getName();
 	bool getIsSupervisor() const;
 	string getInfo() const;
+	void setId(int id);
+	void setName(string name);
+	void setIsSupervisor(bool supervisor);
 	//operators
 	bool operator == (int id);
 	bool operator == (string name);
@@ -31,19 +31,9 @@ public:
 };
 
 class NonExistingEmployee {
-	int id;	/**< int number. The NonExistingRoom's number. */
+	int id;
 public:
-	/**
-	* A constructor.
-	* The constructor creates a NonExistingRoom object with the supplied number.
-	* @param An int, the number of the NonExistingRoom.
-	*/
 	NonExistingEmployee(int id);
-
-	/**
-	* A const member function with no arguments to get the object's number.
-	* @return An int, the number that originated the creation of this object.
-	*/
 	int getId() const;
 };
 

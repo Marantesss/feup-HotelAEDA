@@ -20,10 +20,6 @@ Hotel::Hotel(int floors, string address) {
 
 Hotel::~Hotel() {}
 
-void Hotel::sortClients() {
-	insertionSort(clients);
-}
-
 //... Clients
 vector<Client> Hotel::getClients() const {
 	return this->clients;
@@ -31,6 +27,21 @@ vector<Client> Hotel::getClients() const {
 
 void Hotel::addClient(Client c) {
 	this->clients.push_back(c);
+}
+
+void Hotel::removeClient(string name) {
+	vector<Client>::iterator it;
+	for (it = clients.begin(); it != clients.end(); it++) {
+		if (it->getName() == name) {
+			this->clients.erase(it);
+			return;
+		}
+	}
+	throw (NonExistingClient(name));
+}
+
+void Hotel::sortClients() {
+	insertionSort(clients);
 }
 
 void Hotel::importClientsandReservations(string filename) {
@@ -71,7 +82,7 @@ void Hotel::importClientsandReservations(string filename) {
 				r.setDuration(duration);
 				this->reservations.push_back(r);
 			}
-			getline(file, line);
+
 		}
 		file.close();
 	}
@@ -79,20 +90,37 @@ void Hotel::importClientsandReservations(string filename) {
 	else cout << "Unable to open file";
 }
 
-void Hotel::removeClient(string name) {
-	vector<Client>::iterator it;
-	for (it = clients.begin(); it != clients.end(); it++) {
-		if (it->getName() == name) {
-			this->clients.erase(it);
-			return;
-		}
-	}
-	throw (NonExistingClient(name));
-}
-
 //... Rooms
 vector<Room> Hotel::getRooms() const{
 	return this->rooms;
+}
+
+void Hotel::addRoom(Room r) {
+	this->rooms.push_back(r);
+
+	if (typeid(r) == typeid(Bedroom)) {
+		bedrooms++;
+	}
+	else if (typeid(r) == typeid(MeetingRoom)) {
+		meetingrooms++;
+	}
+}
+
+void Hotel::removeRoom(int i) {
+	vector<Room>::iterator it;
+	for (it = rooms.begin(); it != rooms.end(); it++) {
+		if (it->getNumber() == i) {
+			if (typeid(*it) == typeid(Bedroom)) {
+				bedrooms--;
+			}
+			else if (typeid(*it) == typeid(MeetingRoom)) {
+				meetingrooms--;
+			}
+			this->rooms.erase(it);
+			return;
+		}
+	}
+	throw (NonExistingRoom(i));
 }
 
 vector<Room> Hotel::getFloorNumberRooms(int floor) const {
@@ -122,44 +150,6 @@ string Hotel::getRoomsInfo() {
 	}
 
 	return ss.str();
-}
-
-void Hotel::addRoom(Room r) {
-	this->rooms.push_back(r);
-
-	if (typeid(r) == typeid(Bedroom)) {
-		bedrooms++;
-	}
-	else if (typeid(r) == typeid(MeetingRoom)) {
-		meetingrooms++;
-	}
-
-	/*
-	try {
-		dynamic_cast<Bedroom&>(r); // if room is not Bedroom, throws Exception
-		bedrooms++;
-	}
-	catch (bad_cast& bc) {
-		meetingrooms++;
-	}
-	*/
-}
-
-void Hotel::removeRoom(int i) {
-	vector<Room>::iterator it;
-	for (it = rooms.begin(); it != rooms.end(); it++) {
-		if (it->getNumber() == i) {
-			if (typeid(*it) == typeid(Bedroom)) {
-				bedrooms--;
-			}
-			else if (typeid(*it) == typeid(MeetingRoom)) {
-				meetingrooms--;
-			}
-			this->rooms.erase(it);
-			return;
-		}
-	}
-	throw (NonExistingRoom(i));
 }
 
 void Hotel::removeRoomsFromTopFloor() {
@@ -229,9 +219,6 @@ void Hotel::allocateEmployees() {
 			tmp.push_back(this->employees.at(i));
 		}
 	}
-
-	//for (unsigned int i = 0; i < rooms.size(); i++)
-		//this->rooms.at(i).setSupervisor(tmp.at(i%tmp.size()));
 }
 
 int Hotel::getNoSupervisors() {
@@ -266,7 +253,6 @@ void Hotel::importEmployees(string filename){
 			else if (line == "false") supervisor = false;
 			e.setIsSupervisor(supervisor);
 			this->employees.push_back(e);
-			getline(file, line);
 		}
 		file.close();
 	}
@@ -276,13 +262,32 @@ void Hotel::importEmployees(string filename){
 
 //... Hotel Information
 // Floors
-int Hotel::getFloors() const { return this->floors; }
-void Hotel::addFloor() { this->floors++; }
-void Hotel::removeFloor() { this->floors--; }
+int Hotel::getFloors() const {
+	return this->floors;
+}
+
+void Hotel::addFloor() {
+	this->floors++;
+}
+
+void Hotel::removeFloor() {
+	this->floors--;
+}
+
 // Bedrooms
-int Hotel::getBedrooms() const { return this->bedrooms; }
+int Hotel::getBedrooms() const {
+	return this->bedrooms;
+}
+
 // MeetingRooms
-int Hotel::getMeetingRooms() const { return this->meetingrooms; }
+int Hotel::getMeetingRooms() const {
+	return this->meetingrooms;
+}
 // Address
-string Hotel::getAddress() const { return this->address; }
-void Hotel::setAddress(string address) { this->address = address; }
+string Hotel::getAddress() const {
+	return this->address;
+}
+
+void Hotel::setAddress(string address) {
+	this->address = address;
+}

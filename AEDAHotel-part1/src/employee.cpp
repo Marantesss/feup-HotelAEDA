@@ -1,8 +1,14 @@
 #include "employee.h"
 #include <string>
 
-// Employee Class
-
+/********************/
+/***** Employee *****/
+/********************/
+Employee::Employee() {
+	this->id = 0;
+	this->name = {};
+	this->isSupervisor = false;
+}
 
 Employee::Employee(int id, string name, bool supervisor) {
 	this->id = id;
@@ -10,30 +16,12 @@ Employee::Employee(int id, string name, bool supervisor) {
 	this->isSupervisor = supervisor;
 }
 
-Employee::Employee() {
-	this->id = 0;
-	this->name = {};
-	this->isSupervisor = false;
-}
-
-void Employee::setId(int id) {
-	this->id = id;
-}
-
-void Employee::setName(string name) {
-	this->name = name;
-}
-
-void Employee::setIsSupervisor(bool supervisor) {
-	this->isSupervisor = supervisor;
+int Employee::getId() {
+	return this->id;
 }
 
 string Employee::getName() {
 	return this->name;
-}
-
-int Employee::getId() {
-	return this->id;
 }
 
 bool Employee::getIsSupervisor() const {
@@ -47,6 +35,18 @@ string Employee::getInfo() const {
 	else isSupervisor = "no";
 	ss << "Name - " << name << "   Id - " << id << "   Supervisor - " << isSupervisor;
 	return ss.str();
+}
+
+void Employee::setId(int id) {
+	this->id = id;
+}
+
+void Employee::setName(string name) {
+	this->name = name;
+}
+
+void Employee::setIsSupervisor(bool supervisor) {
+	this->isSupervisor = supervisor;
 }
 
 bool Employee::operator == (int id) {
