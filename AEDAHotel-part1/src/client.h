@@ -11,7 +11,9 @@ using namespace std;
 
 /**
  *  A class used to represent a client.
+ *
  *  Each client object has a name and a reservations vector
+ *
  *  @see Reservation Class
  */
 class Client {
@@ -84,7 +86,7 @@ public:
 	 * @param c2 The other client to be compared to.
 	 *
 	 * @return true, if the first client's name comes first in alphabetical order
-	 * 	false, if otherwise
+	 * 	       false, if otherwise
 	 */
 	bool operator < (Client & c2);
 
@@ -101,6 +103,7 @@ public:
 
 /**
  *  A class used to represent an exception.
+ *
  *  The exception object contains the invalid client.
  */
 class NonExistingClient {
@@ -119,7 +122,8 @@ public:
 	NonExistingClient(string nm);
 
 	/**
-	 * @brief Const member function with no arguments to get the object's name.
+	 * @brief Const member function to get the object's name.
+	 *
 	 * @return The name that originated the creation of this object.
 	 */
 	string getName() const;
