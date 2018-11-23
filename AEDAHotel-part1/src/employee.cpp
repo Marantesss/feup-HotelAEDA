@@ -33,7 +33,7 @@ string Employee::getInfo() const {
 	string isSupervisor;
 	if (this->isSupervisor) isSupervisor = "yes";
 	else isSupervisor = "no";
-	ss << "Name - " << name << "   Id - " << id << "   Supervisor - " << isSupervisor;
+	ss << "Name: " << name << ";  Id: " << id << ";  Supervisor: " << isSupervisor;
 	return ss.str();
 }
 

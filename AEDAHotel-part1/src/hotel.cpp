@@ -103,29 +103,33 @@ vector<Room> Hotel::getRooms() const{
 void Hotel::addRoom(Room & r) {
 	this->rooms.push_back(r);
 
-	if (typeid(r) == typeid(Bedroom)) {
+	if (r.getIsBedroom()) {
 		bedrooms++;
 	}
-	else if (typeid(r) == typeid(MeetingRoom)) {
+	else {
 		meetingrooms++;
 	}
 }
 
-void Hotel::removeRoom(int i) {
+void Hotel::removeRoom(int num) {
 	vector<Room>::iterator it;
 	for (it = rooms.begin(); it != rooms.end(); it++) {
-		if (it->getNumber() == i) {
-			if (typeid(*it) == typeid(Bedroom)) {
+		if (it->getNumber() == num) {
+			if (it->getIsBedroom()) {
 				bedrooms--;
 			}
-			else if (typeid(*it) == typeid(MeetingRoom)) {
+			else {
 				meetingrooms--;
 			}
 			this->rooms.erase(it);
 			return;
 		}
 	}
-	throw (NonExistingRoom(i));
+	throw (NonExistingRoom(num));
+}
+
+void Hotel::sortRooms() {
+	insertionSort(rooms);
 }
 
 vector<Room> Hotel::getFloorNumberRooms(int floor) const {
@@ -143,9 +147,12 @@ string Hotel::getRoomsInfo() {
 	for (int i = 1; i <= getFloors(); i++) {
 		ss << "Floor " << i << ": ";
 		for (size_t j = 0; j < rooms.size(); j++) {
-			if (rooms[i].getFloorNumber() == i) {
-				if (j == rooms.size() - 1) {
+			if (rooms[j].getFloorNumber() == i) {
+				if (rooms[j + 1].getFloorNumber()  == i + 1) {
 					ss << rooms[j].getNumber() << endl;
+				}
+				else if (rooms.size()  == j + 1) {
+					ss << rooms[j].getNumber();
 				}
 				else {
 					ss << rooms[j].getNumber() << ", ";
@@ -159,16 +166,19 @@ string Hotel::getRoomsInfo() {
 
 void Hotel::removeRoomsFromTopFloor() {
 	vector<Room>::iterator it;
-		for (it = rooms.begin(); it != rooms.end(); it++) {
-			if (it->getFloorNumber() == this->floors) {
+	for (it = rooms.begin(); it != rooms.end(); it++) {
+		if (it->getFloorNumber() == this->floors) {
 			removeRoom(it->getNumber());
+			it--;
 		}
 	}
 }
 
 void Hotel::showRooms() {
-	for (size_t i = 0; i < rooms.size(); i++) {
-		cout << i + 1 << " - " << this->rooms.at(i).getInfo() << endl;
+	vector<Room>:: iterator it;
+
+	for (it = rooms.begin(); it != rooms.end(); it++) {
+		cout << it->getInfo() << endl;
 	}
 }
 
@@ -188,15 +198,37 @@ void Hotel::addReservation(Reservation R) {
 	this->reservations.push_back(R);
 }
 
-void Hotel::removeReservation(Date d, Room R) {
+void Hotel::sortReservations() {
+	insertionSort(rooms);
+}
+
+void Hotel::removeReservation(Date d, Room * R) {
 	vector<Reservation>::iterator it;
 	for (it = reservations.begin(); it != reservations.end(); it++) {
-		if (it->getDate() == d && it->getRoom() == &R) {
+		if (it->getDate() == d && it->getRoom() == R) {
 			this->rooms.erase(rooms.begin());
 			return;
 		}
 	}
-	throw (NonExistingReservation(d, &R));
+	throw (NonExistingReservation(d, R));
+}
+
+void Hotel::removeRoomReservations(Room * R) {
+	vector<Reservation>::iterator it;
+	for (it = reservations.begin(); it != reservations.end(); it++) {
+		if (it->getRoom() == R) {
+			removeReservation(it->getDate(), it->getRoom());
+		}
+	}
+}
+
+void Hotel::removeFloorReservations(int floor) {
+	vector<Reservation>::iterator it;
+	for (it = reservations.begin(); it != reservations.end(); it++) {
+		if (it->getRoom()->getFloorNumber() == floor) {
+			removeRoomReservations(it->getRoom());
+		}
+	}
 }
 
 //... Employees
@@ -209,11 +241,18 @@ void Hotel::addEmployee(Employee E) {
 }
 
 void Hotel::removeEmployee(int id) {
-	int i = sequencialSearch(this->getEmployees(), id);
-	if (i == -1) {
-		cout << "Error - Employee with the id " << id << " not found!" << endl;
+	vector<Employee>::iterator it;
+	for (it = employees.begin(); it != employees.end(); it++) {
+		if (it->getId() == id) {
+			this->employees.erase(it);
+			return;
+		}
 	}
-	this->employees.erase(this->employees.begin() + i);
+	throw (NonExistingEmployee(id));
+}
+
+void Hotel::sortEmployees() {
+	insertionSort(reservations);
 }
 
 void Hotel::showEmployees() {

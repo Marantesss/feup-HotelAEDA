@@ -8,15 +8,14 @@ Room::Room() {
 	this->number = 0;
 	this->capacity = 0;
 	this->price = 0;
-	//this->isBedroom = true;
-
+	this->isBedroom = true;
 }
 
 Room::Room(int number, int capacity) {
 	this->number = number;
 	this->capacity = capacity;
 	this->price = 0;
-	//this->isBedroom = true;
+	this->isBedroom = true;
 }
 
 Room::~Room() {};
@@ -38,7 +37,11 @@ double Room::getPrice() const {
 	return this->price;
 }
 
-string Room::getInfo() const {
+bool Room::getIsBedroom() const {
+	return this->isBedroom;
+}
+
+string Room::getInfo() {
 	return NULL;
 }
 
@@ -72,7 +75,7 @@ MeetingRoom::MeetingRoom():Room() {
 	this->video = false;
 	this->audio = false;
 	this->price = 0;
-	// Room::isBedroom = false;
+	this->isBedroom = false;
 }
 
 MeetingRoom::MeetingRoom(int number, int capacity, bool video, bool audio): Room(number, capacity) {
@@ -104,7 +107,7 @@ MeetingRoom::MeetingRoom(int number, int capacity, bool video, bool audio): Room
 			this->price = 300;
 		break;
 	}
-	// Room::isBedroom = false;
+	this->isBedroom = false;
 }
 
 bool MeetingRoom::getVideo() const {
@@ -115,7 +118,7 @@ bool MeetingRoom::getAudio() const {
 	return this->audio;
 }
 
-string MeetingRoom::getInfo() const {
+string MeetingRoom::getInfo() {
 	stringstream ss;
 	string vid;
 	string aud;
@@ -199,7 +202,7 @@ string Bedroom::getLocation() const {
 	return this->location;
 }
 
-string Bedroom::getInfo() const {
+string Bedroom::getInfo() {
 	stringstream ss;
 
 	ss << "Bedroom: \n" << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";

@@ -74,6 +74,14 @@ Room *Reservation::getRoom() const {
 	return this->room;
 }
 
+int Reservation::getDuration() const {
+	return this->duration;
+}
+
+double Reservation::getPrice() const {
+	return this->price;
+}
+
 void Reservation::setPrice(int duration, Room *room) {
 	this->price = duration * room->getPrice();
 }
@@ -97,6 +105,21 @@ string Reservation::getInfo() const {
 	ss << "Room - " << room->getInfo() << endl;
 	ss << "Price - " << price << " Euros" << endl;
 	return ss.str();
+}
+
+bool Reservation::operator <(Reservation & r) const {
+	if (this->getDate() < r.getDate())
+		return true;
+	else
+		return false;
+}
+
+Reservation Reservation::operator =(Reservation &r) {
+	this->date = r.getDate();
+	this->room = r.getRoom();
+	this->duration = r.getDuration();
+	this->price = r.getPrice();
+	return *this;
 }
 
 /**********************************/

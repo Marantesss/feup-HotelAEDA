@@ -20,12 +20,17 @@ public:
 	// get
 	Date getDate() const;
 	Room* getRoom() const;
+	int getDuration() const;
+	double getPrice() const;
 	string getInfo() const;
 	// set
 	void setDate(Date date);
 	void setRoom(Room *room);
 	void setPrice(int duration, Room *room);
 	void setDuration(int duration);
+	// Operators
+	bool operator <(Reservation & r) const;
+	Reservation operator =(Reservation &r);
 };
 
 // NonExistingReservation exception

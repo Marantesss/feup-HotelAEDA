@@ -40,6 +40,11 @@ protected:
 	 */
 	double price;
 
+	/**
+	 * bool isBedroom flag that tells if room is bedroom or meetingroom
+	 */
+	bool isBedroom;
+
 public:
 	/**
 	 * @brief Default constructor.
@@ -91,6 +96,13 @@ public:
 	double getPrice() const;
 
 	/**
+	 * @brief Const member function to get the rooms's price.
+	 *
+	 * @return The room's price.
+	 */
+	bool getIsBedroom() const;
+
+	/**
 	 * @brief Const virtual member function to get the rooms's information.
 	 *
 	 * Different implementations for Bedroom and MeetingRoom
@@ -99,7 +111,7 @@ public:
 	 *
 	 * @return The room's information.
 	 */
-	virtual string getInfo() const;
+	virtual string getInfo();
 
 	/**
 	 * @brief Member function to change the room's number.
@@ -203,7 +215,7 @@ public:
 	 *
 	 * @return a string with the meeting room's info, and the video, audio and price
 	 */
-	string getInfo() const;
+	string getInfo();
 
 	/**
 	 * @brief Member function to change the meeting room's existance of video.
@@ -275,7 +287,7 @@ public:
 	 *
 	 * @return a string with the bedroom's info, and the location and price
 	 */
-	string getInfo() const;
+	string getInfo();
 
 	/**
 	 * @brief Member function to change the bedroom's location.

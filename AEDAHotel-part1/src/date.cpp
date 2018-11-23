@@ -356,6 +356,23 @@ Date Date::operator =(Date date) {
 	return *this;
 }
 
+bool Date::operator < (Date date) {
+	// check year
+	if (this->getYear() < date.getYear())
+		return true;
+	else
+		// check month
+		if (this->getMonth() < date.getMonth())
+			return true;
+		else
+			// check day
+			if (this->getDay() < date.getMonth())
+				return true;
+			else
+				return false;
+
+}
+
 /********************************/
 /**** InvalidDate exception *****/
 /********************************/

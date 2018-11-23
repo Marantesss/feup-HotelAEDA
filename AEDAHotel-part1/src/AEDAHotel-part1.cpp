@@ -110,7 +110,18 @@ Hotel buildDemoHotel() {
 	h.addClient(c4);
 
 	//... creating employees
-	// TODO
+	Employee e1(1, "Diogo Torres", false);
+	h.addEmployee(e1);
+
+	Employee e2(2, "Gustavo Rodrigues", true);
+	h.addEmployee(e2);
+
+	Employee e3(3, "Toy Ferreira", false);
+	h.addEmployee(e3);
+
+	Employee e4(4, "Armanda Correia", true);
+	h.addEmployee(e4);
+
 	return h;
 }
 

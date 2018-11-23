@@ -107,9 +107,7 @@ public:
 	void removeClient(string name);
 
 	/**
-	 * @brief Const member function to get the client's vector.
-	 *
-	 * @return The hotel's clients.
+	 * @brief Member function to sort the vector clients.
 	 */
 	void sortClients();
 
@@ -152,7 +150,12 @@ public:
 	 *
 	 * @param number The number of the hotel's removed room.
 	 */
-	void removeRoom(int i);
+	void removeRoom(int num);
+
+	/**
+	 * @brief Const member function to sort the vector rooms.
+	 */
+	void sortRooms();
 
 	/**
 	 * @brief Const member function to get the room's vector from a specific floor.
@@ -212,13 +215,32 @@ public:
 	void addReservation(Reservation  R);
 
 	/**
+	 * @brief Const member function to sort the reservations rooms.
+	 */
+	void sortReservations();
+
+	/**
 	 * @brief Member function to remove a reservation.
 	 *
 	 * @param d The date of the hotel's removed reservation.
 	 *
 	 * @param R The room of the hotel's removed reservation.
 	 */
-	void removeReservation(Date d, Room R);
+	void removeReservation(Date d, Room * R);
+
+	/**
+	 * @brief Member function to remove all reservations with bedrooms belonging to the specified floor.
+	 *
+	 * @param R Pointer to the hotel's room
+	 */
+	void removeRoomReservations(Room * R);
+
+	/**
+	 * @brief Member function to remove all reservations with bedrooms belonging to the specified floor.
+	 *
+	 * @param floor The hotel's floor
+	 */
+	void removeFloorReservations(int floor);
 
 	/**
 	 * @brief Const member function to get the employee's vector.
@@ -240,6 +262,11 @@ public:
 	 * @param id The Id of the hotel's removed employee.
 	 */
 	void removeEmployee(int id);
+
+	/**
+	 * @brief Const member function to sort the employees rooms.
+	 */
+	void sortEmployees();
 
 	/**
 	 * @brief Member function to print all employees' information.

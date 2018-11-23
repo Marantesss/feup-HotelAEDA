@@ -40,9 +40,11 @@ public:
 	Date operator ++(int); // postfix
 	Date operator --(); // prefix
 	Date operator --(int); // postfix
-	bool operator ==(Date &date);
 	Date operator =(Date date);
+	bool operator ==(Date &date);
+	bool operator < (Date date);
 };
+
 
 // InvalidDate exception
 class InvalidDate {
