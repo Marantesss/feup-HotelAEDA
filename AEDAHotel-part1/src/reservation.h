@@ -77,7 +77,18 @@ public:
 	 */
 	Room* getRoom() const;
 	
+	/**
+	 * @brief Const member function to get the reservation's duration.
+	 *
+	 * @return The reservation's duration.
+	 */
 	int getDuration() const;
+
+	/**
+	 * @brief Const member function to get the reservation's price.
+	 *
+	 * @return The reservation's price.
+	 */
 	double getPrice() const;
 
 	/**
@@ -116,8 +127,23 @@ public:
 	 * @param duration The reservation's new duration.
 	 */
 	void setDuration(int duration);
-	// Operators
+
+	/**
+ 	 * @brief Member function to check a reservation is erlier than another.
+	 *
+	 * @param r compared reservation.
+	 * 
+	 * @return true if the reservation is sooner than r, false otherwise
+	 */
 	bool operator <(Reservation & r) const;
+
+	/**
+ 	 * @brief Member function to copy the content of a reservation to another
+	 *
+	 * @param r Reservation that is being copied
+	 * 
+	 * @return New copied reservation
+	 */
 	Reservation operator =(Reservation &r);
 };
 

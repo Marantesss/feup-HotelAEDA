@@ -81,6 +81,16 @@ public:
 	void addReservation(Reservation * R);
 
 	/**
+	 * @brief Member function to get clients reservations.
+	 *
+	 * All the reservations are pointers to the reservations vector
+	 * in the hotel class
+	 *
+	 * @return Vector of pointers to client's reservations.
+	 */
+	vector<Reservation*> getReservation() const;
+
+	/**
 	 * @brief Overload of Operator < for class Client.
 	 *
 	 * @param c2 The other client to be compared to.

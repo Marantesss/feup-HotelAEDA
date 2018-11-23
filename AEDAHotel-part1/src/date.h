@@ -148,16 +148,73 @@ public:
 	*/
 	void setWeekday(string weekday);
 
-	// show
+	/**
+	* @brief Member function to show the date.
+	*
+	* @return The date in format DD/MM/YYYY.
+	*/
 	string showDate();
+
+	/**
+	* @brief Member function to show the date.
+	*
+	* @return The date in format "day month year".
+	*/
 	string showExtendedDate();
-	// Operators
+
+	/**
+	* @brief Member function to increment the date.
+	*
+	* @return The incremented date.
+	*/
 	Date operator ++(); // prefix
+
+	/**
+	* @brief Member function to increment the date.
+	*
+	* @return The initial date.
+	*/
 	Date operator ++(int); // postfix
+
+	/**
+	* @brief Member function to decrement the date.
+	*
+	* @return The decremented date.
+	*/
 	Date operator --(); // prefix
+
+	/**
+	* @brief Member function to decrement the date.
+	*
+	* @return The initial date.
+	*/
 	Date operator --(int); // postfix
+
+	/**
+	* @brief Member function to copy the date.
+	*
+	* @param date The date that is going to be copied
+	*
+	* @return The copied date.
+	*/
 	Date operator =(Date date);
+
+	/**
+	* @brief Member function to check if two dates are equal.
+	*
+	* @param date The date that is being compared
+	*
+	* @return True if two dates have the same day, month and year, false otherwise.
+	*/
 	bool operator ==(Date &date);
+
+	/**
+	* @brief Member function to check if a date is earlier than another.
+	*
+	* @param date The date that is being compared to
+	*
+	* @return True if the first date is realier than the one passed as an argument, false otherwise.
+	*/
 	bool operator < (Date date);
 };
 

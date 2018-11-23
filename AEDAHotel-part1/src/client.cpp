@@ -33,6 +33,11 @@ void Client::addReservation(Reservation * R) {
 	this->reservations.push_back(R);
 }
 
+vector<Reservation*> Client::getReservation() const {
+	return this->reservations;
+}
+
+
 string Client::getInfo() const {
 	stringstream ss;
 	ss << "Name: " << name << endl;
