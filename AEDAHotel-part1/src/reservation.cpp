@@ -17,7 +17,7 @@ Reservation::Reservation(Date date, Room *room, int duration) {
 	this->duration = duration;
 	this->price = 0;
 	// If the room is a bedroom
-	if(typeid(room) == typeid(Bedroom)) {
+	if(room->getIsBedroom()) {
 		for (int i = 0; i < duration; i++) {
 			// high season
 			if (date.getSeason() == "Summer" || date.getSeason() == "Winter") {
@@ -44,7 +44,7 @@ Reservation::Reservation(Date date, Room *room, int duration) {
 			date--;
 	}
 	// If the room is a MeetingRoom
-	else if(typeid(room) == typeid(MeetingRoom)) {
+	else if(room->getIsBedroom()) {
 		// high season
 		if (date.getSeason() == "Summer" || date.getSeason() == "Winter") {
 			// weekend

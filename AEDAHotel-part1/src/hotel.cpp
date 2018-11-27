@@ -92,6 +92,7 @@ int Hotel::sequencialSearchClients(string name) {
 	for (unsigned int i = 0; i < clients.size(); i++)
 		if (clients[i].getName() == name)
 			return i;
+	throw (NonExistingClient(name));
 	return -1;
 }
 

@@ -89,7 +89,7 @@ Hotel buildDemoHotel() {
 	h.addReservation(r8);
 
 	//... creating clients
-	Client c1("Luis Gonçalves");
+	Client c1("Luis Goncalves");
 	c1.addReservation(&r1);
 	c1.addReservation(&r5);
 	h.addClient(c1);
@@ -99,12 +99,12 @@ Hotel buildDemoHotel() {
 	c2.addReservation(&r2);
 	h.addClient(c2);
 
-	Client c3("Josefina Maria");
+	Client c3("Maria Almeida");
 	c3.addReservation(&r8);
 	c3.addReservation(&r4);
 	h.addClient(c3);
 
-	Client c4("Carlinhos Marques");
+	Client c4("Carlos Marques");
 	c4.addReservation(&r7);
 	c4.addReservation(&r6);
 	h.addClient(c4);
@@ -116,11 +116,17 @@ Hotel buildDemoHotel() {
 	Employee e2(2, "Gustavo Rodrigues", true);
 	h.addEmployee(e2);
 
-	Employee e3(3, "Toy Ferreira", false);
+	Employee e3(3, "Tiago Ferreira", false);
 	h.addEmployee(e3);
 
 	Employee e4(4, "Armanda Correia", true);
 	h.addEmployee(e4);
+
+	Employee e5(5, "Roberto Dias", false);
+	h.addEmployee(e5);
+
+	Employee e6(6, "Joana Pereira", false);
+	h.addEmployee(e6);
 
 	return h;
 }
