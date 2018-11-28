@@ -102,8 +102,16 @@ vector<Room> Hotel::getRooms() const{
 }
 
 void Hotel::addRoom(Room & r) {
+	// Checking if the room is valid
+	vector<Room>::iterator it;
+	for (it = rooms.begin(); it != rooms.end(); it++) {
+		if (it->getNumber() == r.getNumber()) {
+			throw (NonExistingRoom(r.getNumber()));
+			return;
+		}
+	}
+	// Adding the room
 	this->rooms.push_back(r);
-
 	if (r.getIsBedroom()) {
 		bedrooms++;
 	}
@@ -196,6 +204,15 @@ vector<Reservation> Hotel::getReservations() const {
 }
 
 void Hotel::addReservation(Reservation R) {
+	// Checking if the reservation is valid
+	vector<Reservation>::iterator it;
+	for (it = reservations.begin(); it != reservations.end(); it++) {
+		if (it->getDate() == R.getDate() && it->getRoom() == R.getRoom()) {
+			throw (NonExistingReservation(R.getDate(), R.getRoom()));
+			return;
+		}
+	}
+	// adding the reservation
 	this->reservations.push_back(R);
 }
 
@@ -238,6 +255,15 @@ vector<Employee> Hotel::getEmployees() const {
 }
 
 void Hotel::addEmployee(Employee E) {
+	// Checking if the employee is valid
+	vector<Employee>::iterator it;
+	for (it = employees.begin(); it != employees.end(); it++) {
+		if (it->getId() == E.getId()) {
+			throw (NonExistingEmployee(E.getId()));
+			return;
+		}
+	}
+	// adding the employee
 	this->employees.push_back(E);
 }
 
@@ -315,6 +341,7 @@ int Hotel::sequencialSearchEmployees(int id) {
 	for (unsigned int i = 0; i < employees.size(); i++)
 		if (employees[i].getId() == id)
 			return i;
+	throw (NonExistingEmployee(id));
 	return -1;
 }
 

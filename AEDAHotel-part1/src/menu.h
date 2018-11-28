@@ -120,7 +120,7 @@ void importClient(Hotel *h);
  * Calls showRoomMenu() to print clients information menu options
  * @see showRoomOptions()
  */
-int roomsMenu(Hotel *h);
+void roomsMenu(Hotel *h);
 
 /**
  * @brief Prints the various room menu options available on screen
@@ -129,14 +129,124 @@ int roomsMenu(Hotel *h);
  */
 int showRoomsOptions(Hotel *h);
 
+/**
+ * @brief Function to create and add a new room
+ *
+ * Reads the type of room the user wants to add and calls
+ * addMeetingRoom() and addBedroom() accordingly
+ * @see addMeetingRoom()
+ * @see addBedroom()
+ */
+void addRoom(Hotel *h);
+
+/**
+ * @brief Function to create and add a new Meeting Room
+ *
+ * Reads the new room's information and adds it to the hotel's room vector
+ */
+void addMeetingRoom(Hotel *h);
+
+/**
+ * @brief Function to create and add a new Bedroom
+ *
+ * Reads the new room's information and adds it to the hotel's room vector
+ */
+void addBedroom(Hotel *h);
+
+/**
+ * @brief Function to find and remove an existing room
+ *
+ * Reads the room's number, searches it, and deletes it from the hotel's room vector
+ */
+void removeRoom(Hotel *h);
+
+/**
+ * @brief Function to find an existing client
+ *
+ * Reads the client's name and searches it, printing its information on screen
+ */
+void searchRoom(Hotel *h);
+
+/**
+ * @brief Function to import rooms from txt file
+ */
+void importRoom(Hotel *h);
+
 
 /********** Reservation Information **********/
+
+/**
+ * @brief Function to get room information menu options
+ *
+ * Calls showEmployeeOptions() to print clients information menu options
+ * @see showEmployeeOptions()
+ */
+void reservationMenu(Hotel *h);
+
+/**
+ * @brief Prints the various employee menu options available on screen
+ *
+ * @return The employee information menu option chosen by the user
+ */
+int showReservationOptions(Hotel *h);
+
+/**
+ * @brief Function to create and add a new employee
+ *
+ * Reads the new employees's name and adds it to the hotel's client vector
+ */
+void addReservation(Hotel *h);
+
+/**
+ * @brief Function to find and remove an existing employee
+ *
+ * Reads the employee's id, searches it, and deletes it from the hotel's room vector
+ */
+void removeReservation(Hotel *h);
 
 
 
 /********** Employee Information **********/
 
-int employeesMenu(Hotel *h);
+/**
+ * @brief Function to get room information menu options
+ *
+ * Calls showEmployeeOptions() to print clients information menu options
+ * @see showEmployeeOptions()
+ */
+void employeesMenu(Hotel *h);
 
+/**
+ * @brief Prints the various employee menu options available on screen
+ *
+ * @return The employee information menu option chosen by the user
+ */
+int showEmployeeOptions(Hotel *h);
+
+/**
+ * @brief Function to create and add a new employee
+ *
+ * Reads the new employees's name and adds it to the hotel's client vector
+ */
+void addEmployee(Hotel *h);
+
+/**
+ * @brief Function to find and remove an existing employee
+ *
+ * Reads the employee's id, searches it, and deletes it from the hotel's room vector
+ */
+void removeEmployee(Hotel *h);
+
+/**
+ * @brief Function to find an existing client
+ *
+ * Reads the employee's id and searches it, printing its information on screen
+ */
+void searchEmployee(Hotel *h);
+
+/**
+ * @brief Function to import employees from txt file
+ */
+void importEmployee(Hotel *h);
 
 #endif /* MENU_H_ */

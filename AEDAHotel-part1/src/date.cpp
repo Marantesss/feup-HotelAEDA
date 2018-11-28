@@ -340,7 +340,7 @@ Date Date::operator --(int) { // postfix
 	return d;
 }
 
-bool Date::operator ==(Date &date) {
+bool Date::operator ==(Date date) {
 	if (this->day == date.day && this->month == date.month && this->year == date.year)
 		return true;
 	else
