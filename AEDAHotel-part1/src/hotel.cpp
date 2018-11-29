@@ -40,6 +40,12 @@ void Hotel::removeClient(string name) {
 	throw (NonExistingClient(name));
 }
 
+void Hotel::showClients() {
+	for (size_t i = 0; i < clients.size(); i++) {
+		cout << i+1 << " - " << clients.at(i).getInfo() << endl;
+	}
+}
+
 void Hotel::sortClients() {
 	insertionSort(clients);
 }
@@ -249,6 +255,12 @@ void Hotel::removeFloorReservations(int floor) {
 	}
 }
 
+void Hotel::showReservations() {
+	for (size_t i = 0; i < reservations.size(); i++) {
+		cout << i+1 << " - " << reservations.at(i).getInfo() << endl;
+	}
+}
+
 //... Employees
 vector<Employee> Hotel::getEmployees() const {
 	return this->employees;
@@ -284,7 +296,7 @@ void Hotel::sortEmployees() {
 
 void Hotel::showEmployees() {
 	for (size_t i = 0; i < employees.size(); i++) {
-		cout << i+1 << "- " << employees.at(i).getInfo() << endl;
+		cout << i+1 << " - " << employees.at(i).getInfo() << endl;
 	}
 }
 

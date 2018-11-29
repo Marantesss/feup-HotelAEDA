@@ -148,6 +148,7 @@ int main() {
 			clientMenu(&h);
 			break;
 		case 3: // Reservations
+			reservationMenu(&h);
 			break;
 		case 4: // Rooms
 			roomsMenu(&h);

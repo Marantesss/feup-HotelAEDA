@@ -143,9 +143,12 @@ void clientMenu(Hotel *h) {
 			removeClient(h);
 			break;
 		case 3:
-			searchClient(h);
+			h->showClients();
 			break;
 		case 4:
+			searchClient(h);
+			break;
+		case 5:
 			importClient(h);
 			break;
 		default:
@@ -162,11 +165,12 @@ int showClientOptions(Hotel *h) {
 	cout << "Clients - " << h->getClients().size() << endl;
 	cout << "_____________________________________" << endl;
 	cout << "What would you like to do?" << endl;
-	cout << "Add Client - 1 " << endl;
-	cout << "Remove Client - 2 " << endl;
-	cout << "Search Client by name - 3 " << endl;
-	cout << "Import Clients/Reservations - 4" << endl;
-	cout << "Back - 0 " << endl << endl;
+	cout << "1 - Add Client" << endl;
+	cout << "2 - Remove Client" << endl;
+	cout << "3 - See Clients" << endl;
+	cout << "4 - Search Client by name" << endl;
+	cout << "5 - Import Clients/Reservations" << endl;
+	cout << "0 - Back" << endl << endl;
 	cout << "Option: ";
 	clearBuffer();
 	cin >> menuOption;
@@ -420,19 +424,10 @@ void reservationMenu(Hotel *h) {
 			addReservation(h);
 			break;
 		case 2:
-			removeEmployee(h);
+			removeReservation(h);
 			break;
 		case 3:
-			h->showEmployees();
-			break;
-		case 4:
-			searchEmployee(h);
-			break;
-		case 5:
-			searchEmployee(h);
-			break;
-		case 6:
-			importEmployee(h);
+			h->showReservations();
 			break;
 		default:
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
@@ -515,6 +510,10 @@ void addReservation(Hotel *h) {
 
 	// adding reservation to clients record
 	h->getClients()[clientIndex].addReservation(&r);
+}
+
+void removeReservation(Hotel *h) {
+	// TODO
 }
 
 

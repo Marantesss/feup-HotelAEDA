@@ -191,16 +191,16 @@ void reservationMenu(Hotel *h);
 int showReservationOptions(Hotel *h);
 
 /**
- * @brief Function to create and add a new employee
+ * @brief Function to create and add a new reservation
  *
- * Reads the new employees's name and adds it to the hotel's client vector
+ * Reads the new reservations's date and room, and adds it to the hotel's reservation vector
  */
 void addReservation(Hotel *h);
 
 /**
- * @brief Function to find and remove an existing employee
+ * @brief Function to find and remove an existing reservation
  *
- * Reads the employee's id, searches it, and deletes it from the hotel's room vector
+ * Reads the reservation's date and room, searches it, and deletes it from the hotel's reservation vector
  */
 void removeReservation(Hotel *h);
 

@@ -107,6 +107,11 @@ public:
 	void removeClient(string name);
 
 	/**
+	 * @brief Member function to print all clients' information.
+	 */
+	void showClients();
+
+	/**
 	 * @brief Member function to sort the vector clients.
 	 */
 	void sortClients();
@@ -241,6 +246,11 @@ public:
 	 * @param floor The hotel's floor
 	 */
 	void removeFloorReservations(int floor);
+
+	/**
+	 * @brief Member function to print to the output buffer all the reservations information.
+	 */
+	void showReservations();
 
 	/**
 	 * @brief Const member function to get the employee's vector.
