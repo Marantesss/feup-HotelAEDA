@@ -8,7 +8,6 @@
 #include "client.h"
 #include "employee.h"
 #include "AuxFunctions.h"
-#include <typeinfo>       // std::bad_cast
 
 
 /**

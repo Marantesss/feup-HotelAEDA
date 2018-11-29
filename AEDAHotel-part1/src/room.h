@@ -18,7 +18,7 @@ using namespace std;
 class Room {
 protected:
 	/**
-	 * int number The room's name
+	 * int number The room's number
 	 */
 	int number;
 
@@ -111,7 +111,7 @@ public:
 	 *
 	 * @return The room's information.
 	 */
-	virtual string getInfo();
+	virtual string getInfo() {return "";}
 
 	/**
 	 * @brief Member function to change the room's number.

@@ -41,6 +41,7 @@ vector<Reservation*> Client::getReservation() const {
 string Client::getInfo() const {
 	stringstream ss;
 	ss << "Name: " << name << endl;
+
 	if (!this->reservations.empty()) {
 		ss << "Reservations:" << endl;
 		for (size_t i = 0; i < reservations.size(); i++) {
@@ -50,6 +51,7 @@ string Client::getInfo() const {
 	else {
 		ss << "(This client has no reservations)" << endl;
 	}
+
 	return ss.str();
 }
 

@@ -41,10 +41,6 @@ bool Room::getIsBedroom() const {
 	return this->isBedroom;
 }
 
-string Room::getInfo() {
-	return NULL;
-}
-
 void Room::setNumber(int number) {
 	this->number = number;
 }
@@ -126,7 +122,14 @@ string MeetingRoom::getInfo() {
 	if (video) vid = "yes"; else vid = "no";
 	if (audio) aud = "yes"; else aud = "no";
 
-	ss << "Meeting Room: \n" << "\n\tVideo - " << vid << "\n\tAudio - " << aud << "\n\tPrice per hour - " << price << " Euros";
+	// type
+	ss << "Meeting Room:" << endl;
+	// number and capacity
+	ss << "No: " << number << "\tCapacity: " << capacity << endl;
+	// video and audio
+	ss << "Video: " << vid << "\tAudio: " << aud << endl;
+	// price
+	ss << "Price per hour: " << price << " Euros";
 
 	return ss.str();
 }
@@ -205,7 +208,14 @@ string Bedroom::getLocation() const {
 string Bedroom::getInfo() {
 	stringstream ss;
 
-	ss << "Bedroom: \n" << "\nLocation - " << location << "\nPrice per night - " << price << " Euros";
+	// type
+	ss << "Bedroom:" << endl;
+	// number and capacity
+	ss << "No: " << number << "\tCapacity: " << capacity << endl;
+	// location
+	ss << "Location: " << location << endl;
+	// price
+	ss << "Price per night: " << price << " Euros";
 
 	return ss.str();
 }

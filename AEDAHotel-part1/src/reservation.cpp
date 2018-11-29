@@ -44,7 +44,7 @@ Reservation::Reservation(Date date, Room *room, int duration) {
 			date--;
 	}
 	// If the room is a MeetingRoom
-	else if(room->getIsBedroom()) {
+	else if(!room->getIsBedroom()) {
 		// high season
 		if (date.getSeason() == "Summer" || date.getSeason() == "Winter") {
 			// weekend
@@ -84,9 +84,10 @@ double Reservation::getPrice() const {
 
 string Reservation::getInfo() const {
 	stringstream ss;
-	ss << "Date - " << date.getInfo() << endl;
-	ss << "Room - " << room->getInfo() << endl;
-	ss << "Price - " << price << " Euros" << endl;
+
+	ss << "Date: " << date.getInfo() << endl;
+	ss << "Room: " << room->getInfo() << endl;
+	ss << "Total price: " << price << " Euros";
 	return ss.str();
 }
 

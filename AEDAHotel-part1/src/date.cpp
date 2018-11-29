@@ -191,7 +191,7 @@ string Date::getWeekday() {
 
 string Date::getInfo() const {
 	stringstream ss;
-	ss << day << "/" << month << "/" << year;
+	ss << day << "/" << month << "/" << year << " - " << weekday;
 	return ss.str();
 }
 

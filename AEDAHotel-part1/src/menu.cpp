@@ -35,8 +35,8 @@ int showMenu() {
 	cout << "| 0 - Exit                           |" << endl;
 	cout << "|____________________________________|" << endl;
 	cout << "Option: ";
-	clearBuffer();
 	cin >> menuOption;
+	clearBuffer();
 
 	return menuOption;
 }
@@ -70,7 +70,7 @@ int showHotelInformationOptions(Hotel *h) {
 
 	cout << "_____________________________________" << endl;
 	cout << " -------- HOTEL INFORMATION -------- " << endl;
-	cout << "Address - " << h->getAddress() << endl;
+	cout << "Address: " << h->getAddress() << endl;
 	cout << "Total Rooms: " << h->getBedrooms() + h->getMeetingRooms() << endl;
 	cout << "Bedrooms: " << h->getBedrooms() << ", ";
 	cout << "Meeting Rooms: " << h->getMeetingRooms() << endl;
@@ -83,7 +83,6 @@ int showHotelInformationOptions(Hotel *h) {
 	cout << " 3 - Remove top floor" << endl;
 	cout << " 0 - Back" << endl << endl;
 	cout << "Option: ";
-	clearBuffer();
 	cin >> menuOption;
 
 	return menuOption;
@@ -172,7 +171,6 @@ int showClientOptions(Hotel *h) {
 	cout << "5 - Import Clients/Reservations" << endl;
 	cout << "0 - Back" << endl << endl;
 	cout << "Option: ";
-	clearBuffer();
 	cin >> menuOption;
 
 	return menuOption;
@@ -184,8 +182,8 @@ void addClient(Hotel *h) {
 	clearBuffer();
 	cout << "Name: ";
 	getline(cin, name);
-	Client c(name);
-	h->addClient(c);
+	Client *c = new Client(name);
+	h->addClient(*c);
 }
 
 void removeClient(Hotel *h) {
@@ -282,7 +280,6 @@ int showRoomsOptions(Hotel *h) {
 	cout << "6 - Import Rooms [NOT IMPLEMENTED YET]" << endl;
 	cout << "0 - Back" << endl << endl;
 	cout << "Option: ";
-	clearBuffer();
 	cin >> menuOption;
 
 	return menuOption;
@@ -292,8 +289,8 @@ void addRoom(Hotel *h) {
 	char type;
 
 	do {
-		cout << "Meeting Room or Bedroom (m/b): ";
 		clearBuffer();
+		cout << "Meeting Room or Bedroom (m/b): ";
 		cin >> type;
 		if (type != 'm' && type != 'b')
 			cout << "Invalid room type, please try again..." << endl;
@@ -329,9 +326,9 @@ void addMeetingRoom(Hotel *h) {
 	cout << "Audio (y/n): ";
 	cin >> tmp;
 	if (tmp == 'y') audio = true;
-	MeetingRoom m(num, capacity, video, audio);
+	MeetingRoom *m = new MeetingRoom(num, capacity, video, audio);
 	try {
-		h->addRoom(m);
+		h->addRoom(*m);
 	}
 	catch (NonExistingRoom & invalidRoom) {
 		cout << "ERROR: Room " << invalidRoom.getNumber() << " already exists!" << endl;
@@ -359,9 +356,9 @@ void addBedroom(Hotel *h) {
 		if (location != "Front" || location != "Back")
 			cout << "Invalid location, make sure first letter is caps..." << endl;
 	} while (location != "Front" || location != "Back");
-	Bedroom b(num, capacity, location);
+	Bedroom *b = new Bedroom(num, capacity, location);
 	try {
-		h->addRoom(b);
+		h->addRoom(*b);
 	}
 	catch (NonExistingRoom & invalidRoom) {
 		cout << "ERROR: Room " << invalidRoom.getNumber() << " already exists!" << endl;
@@ -448,9 +445,7 @@ int showReservationOptions(Hotel *h) {
 	cout << "3 - See Reservations" << endl;
 	cout << "0 - Back" << endl << endl;
 	cout << "Option: ";
-	clearBuffer();
 	cin >> menuOption;
-	cout << endl;
 
 	return menuOption;
 }
@@ -458,7 +453,7 @@ int showReservationOptions(Hotel *h) {
 void addReservation(Hotel *h) {
 	int day, month, year, roomNumber, roomIndex, duration, clientIndex;
 	Room* roomPointer;
-	Date date;
+	Date *date = new Date();
 	string name;
 
 	// reading the client
@@ -480,7 +475,7 @@ void addReservation(Hotel *h) {
 	cout << "Enter date(day month year): ";
 	cin >> day >> month >> year;
 	try {
-		date = Date(day, month, year);
+		*date = Date(day, month, year);
 	}
 	catch (InvalidDate & date) {
 		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
@@ -500,16 +495,16 @@ void addReservation(Hotel *h) {
 	clearBuffer();
 	cout << "Duration: ";
 	cin >> duration;
-	Reservation r(date, roomPointer, duration);
+	Reservation *r = new Reservation(*date, roomPointer, duration);
 	try {
-		h->addReservation(r);
+		h->addReservation(*r);
 	}
 	catch (NonExistingReservation & nonReservation) {
 		cout << "ERROR: Reservation already exists or is incompatible with others!!!" << endl;
 	}
 
 	// adding reservation to clients record
-	h->getClients()[clientIndex].addReservation(&r);
+	h->getClients()[clientIndex].addReservation(r);
 }
 
 void removeReservation(Hotel *h) {
@@ -563,11 +558,9 @@ int showEmployeeOptions(Hotel *h) {
 	cout << "3 - See Employees" << endl;
 	cout << "4 - Search Employee by ID" << endl;
 	cout << "5 - Import Employees" << endl;
-	cout << "0 - Back" << endl;
-	cout << "\nOption: ";
-	clearBuffer();
+	cout << "0 - Back" << endl << endl;
+	cout << "Option: ";
 	cin >> menuOption;
-	cout << endl;
 
 	return menuOption;
 }
@@ -587,18 +580,18 @@ void addEmployee(Hotel *h) {
 	cout << "Supervisor (y/n): ";
 	cin >> supervisor;
 	if (supervisor == 'y') {
-		Employee e(id, name, true);
+		Employee *e = new Employee(id, name, true);
 		try {
-			h->addEmployee(e);
+			h->addEmployee(*e);
 		}
 		catch (NonExistingEmployee & invalidEmployee) {
 			cout << "ERROR: Employee " << invalidEmployee.getId() << " already exists!" << endl;
 		}
 	}
 	else {
-		Employee e(id, name, false);
+		Employee *e = new Employee(id, name, false);
 		try {
-			h->addEmployee(e);
+			h->addEmployee(*e);
 		}
 		catch (NonExistingEmployee & invalidEmployee) {
 			cout << "ERROR: Employee " << invalidEmployee.getId() << " already exists!" << endl;
@@ -640,7 +633,7 @@ void importEmployee(Hotel *h) {
 	string filename;
 
 	clearBuffer();
-	cout << "File name - ";
+	cout << "File name: ";
 	cin >> filename;
 	h->importEmployees(filename);
 }

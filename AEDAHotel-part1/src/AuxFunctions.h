@@ -10,10 +10,10 @@ using namespace std;
 
 template <class T>
 /**
-* @brief Function to sort a vector by some specific condition.
-*
-* @param v The vector to be sorted.
-*/
+ * @brief Function to sort a vector by some specific condition.
+ *
+ * @param v The vector to be sorted.
+ */
 void insertionSort(vector<T> &v)
 {
     for (unsigned int p = 1; p < v.size(); p++)
@@ -28,12 +28,12 @@ void insertionSort(vector<T> &v)
 
 template <class T, class A>
 /**
-* @brief Function to search an object in a vector of objects.
-*
-* @param vec The vector to be searched in.
-*
-* @param x The object to be searched.
-*/
+ * @brief Function to search an object in a vector of objects.
+ *
+ * @param vec The vector to be searched in.
+ *
+ * @param x The object to be searched.
+ */
 int sequencialSearch(vector<T> vec, A x) {
 	for (unsigned int i = 0; i < vec.size(); i++)
 		if (vec[i] == x)

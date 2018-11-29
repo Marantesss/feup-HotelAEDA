@@ -79,8 +79,7 @@ void Hotel::importClientsandReservations(string filename) {
 				room = atoi(line.c_str());
 				for (size_t i = 0; i < rooms.size(); i++) {
 					if (rooms.at(i) == room) {
-						Room c =  rooms.at(i);
-						r.setRoom(&c);
+						r.setRoom(&(rooms.at(i)));
 					}
 				}
 				getline(file, line);
