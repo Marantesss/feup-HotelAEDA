@@ -360,13 +360,13 @@ bool Date::operator < (Date date) {
 	// check year
 	if (this->getYear() < date.getYear())
 		return true;
-	else
+	else if (this->getYear() == date.getYear())
 		// check month
 		if (this->getMonth() < date.getMonth())
 			return true;
-		else
+		else if (this->getMonth() == date.getMonth())
 			// check day
-			if (this->getDay() < date.getMonth())
+			if (this->getDay() < date.getDay())
 				return true;
 			else
 				return false;
