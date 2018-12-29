@@ -9,9 +9,9 @@
 
 // Reservation Class
 /**
- *  An abstract class used to represent a reservation.
+ *  A class used to represent a reservation.
  *
- *  Each reservation object has a date, a room, a duration and a price.
+ *  Each reservation has a date, a room, a duration and a price.
  *
  *  @see Date Class
  *

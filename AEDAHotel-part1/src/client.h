@@ -18,14 +18,30 @@ using namespace std;
  */
 class Client {
 	/**
+	 * int id The clients's id
+	 */
+	int id;
+
+	/**
 	 * string name The client's name
 	 */
 	string name;
 
 	/**
+	 * Date birthday The client's birthday
+	 */
+	Date birthday;
+
+	/**
 	 * vector<Reservation*> reservations The client's hotel reservations.
 	 */
 	vector<Reservation*> reservations;
+
+	/**
+	 * static int nextId The next client's id.
+	 */
+	static int nextId;
+
 public:
 	/**
 	 * @brief Default constructor.

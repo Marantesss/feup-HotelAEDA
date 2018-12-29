@@ -87,6 +87,7 @@ string Reservation::getInfo() const {
 
 	ss << "Date: " << date.getInfo() << endl;
 	ss << "Room: " << room->getInfo() << endl;
+	ss << "Duration: " << duration << endl;
 	ss << "Total price: " << price << " Euros";
 	return ss.str();
 }

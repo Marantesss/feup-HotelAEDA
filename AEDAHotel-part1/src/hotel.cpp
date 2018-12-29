@@ -42,7 +42,7 @@ void Hotel::removeClient(string name) {
 
 void Hotel::showClients() {
 	for (size_t i = 0; i < clients.size(); i++) {
-		cout << i+1 << " - " << clients.at(i).getInfo() << endl;
+		cout << clients.at(i).getInfo() << endl;
 	}
 }
 
@@ -162,7 +162,7 @@ string Hotel::getRoomsInfo() {
 		ss << "Floor " << i << ": ";
 		for (size_t j = 0; j < rooms.size(); j++) {
 			if (rooms[j].getFloorNumber() == i) {
-				if (rooms[j + 1].getFloorNumber()  == i + 1) {
+				if (rooms[j + 1].getFloorNumber() == i + 1) {
 					ss << rooms[j].getNumber() << endl;
 				}
 				else if (rooms.size()  == j + 1) {
@@ -200,6 +200,7 @@ int Hotel::sequencialSearchRooms(int num) {
 	for (unsigned int i = 0; i < rooms.size(); i++)
 		if (rooms[i].getNumber() == num)
 			return i;
+	throw (NonExistingRoom(num));
 	return -1;
 }
 

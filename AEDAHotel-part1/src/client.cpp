@@ -7,11 +7,17 @@ using namespace std;
 /** Client Class **/
 /******************/
 
+int Client::nextId = 1;
+
 Client::Client(string name) {
 	this->name = name;
+	this->id = this->nextId;
+	nextId++;
 }
 
 Client::Client() {
+	this->id = this->nextId;
+	nextId++;
 }
 
 Client::~Client() {}
@@ -25,7 +31,7 @@ void Client::setName(string name) {
 }
 
 bool  Client::operator< (Client &c2) {
-	if (this->name <= c2.name) return true;
+	if (this->id < c2.id) return true;
 	else return false;
 }
 
@@ -40,6 +46,7 @@ vector<Reservation*> Client::getReservation() const {
 
 string Client::getInfo() const {
 	stringstream ss;
+	ss << "ID: " << id << endl;
 	ss << "Name: " << name << endl;
 
 	if (!this->reservations.empty()) {

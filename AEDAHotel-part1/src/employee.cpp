@@ -4,16 +4,21 @@
 /********************/
 /***** Employee *****/
 /********************/
+
+int Employee::nextId = 1;
+
 Employee::Employee() {
-	this->id = 0;
-	this->name = {};
+	this->id = this->nextId;
+	this->name = "";
 	this->isSupervisor = false;
+	this->nextId++;
 }
 
-Employee::Employee(int id, string name, bool supervisor) {
-	this->id = id;
+Employee::Employee(string name, bool supervisor) {
+	this->id = this->nextId;
 	this->name = name;
 	this->isSupervisor = supervisor;
+	this->nextId++;
 }
 
 int Employee::getId() {

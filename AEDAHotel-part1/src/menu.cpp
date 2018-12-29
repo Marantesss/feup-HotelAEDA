@@ -389,7 +389,8 @@ void searchRoom(Hotel *h) {
 	try {
 		int i = h->sequencialSearchRooms(num);
 		cout << "Room found!" << endl;
-		cout << h->getRooms()[i].getInfo() << endl;
+		Room R = h->getRooms()[i];
+		cout << R.getNumber() << endl;
 	}
 	catch (NonExistingRoom & nonRoom) {
 		cout << "ERROR: Room " << nonRoom.getNumber() << " does not exist!!!" << endl;
@@ -453,7 +454,7 @@ int showReservationOptions(Hotel *h) {
 void addReservation(Hotel *h) {
 	int day, month, year, roomNumber, roomIndex, duration, clientIndex;
 	Room* roomPointer;
-	Date *date = new Date();
+	Date date = Date();
 	string name;
 
 	// reading the client
@@ -471,11 +472,10 @@ void addReservation(Hotel *h) {
 	}
 
 	// creating the reservation
-	clearBuffer();
 	cout << "Enter date(day month year): ";
 	cin >> day >> month >> year;
 	try {
-		*date = Date(day, month, year);
+		date = Date(day, month, year);
 	}
 	catch (InvalidDate & date) {
 		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
@@ -486,7 +486,9 @@ void addReservation(Hotel *h) {
 	cin >> roomNumber;
 	try {
 		roomIndex = h->sequencialSearchRooms(roomNumber);
+		cout << roomIndex << endl;
 		roomPointer = &(h->getRooms()[roomIndex]);
+		cout << roomPointer->getInfo() << endl;
 	}
 	catch (NonExistingRoom & nonRoom) {
 		cout << "ERROR: Room " << nonRoom.getNumber() << " does not exist!!!" << endl;
@@ -495,9 +497,10 @@ void addReservation(Hotel *h) {
 	clearBuffer();
 	cout << "Duration: ";
 	cin >> duration;
-	Reservation *r = new Reservation(*date, roomPointer, duration);
+	Reservation *r = new Reservation(date, roomPointer, duration);
 	try {
 		h->addReservation(*r);
+		cout << "Reservation added succesfuly!" << endl;
 	}
 	catch (NonExistingReservation & nonReservation) {
 		cout << "ERROR: Reservation already exists or is incompatible with others!!!" << endl;
@@ -505,6 +508,7 @@ void addReservation(Hotel *h) {
 
 	// adding reservation to clients record
 	h->getClients()[clientIndex].addReservation(r);
+	cout << h->getClients()[clientIndex].getInfo() << endl;
 }
 
 void removeReservation(Hotel *h) {
@@ -580,7 +584,7 @@ void addEmployee(Hotel *h) {
 	cout << "Supervisor (y/n): ";
 	cin >> supervisor;
 	if (supervisor == 'y') {
-		Employee *e = new Employee(id, name, true);
+		Employee *e = new Employee(name, true);
 		try {
 			h->addEmployee(*e);
 		}
@@ -589,7 +593,7 @@ void addEmployee(Hotel *h) {
 		}
 	}
 	else {
-		Employee *e = new Employee(id, name, false);
+		Employee *e = new Employee(name, false);
 		try {
 			h->addEmployee(*e);
 		}

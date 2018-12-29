@@ -32,6 +32,11 @@ protected:
 	 */
 	bool isSupervisor;
 
+	/**
+	 * static int nextId The next client's id.
+	 */
+	static int nextId;
+
 public:
 	/**
 	 * @brief Default constructor.
@@ -43,13 +48,11 @@ public:
 	 *
 	 * The constructor creates an Employee object with the data passed as argument.
 	 *
-	 * @param id The Employee's id.
-	 *
 	 * @param name The Employee's name.
 	 *
 	 * @param supervisor The Employee's possibility to be a supervisor.
 	 */
-	Employee(int id, string name, bool supervisor);
+	Employee(string name, bool supervisor);
 
 	/**
 	 * @brief Default destructor.

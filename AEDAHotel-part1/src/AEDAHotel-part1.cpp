@@ -22,6 +22,25 @@ using namespace std;
 Hotel* buildDemoHotel() {
 	Hotel *h = new Hotel(4, "Porto, Rua da Alegria 20");
 
+	//... creating employees
+	Employee *e1 = new Employee("Diogo Torres", false);
+	h->addEmployee(*e1);
+
+	Employee *e2 = new Employee("Gustavo Rodrigues", true);
+	h->addEmployee(*e2);
+
+	Employee *e3 = new Employee("Tiago Ferreira", false);
+	h->addEmployee(*e3);
+
+	Employee *e4 = new Employee("Armanda Correia", true);
+	h->addEmployee(*e4);
+
+	Employee *e5 = new Employee("Roberto Dias", false);
+	h->addEmployee(*e5);
+
+	Employee *e6 = new Employee("Joana Pereira", false);
+	h->addEmployee(*e6);
+
 	//... Building Rooms
 	Bedroom *b101 = new Bedroom(101, 1, "Back");
 	h->addRoom(*b101);
@@ -109,24 +128,10 @@ Hotel* buildDemoHotel() {
 	c4->addReservation(r6);
 	h->addClient(*c4);
 
-	//... creating employees
-	Employee *e1 = new Employee(1, "Diogo Torres", false);
-	h->addEmployee(*e1);
-
-	Employee *e2 = new Employee(2, "Gustavo Rodrigues", true);
-	h->addEmployee(*e2);
-
-	Employee *e3 = new Employee(3, "Tiago Ferreira", false);
-	h->addEmployee(*e3);
-
-	Employee *e4 = new Employee(4, "Armanda Correia", true);
-	h->addEmployee(*e4);
-
-	Employee *e5 = new Employee(5, "Roberto Dias", false);
-	h->addEmployee(*e5);
-
-	Employee *e6 = new Employee(6, "Joana Pereira", false);
-	h->addEmployee(*e6);
+	/*
+	cout << h->getRooms()[0].getInfo() << endl;
+	cout << h->getRooms()[15].getInfo() << endl;
+	cout << h->getReservations()[0].getInfo() << endl;*/
 
 	return h;
 }
