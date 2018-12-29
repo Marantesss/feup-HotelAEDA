@@ -3,11 +3,9 @@
 
 #include <sstream>
 #include <vector>
-#include <typeinfo>
 #include "date.h"
 #include "room.h"
 
-// Reservation Class
 /**
  *  A class used to represent a reservation.
  *
@@ -31,8 +29,11 @@ class Reservation {
 
 	/**
 	 * int duration The reservation's duration
+	 *
+	 * In hours for MeetingRooms
+	 * In days for Bedrooms
 	 */
-	int duration; // In days for Bedrooms and in hours for the Meeting Rooms
+	int duration;
 
 	/**
 	 * double price The reservation's price
@@ -135,7 +136,7 @@ public:
 	 * 
 	 * @return true if the reservation is sooner than r, false otherwise
 	 */
-	bool operator <(Reservation & r) const;
+	bool operator <(const Reservation & r) const;
 
 	/**
  	 * @brief Member function to copy the content of a reservation to another
@@ -144,10 +145,9 @@ public:
 	 * 
 	 * @return New copied reservation
 	 */
-	Reservation operator =(Reservation &r);
+	Reservation operator =(const Reservation &r);
 };
 
-// NonExistingReservation exception
 /**
  *  A class used to represent an exception.
  *

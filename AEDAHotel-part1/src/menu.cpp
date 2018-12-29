@@ -245,7 +245,7 @@ void roomsMenu(Hotel *h) {
 			removeRoom(h);
 			break;
 		case 3:
-			h->showRooms();
+			cout << h->getRoomsInfo() << endl;
 			break;
 		case 4:
 			h->allocateEmployees();
@@ -328,7 +328,7 @@ void addMeetingRoom(Hotel *h) {
 	if (tmp == 'y') audio = true;
 	MeetingRoom *m = new MeetingRoom(num, capacity, video, audio);
 	try {
-		h->addRoom(*m);
+		h->addRoom(m);
 	}
 	catch (NonExistingRoom & invalidRoom) {
 		cout << "ERROR: Room " << invalidRoom.getNumber() << " already exists!" << endl;
@@ -358,7 +358,7 @@ void addBedroom(Hotel *h) {
 	} while (location != "Front" || location != "Back");
 	Bedroom *b = new Bedroom(num, capacity, location);
 	try {
-		h->addRoom(*b);
+		h->addRoom(b);
 	}
 	catch (NonExistingRoom & invalidRoom) {
 		cout << "ERROR: Room " << invalidRoom.getNumber() << " already exists!" << endl;
@@ -389,8 +389,7 @@ void searchRoom(Hotel *h) {
 	try {
 		int i = h->sequencialSearchRooms(num);
 		cout << "Room found!" << endl;
-		Room R = h->getRooms()[i];
-		cout << R.getNumber() << endl;
+		cout << h->getRooms()[i]->getInfo() << endl;
 	}
 	catch (NonExistingRoom & nonRoom) {
 		cout << "ERROR: Room " << nonRoom.getNumber() << " does not exist!!!" << endl;
@@ -454,7 +453,7 @@ int showReservationOptions(Hotel *h) {
 void addReservation(Hotel *h) {
 	int day, month, year, roomNumber, roomIndex, duration, clientIndex;
 	Room* roomPointer;
-	Date date = Date();
+	Date* date = new Date();
 	string name;
 
 	// reading the client
@@ -475,7 +474,7 @@ void addReservation(Hotel *h) {
 	cout << "Enter date(day month year): ";
 	cin >> day >> month >> year;
 	try {
-		date = Date(day, month, year);
+		*date = Date(day, month, year);
 	}
 	catch (InvalidDate & date) {
 		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
@@ -486,8 +485,7 @@ void addReservation(Hotel *h) {
 	cin >> roomNumber;
 	try {
 		roomIndex = h->sequencialSearchRooms(roomNumber);
-		cout << roomIndex << endl;
-		roomPointer = &(h->getRooms()[roomIndex]);
+		roomPointer = h->getRooms()[roomIndex];
 		cout << roomPointer->getInfo() << endl;
 	}
 	catch (NonExistingRoom & nonRoom) {
@@ -497,22 +495,54 @@ void addReservation(Hotel *h) {
 	clearBuffer();
 	cout << "Duration: ";
 	cin >> duration;
-	Reservation *r = new Reservation(date, roomPointer, duration);
+	Reservation *r = new Reservation(*date, roomPointer, duration);
 	try {
 		h->addReservation(*r);
-		cout << "Reservation added succesfuly!" << endl;
+		Client c = h->getClients()[clientIndex];
+		c.addReservation(r);
+		cout << "Reservation added successfully!" << endl;
 	}
 	catch (NonExistingReservation & nonReservation) {
 		cout << "ERROR: Reservation already exists or is incompatible with others!!!" << endl;
 	}
-
-	// adding reservation to clients record
-	h->getClients()[clientIndex].addReservation(r);
-	cout << h->getClients()[clientIndex].getInfo() << endl;
 }
 
 void removeReservation(Hotel *h) {
-	// TODO
+	int day, month, year, roomNumber, roomIndex;
+	Room* roomPointer;
+	Date* date = new Date();
+	string name;
+
+	// getting the date
+	cout << "Enter date(day month year): ";
+	cin >> day >> month >> year;
+	try {
+		*date = Date(day, month, year);
+	}
+	catch (InvalidDate & date) {
+		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
+		return;
+	}
+	//getting the room
+	clearBuffer();
+	cout << "Room number: ";
+	cin >> roomNumber;
+	try {
+		roomIndex = h->sequencialSearchRooms(roomNumber);
+		roomPointer = h->getRooms()[roomIndex];
+		cout << roomPointer->getInfo() << endl;
+	}
+	catch (NonExistingRoom & nonRoom) {
+		cout << "ERROR: Room " << nonRoom.getNumber() << " does not exist!!!" << endl;
+		return;
+	}
+	try {
+		h->removeReservation(*date, roomPointer);
+		cout << "Reservation removed successfully!" << endl;
+	}
+	catch (NonExistingReservation & nonReservation) {
+		cout << "ERROR: Reservation does not exist!!!" << endl;
+	}
 }
 
 

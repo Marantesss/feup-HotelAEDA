@@ -36,7 +36,7 @@ class Hotel {
 	/**
 	 * vector<Room> rooms The hotel's rooms
 	 */
-	vector<Room> rooms;
+	vector<Room*> rooms;
 
 	/**
 	 * vector<Employee> employees The hotel's employees
@@ -140,14 +140,14 @@ public:
 	 *
 	 * @return The hotel's rooms.
 	 */
-	vector<Room> getRooms() const;
+	vector<Room*> getRooms() const;
 
 	/**
 	 * @brief Member function to add a new room.
 	 *
-	 * @param r The hotel's new room.
+	 * @param r Pointer to the hotel's new room.
 	 */
-	void addRoom(Room & r);
+	void addRoom(Room *r);
 
 	/**
 	 * @brief Member function to remove a room.
@@ -168,15 +168,12 @@ public:
 	 *
 	 * @return The hotel's rooms from a specific floor.
 	 */
-	vector<Room> getFloorNumberRooms(int floor) const;
+	vector<Room*> getFloorNumberRooms(int floor) const;
 
 	/**
-	 * @brief Member function to get the floor's information.
+	 * @brief Member function to get all rooms information.
 	 *
-	 * The return string will contain the floor's number
-	 * followed by newline and a list containing all the rooms number
-	 *
-	 * @return The floor's rooms number.
+	 * @return String containing all room's information.
 	 */
 	string getRoomsInfo();
 
@@ -186,11 +183,6 @@ public:
 	 * @param floor The number of the floor of the hotel's removed rooms.
 	 */
 	void removeRoomsFromTopFloor();
-
-	/**
-	 * @brief Member function to print all rooms' information.
-	 */
-	void showRooms();
 
 	/**
 	 * @brief Function to search a specific room given its number.

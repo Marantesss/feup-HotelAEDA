@@ -109,14 +109,14 @@ void Reservation::setDuration(int duration) {
 	this->duration = duration;
 }
 
-bool Reservation::operator <(Reservation & r) const {
+bool Reservation::operator <(const Reservation & r) const {
 	if (this->getDate() < r.getDate())
 		return true;
 	else
 		return false;
 }
 
-Reservation Reservation::operator =(Reservation &r) {
+Reservation Reservation::operator =(const Reservation & r) {
 	this->date = r.getDate();
 	this->room = r.getRoom();
 	this->duration = r.getDuration();

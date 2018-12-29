@@ -78,8 +78,8 @@ void Hotel::importClientsandReservations(string filename) {
 				getline(file, line);
 				room = atoi(line.c_str());
 				for (size_t i = 0; i < rooms.size(); i++) {
-					if (rooms.at(i) == room) {
-						r.setRoom(&(rooms.at(i)));
+					if (*(rooms.at(i)) == room) {
+						r.setRoom(rooms[i]);
 					}
 				}
 				getline(file, line);
@@ -102,22 +102,21 @@ int Hotel::sequencialSearchClients(string name) {
 }
 
 //... Rooms
-vector<Room> Hotel::getRooms() const{
+vector<Room*> Hotel::getRooms() const{
 	return this->rooms;
 }
 
-void Hotel::addRoom(Room & r) {
+void Hotel::addRoom(Room *r) {
 	// Checking if the room is valid
-	vector<Room>::iterator it;
-	for (it = rooms.begin(); it != rooms.end(); it++) {
-		if (it->getNumber() == r.getNumber()) {
-			throw (NonExistingRoom(r.getNumber()));
+	for (size_t i = 0; i < rooms.size(); i++) {
+		if (rooms[i]->getNumber() == r->getNumber()) {
+			throw (NonExistingRoom(r->getNumber()));
 			return;
 		}
 	}
 	// Adding the room
 	this->rooms.push_back(r);
-	if (r.getIsBedroom()) {
+	if (r->getIsBedroom()) {
 		bedrooms++;
 	}
 	else {
@@ -126,16 +125,15 @@ void Hotel::addRoom(Room & r) {
 }
 
 void Hotel::removeRoom(int num) {
-	vector<Room>::iterator it;
-	for (it = rooms.begin(); it != rooms.end(); it++) {
-		if (it->getNumber() == num) {
-			if (it->getIsBedroom()) {
+	for (size_t i = 0; i < rooms.size(); i++) {
+		if (rooms[i]->getNumber() == num) {
+			if (rooms[i]->getIsBedroom()) {
 				bedrooms--;
 			}
 			else {
 				meetingrooms--;
 			}
-			this->rooms.erase(it);
+			this->rooms.erase(rooms.begin() + i);
 			return;
 		}
 	}
@@ -146,10 +144,10 @@ void Hotel::sortRooms() {
 	insertionSort(rooms);
 }
 
-vector<Room> Hotel::getFloorNumberRooms(int floor) const {
-	vector<Room> returnRooms;
+vector<Room*> Hotel::getFloorNumberRooms(int floor) const {
+	vector<Room*> returnRooms;
 	for (size_t i = 0; i < rooms.size(); i++) {
-		if (rooms[i].getFloorNumber() == floor) {
+		if (rooms[i]->getFloorNumber() == floor) {
 			returnRooms.push_back(rooms[i]);
 		}
 	}
@@ -161,15 +159,15 @@ string Hotel::getRoomsInfo() {
 	for (int i = 1; i <= getFloors(); i++) {
 		ss << "Floor " << i << ": ";
 		for (size_t j = 0; j < rooms.size(); j++) {
-			if (rooms[j].getFloorNumber() == i) {
-				if (rooms[j + 1].getFloorNumber() == i + 1) {
-					ss << rooms[j].getNumber() << endl;
+			if (rooms[j]->getFloorNumber() == i) {
+				if (rooms[j + 1]->getFloorNumber() == i + 1) {
+					ss << rooms[j]->getInfo() << endl;
 				}
 				else if (rooms.size()  == j + 1) {
-					ss << rooms[j].getNumber();
+					ss << rooms[j]->getInfo();
 				}
 				else {
-					ss << rooms[j].getNumber() << ", ";
+					ss << rooms[j]->getInfo() << ", ";
 				}
 			}
 		}
@@ -179,26 +177,17 @@ string Hotel::getRoomsInfo() {
 }
 
 void Hotel::removeRoomsFromTopFloor() {
-	vector<Room>::iterator it;
-	for (it = rooms.begin(); it != rooms.end(); it++) {
-		if (it->getFloorNumber() == this->floors) {
-			removeRoom(it->getNumber());
-			it--;
+	for (size_t i = 0; i < rooms.size(); i++) {
+		if (rooms[i]->getFloorNumber() == this->floors) {
+			removeRoom(rooms[i]->getNumber());
+			i--;
 		}
-	}
-}
-
-void Hotel::showRooms() {
-	vector<Room>:: iterator it;
-
-	for (it = rooms.begin(); it != rooms.end(); it++) {
-		cout << it->getInfo() << endl;
 	}
 }
 
 int Hotel::sequencialSearchRooms(int num) {
 	for (unsigned int i = 0; i < rooms.size(); i++)
-		if (rooms[i].getNumber() == num)
+		if (rooms[i]->getNumber() == num)
 			return i;
 	throw (NonExistingRoom(num));
 	return -1;
@@ -227,10 +216,9 @@ void Hotel::sortReservations() {
 }
 
 void Hotel::removeReservation(Date d, Room * R) {
-	vector<Reservation>::iterator it;
-	for (it = reservations.begin(); it != reservations.end(); it++) {
-		if (it->getDate() == d && it->getRoom() == R) {
-			this->rooms.erase(rooms.begin());
+	for (size_t i = 0; i < reservations.size(); i++) {
+		if (reservations[i].getDate() == d && reservations[i].getRoom() == R) {
+			this->reservations.erase(reservations.begin() + i);
 			return;
 		}
 	}

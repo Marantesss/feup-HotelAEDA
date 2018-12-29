@@ -162,7 +162,7 @@ public:
  *
  * Each meeting room has a price
  */
-class MeetingRoom : public Room {
+class MeetingRoom: public Room {
 	/**
 	 * bool video The existance of video in the meeting room
 	 */
@@ -250,7 +250,7 @@ public:
  *
  *  Each bedroom has a location and a price
  */
-class Bedroom : public Room {
+class Bedroom: public Room {
 	/**
 	 *  string location The bedroom's location
 	 */

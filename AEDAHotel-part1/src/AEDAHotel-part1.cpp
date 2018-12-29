@@ -43,39 +43,39 @@ Hotel* buildDemoHotel() {
 
 	//... Building Rooms
 	Bedroom *b101 = new Bedroom(101, 1, "Back");
-	h->addRoom(*b101);
+	h->addRoom(b101);
 	Bedroom *b102 = new Bedroom(102, 1, "Back");
-	h->addRoom(*b102);
+	h->addRoom(b102);
 	Bedroom *b103 = new Bedroom(103, 1, "Front");
-	h->addRoom(*b103);
+	h->addRoom(b103);
 	Bedroom *b104 = new Bedroom(104, 2, "Back");
-	h->addRoom(*b104);
+	h->addRoom(b104);
 	Bedroom *b105 = new Bedroom(105, 2, "Front");
-	h->addRoom(*b105);
+	h->addRoom(b105);
 	Bedroom *b201 = new Bedroom(201, 1, "Back");
-	h->addRoom(*b201);
+	h->addRoom(b201);
 	Bedroom *b202 = new Bedroom(202, 1, "Back");
-	h->addRoom(*b202);
+	h->addRoom(b202);
 	Bedroom *b203 = new Bedroom(203, 1, "Front");
-	h->addRoom(*b203);
+	h->addRoom(b203);
 	Bedroom *b204 = new Bedroom(204, 2, "Back");
-	h->addRoom(*b204);
+	h->addRoom(b204);
 	Bedroom *b205 = new Bedroom(205, 2, "Front");
-	h->addRoom(*b205);
+	h->addRoom(b205);
 	Bedroom *b301 = new Bedroom(301, 1, "Back");
-	h->addRoom(*b301);
+	h->addRoom(b301);
 	Bedroom *b302 = new Bedroom(302, 1, "Back");
-	h->addRoom(*b302);
+	h->addRoom(b302);
 	Bedroom *b303 = new Bedroom(303, 1, "Front");
-	h->addRoom(*b303);
+	h->addRoom(b303);
 	Bedroom *b304 = new Bedroom(304, 2, "Back");
-	h->addRoom(*b304);
+	h->addRoom(b304);
 	Bedroom *b305 = new Bedroom(305, 2, "Front");
-	h->addRoom(*b305);
+	h->addRoom(b305);
 	MeetingRoom *mr401 = new MeetingRoom(401, 25, true, true);
-	h->addRoom(*mr401);
+	h->addRoom(mr401);
 	MeetingRoom *mr402 = new MeetingRoom(402, 10, false, false);
-	h->addRoom(*mr402);
+	h->addRoom(mr402);
 
 	//... Creating Reservations
 	// winter
@@ -127,11 +127,6 @@ Hotel* buildDemoHotel() {
 	c4->addReservation(r7);
 	c4->addReservation(r6);
 	h->addClient(*c4);
-
-	/*
-	cout << h->getRooms()[0].getInfo() << endl;
-	cout << h->getRooms()[15].getInfo() << endl;
-	cout << h->getReservations()[0].getInfo() << endl;*/
 
 	return h;
 }
