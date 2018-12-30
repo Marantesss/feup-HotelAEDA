@@ -26,7 +26,7 @@ class Hotel {
 	/**
 	 * vector<Client> clients The hotel's clients
 	 */
-	vector<Client> clients;
+	vector<Client*> clients;
 
 	/**
 	 *  vector<Reservation> reservations The hotel's reservations
@@ -89,14 +89,14 @@ public:
 	 *
 	 * @return The hotel's clients.
 	 */
-	vector<Client> getClients() const;
+	vector<Client*> getClients() const;
 
 	/**
 	 * @brief Member function to add a new client.
 	 *
 	 * @param c The hotel's new client.
 	 */
-	void addClient(Client c);
+	void addClient(Client *c);
 
 	/**
 	 * @brief Member function to remove a client.

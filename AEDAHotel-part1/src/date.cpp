@@ -63,7 +63,7 @@ int calculateWeekday(int day, int month, int year) {
 
 bool validDate(int day, int month, int year) {
 	if (month < 1 || month > 12) return false;
-	if (year < 2018) return false;
+	if (year < 1900) return false;
 	switch(month) {
 		case 1: // January
 			if (day < 0 || day > 31) return false;
@@ -169,23 +169,23 @@ Date::Date(int day, int month, int year) {
 }
 
 // get
-int Date::getDay() {
+int Date::getDay() const {
 	return day;
 }
 
-int Date::getMonth() {
+int Date::getMonth() const {
 	return month;
 }
 
-int Date::getYear() {
+int Date::getYear() const {
 	return year;
 }
 
-string Date::getSeason() {
+string Date::getSeason() const {
 	return this->season;
 }
 
-string Date::getWeekday() {
+string Date::getWeekday() const {
 	return this->weekday;
 }
 
@@ -234,19 +234,19 @@ void Date::setWeekday(string weekday) {
 	this->weekday = weekday;
 }
 
-string Date::showDate() {
+string Date::showDate() const {
 	stringstream ss;
-	ss << this->day << "/" << this->month << "/" << this->year << endl;
+	ss << this->day << "/" << this->month << "/" << this->year;
 	return ss.str();
 }
 
-string Date::showExtendedDate() {
+string Date::showExtendedDate() const {
 	stringstream ss;
 	string monthName[] = { "January", "February", "March",
 		"April", "May", "June", "July",
 		"August", "September", "October",
 		"November", "December" };
-	ss << this->day << "  " << monthName[this->month - 1] << "  " << this->year << endl;
+	ss << this->day << " " << monthName[this->month - 1] << " " << this->year;
 	return ss.str();
 }
 
@@ -358,19 +358,21 @@ Date Date::operator =(Date date) {
 
 bool Date::operator < (Date date) {
 	// check year
-	if (this->getYear() < date.getYear())
+	if (this->getYear() < date.getYear()) {
 		return true;
-	else if (this->getYear() == date.getYear())
+	}
+	else if (this->getYear() == date.getYear()) {
 		// check month
-		if (this->getMonth() < date.getMonth())
+		if (this->getMonth() < date.getMonth()) {
 			return true;
-		else if (this->getMonth() == date.getMonth())
+		}
+		else if (this->getMonth() == date.getMonth()) {
 			// check day
 			if (this->getDay() < date.getDay())
 				return true;
-			else
-				return false;
-
+		}
+	}
+	return false;
 }
 
 /********************************/

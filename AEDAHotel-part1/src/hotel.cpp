@@ -21,19 +21,18 @@ Hotel::Hotel(int floors, string address) {
 Hotel::~Hotel() {}
 
 //... Clients
-vector<Client> Hotel::getClients() const {
+vector<Client*> Hotel::getClients() const {
 	return this->clients;
 }
 
-void Hotel::addClient(Client c) {
+void Hotel::addClient(Client *c) {
 	this->clients.push_back(c);
 }
 
 void Hotel::removeClient(string name) {
-	vector<Client>::iterator it;
-	for (it = clients.begin(); it != clients.end(); it++) {
-		if (it->getName() == name) {
-			this->clients.erase(it);
+	for (size_t i = 0; i < clients.size(); i++) {
+		if (clients[i]->getName() == name) {
+			this->clients.erase(clients.begin() + i);
 			return;
 		}
 	}
@@ -42,7 +41,7 @@ void Hotel::removeClient(string name) {
 
 void Hotel::showClients() {
 	for (size_t i = 0; i < clients.size(); i++) {
-		cout << clients.at(i).getInfo() << endl;
+		cout << clients.at(i)->getInfo() << endl;
 	}
 }
 
@@ -64,7 +63,7 @@ void Hotel::importClientsandReservations(string filename) {
 		{
 			name = line;
 			c.setName(name);
-			this->clients.push_back(c);
+			this->clients.push_back(&c);
 			getline(file, line);
 			noReservations = atoi(line.c_str());
 			getline(file, line);
@@ -95,7 +94,7 @@ void Hotel::importClientsandReservations(string filename) {
 
 int Hotel::sequencialSearchClients(string name) {
 	for (unsigned int i = 0; i < clients.size(); i++)
-		if (clients[i].getName() == name)
+		if (clients[i]->getName() == name)
 			return i;
 	throw (NonExistingClient(name));
 	return -1;

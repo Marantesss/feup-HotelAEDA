@@ -178,12 +178,23 @@ int showClientOptions(Hotel *h) {
 
 void addClient(Hotel *h) {
 	string name;
+	int day, month, year;
+	Date *birthday = new Date;
 
 	clearBuffer();
 	cout << "Name: ";
 	getline(cin, name);
-	Client *c = new Client(name);
-	h->addClient(*c);
+	cout << "Enter date(day month year): ";
+	cin >> day >> month >> year;
+	try {
+		*birthday = Date(day, month, year);
+	}
+	catch (InvalidDate & date) {
+		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
+		return;
+	}
+	Client *c = new Client(name, *birthday);
+	h->addClient(c);
 }
 
 void removeClient(Hotel *h) {
@@ -210,7 +221,7 @@ void searchClient(Hotel *h) {
 	try {
 		int i = h->sequencialSearchClients(name);
 		cout << "Client found!" << endl;
-		cout << h->getClients()[i].getInfo() << endl;
+		cout << h->getClients()[i]->getInfo() << endl;
 	}
 	catch (NonExistingClient & nonClient) {
 		cout << "ERROR: Client " << nonClient.getName() << " does not exist!!!" << endl;
@@ -463,7 +474,7 @@ void addReservation(Hotel *h) {
 	try {
 		clientIndex = h->sequencialSearchClients(name);
 		cout << "Client found!" << endl;
-		cout << h->getClients()[clientIndex].getInfo() << endl;
+		cout << h->getClients()[clientIndex]->getInfo() << endl;
 	}
 	catch (NonExistingClient & nonClient) {
 		cout << "ERROR: Client " << nonClient.getName() << " does not exist!!!" << endl;
@@ -498,8 +509,8 @@ void addReservation(Hotel *h) {
 	Reservation *r = new Reservation(*date, roomPointer, duration);
 	try {
 		h->addReservation(*r);
-		Client c = h->getClients()[clientIndex];
-		c.addReservation(r);
+		Client *c = h->getClients()[clientIndex];
+		c->addReservation(r);
 		cout << "Reservation added successfully!" << endl;
 	}
 	catch (NonExistingReservation & nonReservation) {

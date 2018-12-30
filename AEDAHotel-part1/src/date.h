@@ -69,35 +69,35 @@ public:
 	 *
 	 * @return The date's day.
 	 */
-	int getDay();
+	int getDay() const;
 
 	/**
 	 * @brief Member function to get the date's month.
 	 *
 	 * @return The date's month.
 	 */
-	int getMonth();
+	int getMonth() const;
 
 	/**
 	 * @brief Member function to get the date's year.
 	 *
 	 * @return The date's year.
 	 */
-	int getYear();
+	int getYear() const;
 
 	/**
 	 * @brief Member function to get the date's season.
 	 *
 	 * @return The date's season.
 	 */
-	string getSeason();
+	string getSeason() const;
 
 	/**
 	 * @brief Member function to get the date's weekday.
 	 *
 	 * @return The date's weekday.
 	 */
-	string getWeekday();
+	string getWeekday() const;
 
 	/**
 	 * @brief Member function to get the date's information.
@@ -153,14 +153,14 @@ public:
 	 *
 	 * @return The date in format DD/MM/YYYY.
 	 */
-	string showDate();
+	string showDate() const;
 
 	/**
 	 * @brief Member function to show the date.
 	 *
 	 * @return The date in format "day month year".
 	 */
-	string showExtendedDate();
+	string showExtendedDate() const;
 
 	/**
 	 * @brief Member function to increment the date.

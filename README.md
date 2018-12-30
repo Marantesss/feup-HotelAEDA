@@ -21,6 +21,27 @@ conjunto de funcionários (supervisores e não supervisores), conjunto de client
 reserva de espaços. (nota: esta enumeração de listagens a implementar não é exaustiva).
 Implemente outras funcionalidades que considere relevantes, para além dos requisitos globais enunciados.
 
+### Tema 9 – Gestão Hoteleira (Parte 2)
+Complemente o sistema já implementado com as seguintes funcionalidades:
+
+* Para apoio aos seus clientes, o hotel disponibiliza informação sobre os restaurantes nas redondezas. Os
+restaurantes são guardados numa. árvore binária de pesquisa ordenados por po de cozinha
+(portuguesa, tapas, italiana, …) e, em caso de empate, por distância ao hotel.
+* O hotel disponibiliza aos seus clientes um serviço de excursões a pontos turíscos da localidade. Para uma
+gestão eficiente das carrinhas a alugar, a alocação dos lugares das carrinhas aos clientes é realizado com o
+auxílio de uma fila de prioridade. As carrinhas são guardadas numa fila de prioridade, ordenadas por
+número de lugares vagos (no topo da fila está a carrinha com menos lugares vagos). Os clientes do hotel
+podem querer efetuar a viagem na carrinha em grupo (são amigos ou familiares) ou sozinhos. Para
+determinado grupo, deve ser alocada a carrinha com menos lugares vagos suficientes para o número de
+elementos do grupo.
+* O hotel mantém um registo de todos os seus clientes (atuais e angos) numa tabela de dispersão. A
+manutenção do registo de clientes angos do hotel jusfica-se pela políca de markeng do hotel: envio
+de felicitações no seu aniversário, envio de informação sobre eventos a decorrer no hotel.
+
+Implemente também outras funcionalidades que considere relevantes, para além dos requisitos globais
+enunciados.
+
+
 ## Authors
 
 * **Gonçalo Marantes** - [Marantesss](https://github.com/Marantesss)

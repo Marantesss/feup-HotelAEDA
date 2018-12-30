@@ -108,25 +108,29 @@ Hotel* buildDemoHotel() {
 	h->addReservation(*r8);
 
 	//... creating clients
-	Client *c1 = new Client("Luis Goncalves");
+	Date *bd1 = new Date(11, 9, 1990);
+	Client *c1 = new Client("Luis Goncalves", *bd1);
 	c1->addReservation(r1);
 	c1->addReservation(r5);
-	h->addClient(*c1);
+	h->addClient(c1);
 
-	Client *c2 = new Client("Joao Francisco");
+	Date *bd2 = new Date(21, 4, 1996);
+	Client *c2 = new Client("Joao Francisco", *bd2);
 	c2->addReservation(r3);
 	c2->addReservation(r2);
-	h->addClient(*c2);
+	h->addClient(c2);
 
-	Client *c3 = new Client("Maria Almeida");
+	Date *bd3 = new Date(7, 12, 1978);
+	Client *c3 = new Client("Maria Almeida", *bd3);
 	c3->addReservation(r8);
 	c3->addReservation(r4);
-	h->addClient(*c3);
+	h->addClient(c3);
 
-	Client *c4 = new Client("Carlos Marques");
+	Date *bd4 = new Date(2, 9, 1986);
+	Client *c4 = new Client("Carlos Marques", *bd4);
 	c4->addReservation(r7);
 	c4->addReservation(r6);
-	h->addClient(*c4);
+	h->addClient(c4);
 
 	return h;
 }

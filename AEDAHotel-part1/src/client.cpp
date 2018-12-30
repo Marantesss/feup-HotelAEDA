@@ -9,8 +9,9 @@ using namespace std;
 
 int Client::nextId = 1;
 
-Client::Client(string name) {
+Client::Client(string name, Date birthday) {
 	this->name = name;
+	this->birthday = birthday;
 	this->id = this->nextId;
 	nextId++;
 }
@@ -28,6 +29,10 @@ string Client::getName() const {
 
 void Client::setName(string name) {
 	this->name = name;
+}
+
+int Client::getId() const {
+	return this->id;
 }
 
 bool  Client::operator< (Client &c2) {
@@ -48,6 +53,7 @@ string Client::getInfo() const {
 	stringstream ss;
 	ss << "ID: " << id << endl;
 	ss << "Name: " << name << endl;
+	ss << "Birthday: " << this->birthday.showExtendedDate() << endl;
 
 	if (!this->reservations.empty()) {
 		ss << "Reservations:" << endl;
@@ -62,9 +68,11 @@ string Client::getInfo() const {
 	return ss.str();
 }
 
-bool Client::operator == (string name) {
-	if (this->name == name) return true;
-	else return false;
+bool Client::operator == (Client c) {
+	if (this->id == c.id)
+		return true;
+	else
+		return false;
 }
 
 /********************************/

@@ -55,7 +55,7 @@ public:
 	 *
 	 * @param name The client's name.
 	 */
-	Client(string name);
+	Client(string name, Date birthday);
 
 	/**
 	 * @brief Default destructor.
@@ -75,6 +75,13 @@ public:
 	 * @param name The client's new name.
 	 */
 	void setName(string name);
+
+	/**
+	 * @brief Const member function to get the client's id.
+	 *
+	 * @return The client's id.
+	 */
+	int getId() const;
 
 	/**
 	 * @brief Const member function to get the client's information.
@@ -124,7 +131,7 @@ public:
 	 * @return true, if the Clients name is the same as the parameter
 	 * 		  false, if otherwise
 	 */
-	bool operator == (string name);
+	bool operator == (Client c);
 };
 
 /**
