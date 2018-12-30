@@ -44,7 +44,7 @@ void Client::addReservation(Reservation * R) {
 	this->reservations.push_back(R);
 }
 
-vector<Reservation*> Client::getReservation() const {
+vector<Reservation*> Client::getReservations() const {
 	return this->reservations;
 }
 

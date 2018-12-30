@@ -175,7 +175,7 @@ public:
 	 *
 	 * @return String containing all room's information.
 	 */
-	string getRoomsInfo();
+	string getRoomsInfo() const;
 
 	/**
 	 * @brief Member function to remove the rooms from a floor.

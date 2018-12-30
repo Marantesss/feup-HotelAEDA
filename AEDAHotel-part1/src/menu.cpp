@@ -204,8 +204,16 @@ void removeClient(Hotel *h) {
 	cout << "Name: ";
 	getline(cin, name);
 	try {
+		int ClientIndex = h->sequencialSearchClients(name);
+		cout << "Client found!" << endl;
+		vector<Reservation*> clientsReservations = h->getClients()[ClientIndex]->getReservations();
+		for (size_t i = 0; i < clientsReservations.size(); i++) {
+			h->removeReservation(clientsReservations[i]->getDate(), clientsReservations[i]->getRoom());
+		}
+		cout << name << "'s reservations removed successfully!" << endl;
 		h->removeClient(name);
 		cout << "Client " << name << " removed successfully!" << endl;
+
 	}
 	catch (NonExistingClient & nonClient) {
 		cout << "ERROR: Client " << nonClient.getName() << " does not exist!!!" << endl;
@@ -285,7 +293,7 @@ int showRoomsOptions(Hotel *h) {
 	cout << " ---- What would you like to do? ---- " << endl;
 	cout << "1 - Add Room" << endl;
 	cout << "2 - Remove Room" << endl;
-	cout << "3 - See Rooms [NOT IMPLEMENTED YET]" << endl;
+	cout << "3 - See Rooms" << endl;
 	cout << "4 - Distribute supervisors"<< endl;
 	cout << "5 - Search Room by number" << endl;
 	cout << "6 - Import Rooms [NOT IMPLEMENTED YET]" << endl;
@@ -365,7 +373,7 @@ void addBedroom(Hotel *h) {
 		cout << "Location (Front/Back): ";
 		cin >> location;
 		if (location != "Front" || location != "Back")
-			cout << "Invalid location, make sure first letter is caps..." << endl;
+			cout << "Invalid location, make sure first letter is in caps..." << endl;
 	} while (location != "Front" || location != "Back");
 	Bedroom *b = new Bedroom(num, capacity, location);
 	try {

@@ -153,21 +153,15 @@ vector<Room*> Hotel::getFloorNumberRooms(int floor) const {
 	return returnRooms;
 }
 
-string Hotel::getRoomsInfo() {
+string Hotel::getRoomsInfo() const {
 	stringstream ss;
 	for (int i = 1; i <= getFloors(); i++) {
-		ss << "Floor " << i << ": ";
+		ss << "_____________________________________" << endl;
+		ss << " ------------ Floor " << i << " ------------ " << endl;
 		for (size_t j = 0; j < rooms.size(); j++) {
 			if (rooms[j]->getFloorNumber() == i) {
-				if (rooms[j + 1]->getFloorNumber() == i + 1) {
-					ss << rooms[j]->getInfo() << endl;
-				}
-				else if (rooms.size()  == j + 1) {
-					ss << rooms[j]->getInfo();
-				}
-				else {
-					ss << rooms[j]->getInfo() << ", ";
-				}
+				ss << rooms[j]->getInfo() << endl;
+				ss << " ------------------------ " << endl;
 			}
 		}
 	}

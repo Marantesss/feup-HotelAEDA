@@ -111,7 +111,7 @@ public:
 	 *
 	 * @return Vector of pointers to client's reservations.
 	 */
-	vector<Reservation*> getReservation() const;
+	vector<Reservation*> getReservations() const;
 
 	/**
 	 * @brief Overload of Operator < for class Client.
