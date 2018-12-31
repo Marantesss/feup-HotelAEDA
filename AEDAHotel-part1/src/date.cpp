@@ -54,11 +54,34 @@ bool isLeap(int year) {
 		return false;
 }
 
-int calculateWeekday(int day, int month, int year) {
+string calculateWeekday(int day, int month, int year) {
 	int s = year / 100; // two first digits of the year
 	int a = year % 100; // two last digits of the year
 	int c = getCCode(month, isLeap(year));
-	return (((5*a)/4) + c + day - (2*(s%4)) + 7) % 7;
+	switch ((((5*a)/4) + c + day - (2*(s%4)) + 7) % 7) {
+	case 0:
+		return "Saturday";
+		break;
+	case 1:
+		return "Sunday";
+		break;
+	case 2:
+		return "Monday";
+		break;
+	case 3:
+		return "Tuesday";
+		break;
+	case 4:
+		return "Wednesday";
+		break;
+	case 5:
+		return "Thursday";
+		break;
+	case 6:
+		return "Friday";
+		break;
+	}
+	return NULL;
 }
 
 bool validDate(int day, int month, int year) {
@@ -142,29 +165,7 @@ Date::Date(int day, int month, int year) {
 		else
 			this->season = "Winter";
 		// Calculating weekday
-		switch(calculateWeekday(day, month, year)) {
-		case 0:
-			this->weekday = "Saturday";
-			break;
-		case 1:
-			this->weekday = "Sunday";
-			break;
-		case 2:
-			this->weekday = "Monday";
-			break;
-		case 3:
-			this->weekday = "Tuesday";
-			break;
-		case 4:
-			this->weekday = "Wednesday";
-			break;
-		case 5:
-			this->weekday = "Thursday";
-			break;
-		case 6:
-			this->weekday = "Friday";
-			break;
-		}
+		this->weekday = calculateWeekday(day, month, year);
 	}
 }
 
@@ -234,19 +235,13 @@ void Date::setWeekday(string weekday) {
 	this->weekday = weekday;
 }
 
-string Date::showDate() const {
-	stringstream ss;
-	ss << this->day << "/" << this->month << "/" << this->year;
-	return ss.str();
-}
-
-string Date::showExtendedDate() const {
+string Date::getExtendedDate() const {
 	stringstream ss;
 	string monthName[] = { "January", "February", "March",
 		"April", "May", "June", "July",
 		"August", "September", "October",
 		"November", "December" };
-	ss << this->day << " " << monthName[this->month - 1] << " " << this->year;
+	ss << this->day << " " << monthName[this->month - 1] << " " << this->year << " - " << this->weekday;
 	return ss.str();
 }
 
@@ -259,12 +254,14 @@ void nextDate(Date &d) {
 	// Adding one day
 	if (validDate(day + 1, month, year)) {
 		d.setDay(day + 1);
+		d.setWeekday(calculateWeekday(d.getDay(), d.getMonth(), d.getYear()));
 		return;
 	}
 	// Adding one month
 	if (validDate(1, month + 1, year)) {
 		d.setDay(1);
 		d.setMonth(month + 1);
+		d.setWeekday(calculateWeekday(d.getDay(), d.getMonth(), d.getYear()));
 		return;
 	}
 	// Adding one year
@@ -272,6 +269,7 @@ void nextDate(Date &d) {
 		d.setDay(1);
 		d.setMonth(1);
 		d.setYear(year + 1);
+		d.setWeekday(calculateWeekday(d.getDay(), d.getMonth(), d.getYear()));
 		return;
 	}
 }

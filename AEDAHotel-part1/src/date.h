@@ -151,16 +151,9 @@ public:
 	/**
 	 * @brief Member function to show the date.
 	 *
-	 * @return The date in format DD/MM/YYYY.
-	 */
-	string showDate() const;
-
-	/**
-	 * @brief Member function to show the date.
-	 *
 	 * @return The date in format "day month year".
 	 */
-	string showExtendedDate() const;
+	string getExtendedDate() const;
 
 	/**
 	 * @brief Member function to increment the date.

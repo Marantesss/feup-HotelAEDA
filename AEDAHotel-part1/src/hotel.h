@@ -8,6 +8,37 @@
 #include "client.h"
 #include "employee.h"
 #include "AuxFunctions.h"
+#include <unordered_set>
+
+/**
+ *  A struct used to represent hash functions.
+ */
+struct clientHash {
+	/**
+	 * @brief Hash function.
+	 *
+	 * @param Client & c The client to be added in the hash table
+	 *
+	 * @return The added client's index in the hash table, which will be equal to its ID
+	 */
+	int operator() (const Client & c) const {
+		return c.getId();
+	}
+	/**
+	 * @brief Equal function.
+	 *
+	 * @param Client & c1 The first client to be compared
+	 *
+	 * @param Client & c2 The second client to be compared
+	 *
+	 * @return true if both clients have the same ID, false if otherwise
+	 */
+	bool operator() (const Client & c1, const Client & c2) const {
+		return c1.getId() == c2.getId();
+	}
+};
+
+typedef unordered_set<Client, clientHash, clientHash> hashTabClients;
 
 
 /**

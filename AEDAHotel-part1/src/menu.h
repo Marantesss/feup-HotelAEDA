@@ -16,14 +16,22 @@ using namespace std;
 void clearBuffer();
 
 /**
+ * @brief Function to increment a date passed as argument
+ */
+void nextDay(Date* date);
+
+/**
  * @brief Function to get menu options
  *
+ * Displays date passed as argument
  * Calls showMenu() to print menu options
  * @see showMenu()
  *
+ * @param Pointer to date's memory location
+ *
  * @return The menu option chosen by the user
  */
-int menu();
+int menu(Date *date);
 
 /**
  * @brief Prints the various menu options available on screen

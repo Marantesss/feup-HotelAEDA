@@ -9,15 +9,16 @@ void clearBuffer() {
 
 /********** Hotel Information **********/
 
-int menu() {
+int menu(Date *date) {
 	int menuOption;
 
+	cout << date->getExtendedDate() << endl;
 	do {
 		menuOption = showMenu();
-		if (menuOption < 0 || menuOption > 5) {
+		if (menuOption < 0 || menuOption > 6) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
-	} while (menuOption < 0 || menuOption > 5);
+	} while (menuOption < 0 || menuOption > 6);
 
 	return menuOption;
 }
@@ -32,6 +33,7 @@ int showMenu() {
 	cout << "| 3 - Reservations                   |" << endl;
 	cout << "| 4 - Rooms                          |" << endl;
 	cout << "| 5 - Employees                      |" << endl;
+	cout << "| 6 - Next Day                       |" << endl;
 	cout << "| 0 - Exit                           |" << endl;
 	cout << "|____________________________________|" << endl;
 	cout << "Option: ";

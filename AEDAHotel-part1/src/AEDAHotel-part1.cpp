@@ -139,12 +139,13 @@ int main() {
 	int menuOption;
 
 	Hotel *h = buildDemoHotel();
+	Date currentDate = Date(31, 12, 2018);
 
 	cout << "=======================================" << endl;
 	cout << "======== Welcome to Hotel AEDA ========" << endl;
 	cout << "=======================================" << endl;
 	do {
-		menuOption = menu();
+		menuOption = menu(&currentDate);
 		switch(menuOption) {
 		case 1: // Hotel Information
 			hotelInformationMenu(h);
@@ -161,8 +162,11 @@ int main() {
 		case 5: // Employees
 			employeesMenu(h);
 			break;
+		case 6:
+			currentDate++;
+			break;
 		}
-		if (menuOption < 0 || menuOption > 5) {
+		if (menuOption < 0 || menuOption > 6) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption != 0);

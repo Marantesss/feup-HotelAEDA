@@ -61,7 +61,7 @@ string Client::getInfo() const {
 	stringstream ss;
 	ss << "ID: " << id << endl;
 	ss << "Name: " << name << endl;
-	ss << "Birthday: " << this->birthday.showExtendedDate() << endl;
+	ss << "Birthday: " << this->birthday.getExtendedDate() << endl;
 
 	if (!this->reservations.empty()) {
 		ss << "Reservations:" << endl;
