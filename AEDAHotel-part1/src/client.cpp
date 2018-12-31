@@ -23,6 +23,10 @@ Client::Client() {
 
 Client::~Client() {}
 
+int Client::getId() const {
+	return this->id;
+}
+
 string Client::getName() const {
 	return this->name;
 }
@@ -31,23 +35,27 @@ void Client::setName(string name) {
 	this->name = name;
 }
 
-int Client::getId() const {
-	return this->id;
-}
-
-bool  Client::operator< (Client &c2) {
-	if (this->id < c2.id) return true;
-	else return false;
+Date Client::getBirthday() const {
+	return this->birthday;
 }
 
 void Client::addReservation(Reservation * R) {
 	this->reservations.push_back(R);
 }
 
+void Client::removeReservation(Date d, Room * R) {
+	for (size_t i = 0; i < reservations.size(); i++) {
+		if (reservations[i]->getDate() == d && reservations[i]->getRoom() == R) {
+			this->reservations.erase(reservations.begin() + i);
+			return;
+		}
+	}
+	throw (NonExistingReservation(d, R));
+}
+
 vector<Reservation*> Client::getReservations() const {
 	return this->reservations;
 }
-
 
 string Client::getInfo() const {
 	stringstream ss;
@@ -66,6 +74,11 @@ string Client::getInfo() const {
 	}
 
 	return ss.str();
+}
+
+bool  Client::operator< (Client &c2) {
+	if (this->id < c2.id) return true;
+	else return false;
 }
 
 bool Client::operator == (Client c) {

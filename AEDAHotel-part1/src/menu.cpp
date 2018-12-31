@@ -558,6 +558,14 @@ void removeReservation(Hotel *h) {
 	try {
 		h->removeReservation(*date, roomPointer);
 		cout << "Reservation removed successfully!" << endl;
+		vector<Client*> tempClients = h->getClients();
+		for (size_t i = 0; i < tempClients.size(); i++) {
+			try {
+				tempClients[i]->removeReservation(*date, roomPointer);
+				cout << tempClients[i]->getName() << "'s reservation removed successfully!" << endl;
+			}
+			catch (NonExistingReservation & nonReservation) {}
+		}
 	}
 	catch (NonExistingReservation & nonReservation) {
 		cout << "ERROR: Reservation does not exist!!!" << endl;

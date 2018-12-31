@@ -63,6 +63,13 @@ public:
 	~Client();
 
 	/**
+	 * @brief Const member function to get the client's id.
+	 *
+	 * @return The client's id.
+	 */
+	int getId() const;
+
+	/**
 	 * @brief Const member function to get the client's name.
 	 *
 	 * @return The client's name.
@@ -77,11 +84,11 @@ public:
 	void setName(string name);
 
 	/**
-	 * @brief Const member function to get the client's id.
+	 * @brief Const member function to get the client's birthday.
 	 *
-	 * @return The client's id.
+	 * @return The client's birthday.
 	 */
-	int getId() const;
+	Date getBirthday() const;
 
 	/**
 	 * @brief Const member function to get the client's information.
@@ -102,6 +109,15 @@ public:
 	 * @param R Pointer to client's new reservation.
 	 */
 	void addReservation(Reservation * R);
+
+	/**
+	 * @brief Member function to remove a reservation.
+	 *
+	 * @param d The date of the client's removed reservation.
+	 *
+	 * @param R The room of the client's removed reservation.
+	 */
+	void removeReservation(Date d, Room * R);
 
 	/**
 	 * @brief Member function to get clients reservations.
