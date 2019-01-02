@@ -338,6 +338,39 @@ int Hotel::sequencialSearchEmployees(int id) {
 	return -1;
 }
 
+//... Events
+priority_queue<Event> Hotel::getEvents() const {
+	return this->events;
+}
+
+void Hotel::addEvent(Event Ev) {
+	this->events.push(Ev);
+}
+
+void Hotel::removeEvent() {
+	this->events.pop();
+}
+
+string Hotel::getEventsInfo() {
+	stack<Event> tempEvents;
+	stringstream ss;
+	int numberOfEvents = events.size();
+
+	// Getting every event's information
+	for (int i = 1; i <= numberOfEvents; i++) {
+		ss << i << ": " << endl << events.top().getInfo() << endl;
+		tempEvents.push(events.top());
+		events.pop();
+	}
+	// Returning them to the queue
+	for (int i = 0; i < numberOfEvents; i++) {
+		events.push(tempEvents.top());
+		tempEvents.pop();
+	}
+
+	return ss.str();
+}
+
 //... Hotel Information
 // Floors
 int Hotel::getFloors() const {

@@ -8,7 +8,10 @@
 #include "client.h"
 #include "employee.h"
 #include "AuxFunctions.h"
+#include "event.h"
 #include <unordered_set>
+#include <queue>
+#include <stack>
 
 /**
  *  A struct used to represent hash functions.
@@ -38,6 +41,7 @@ struct clientHash {
 	}
 };
 
+// TODO
 typedef unordered_set<Client, clientHash, clientHash> hashTabClients;
 
 
@@ -73,6 +77,11 @@ class Hotel {
 	 * vector<Employee> employees The hotel's employees
 	 */
 	vector<Employee> employees;
+
+	/**
+	 * vector<Employee> events The hotel's events
+	 */
+	priority_queue<Event> events;
 
 	/**
 	 * int floors The hotel's total number of floors
@@ -335,6 +344,32 @@ public:
 	 * or -1 if not found
 	 */
 	int sequencialSearchEmployees(int id);
+
+	/**
+	 * @brief Const member function to get the hotel's events.
+	 *
+	 * @return The hotel's events.
+	 */
+	priority_queue<Event> getEvents() const;
+
+	/**
+	 * @brief Member function to add a new event.
+	 *
+	 * @param Ev The hotel's new event.
+	 */
+	void addEvent(Event Ev);
+
+	/**
+	 * @brief Member function to remove the earliest event.
+	 */
+	void removeEvent();
+
+	/**
+	 * @brief Member function to get all the event's information.
+	 *
+	 * @return string All hotel's event's informations
+	 */
+	string getEventsInfo();
 
 	/**
 	 * @brief Const member function to get the total number of the hotel's floors.

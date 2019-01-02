@@ -170,6 +170,17 @@ Date::Date(int day, int month, int year) {
 }
 
 // get
+
+void Date::getCurrentDate() {
+	// current date/time based on current system
+	time_t now = time(0);
+
+	tm *ltm = localtime(&now);
+
+	Date currentDate = Date(ltm->tm_mday, 1 + ltm->tm_mon , 1900 + ltm->tm_year);
+	(*this) = currentDate;
+}
+
 int Date::getDay() const {
 	return day;
 }
@@ -354,7 +365,7 @@ Date Date::operator =(Date date) {
 	return *this;
 }
 
-bool Date::operator < (Date date) {
+bool Date::operator < (Date date) const {
 	// check year
 	if (this->getYear() < date.getYear()) {
 		return true;

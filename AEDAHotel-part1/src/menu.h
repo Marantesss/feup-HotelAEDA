@@ -16,11 +16,6 @@ using namespace std;
 void clearBuffer();
 
 /**
- * @brief Function to increment a date passed as argument
- */
-void nextDay(Date* date);
-
-/**
  * @brief Function to get menu options
  *
  * Displays date passed as argument
@@ -219,7 +214,7 @@ void removeReservation(Hotel *h);
 /**
  * @brief Function to get room information menu options
  *
- * Calls showEmployeeOptions() to print clients information menu options
+ * Calls showEmployeeOptions() to print employees information menu options
  * @see showEmployeeOptions()
  */
 void employeesMenu(Hotel *h);
@@ -256,5 +251,29 @@ void searchEmployee(Hotel *h);
  * @brief Function to import employees from txt file
  */
 void importEmployee(Hotel *h);
+
+/********** Employee Information **********/
+
+/**
+ * @brief Function to get event information menu options
+ *
+ * Calls showEventOptions() to print events information menu options
+ * @see showEventOptions()
+ */
+void eventMenu(Hotel *h);
+
+/**
+ * @brief Prints the various event menu options available on screen
+ *
+ * @return The event information menu option chosen by the user
+ */
+int showEventOptions(Hotel *h);
+
+/**
+ * @brief Function to create and add a new event
+ *
+ * Reads the new events's name, date, location and description and adds it to the hotel's event container
+ */
+void addEvent(Hotel *h);
 
 #endif /* MENU_H_ */

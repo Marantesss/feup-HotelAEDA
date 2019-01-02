@@ -132,6 +132,19 @@ Hotel* buildDemoHotel() {
 	c4->addReservation(r6);
 	h->addClient(c4);
 
+	// Creating Events
+	Date *ev1d = new Date (19, 1, 2019);
+	Event *ev1 = new Event("Hotel's Birthday Party", *ev1d, "Hotel AEDA", "Join us and come have fun with your family and friends with the opening of the Hotels new bar and dining room");
+	h->addEvent(*ev1);
+
+	Date *ev2d = new Date (14, 2, 2019);
+	Event *ev2 = new Event("Valentine's day", *ev2d, "Rua do Rei, 23", "Come have fun with you significant other with a special Valentine's day dinner and romantic movie!");
+	h->addEvent(*ev2);
+
+	Date *ev3d = new Date (21, 4, 2019);
+	Event *ev3 = new Event("Easter Egg Hunt", *ev3d, "Avenida da Liberdade, 45", "Easter is here, so bring the little ones in our annual easter egg hunt!");
+	h->addEvent(*ev3);
+
 	return h;
 }
 
@@ -139,13 +152,14 @@ int main() {
 	int menuOption;
 
 	Hotel *h = buildDemoHotel();
-	Date currentDate = Date(31, 12, 2018);
+	Date *currentDate = new Date();
+	currentDate->getCurrentDate();
 
 	cout << "=======================================" << endl;
 	cout << "======== Welcome to Hotel AEDA ========" << endl;
 	cout << "=======================================" << endl;
 	do {
-		menuOption = menu(&currentDate);
+		menuOption = menu(currentDate);
 		switch(menuOption) {
 		case 1: // Hotel Information
 			hotelInformationMenu(h);
@@ -163,10 +177,13 @@ int main() {
 			employeesMenu(h);
 			break;
 		case 6:
-			currentDate++;
+			eventMenu(h);
+			break;
+		case 7:
+			(*currentDate)++;
 			break;
 		}
-		if (menuOption < 0 || menuOption > 6) {
+		if (menuOption < 0 || menuOption > 7) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption != 0);

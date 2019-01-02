@@ -15,10 +15,10 @@ int menu(Date *date) {
 	cout << date->getExtendedDate() << endl;
 	do {
 		menuOption = showMenu();
-		if (menuOption < 0 || menuOption > 6) {
+		if (menuOption < 0 || menuOption > 7) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
-	} while (menuOption < 0 || menuOption > 6);
+	} while (menuOption < 0 || menuOption > 7);
 
 	return menuOption;
 }
@@ -33,7 +33,8 @@ int showMenu() {
 	cout << "| 3 - Reservations                   |" << endl;
 	cout << "| 4 - Rooms                          |" << endl;
 	cout << "| 5 - Employees                      |" << endl;
-	cout << "| 6 - Next Day                       |" << endl;
+	cout << "| 6 - Events                         |" << endl;
+	cout << "| 7 - Next Day                       |" << endl;
 	cout << "| 0 - Exit                           |" << endl;
 	cout << "|____________________________________|" << endl;
 	cout << "Option: ";
@@ -197,6 +198,7 @@ void addClient(Hotel *h) {
 	}
 	Client *c = new Client(name, *birthday);
 	h->addClient(c);
+	cout << "Client " << c->getName() << " added successfully!" << endl;
 }
 
 void removeClient(Hotel *h) {
@@ -699,4 +701,70 @@ void importEmployee(Hotel *h) {
 	cout << "File name: ";
 	cin >> filename;
 	h->importEmployees(filename);
+}
+
+/********** Employee Information **********/
+
+void eventMenu(Hotel *h) {
+	int menuOption;
+
+	do {
+		menuOption = showEventOptions(h);
+		switch (menuOption) {
+		case 0:
+			break;
+		case 1:
+			addEvent(h);
+			break;
+		case 2:
+			cout << h->getEventsInfo();
+			break;
+		default:
+			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
+		}
+	} while (menuOption != 0);
+}
+
+int showEventOptions(Hotel *h) {
+	int menuOption;
+
+	cout << "_____________________________________" << endl;
+	cout << "------------ EVENT MENU ------------" << endl;
+	cout << "No. of upcoming events: " << h->getEvents().size()  << endl;
+	cout << "_____________________________________" << endl;
+	cout << " ---- What would you like to do? ---- " << endl;
+	cout << "1 - Add Event" << endl;
+	cout << "2 - See Events" << endl;
+	cout << "0 - Back" << endl << endl;
+	cout << "Option: ";
+	cin >> menuOption;
+
+	return menuOption;
+}
+
+void addEvent(Hotel *h) {
+	string name, location, description;
+	int day, month, year;
+	Date *date = new Date();
+
+	clearBuffer();
+	cout << "Name: ";
+	getline(cin, name);
+	cout << "Enter date(day month year): ";
+	cin >> day >> month >> year;
+	try {
+		*date = Date(day, month, year);
+	}
+	catch (InvalidDate & date) {
+		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
+		return;
+	}
+	clearBuffer();
+	cout << "Location: ";
+	getline(cin, location);
+	cout << "Description: ";
+	getline(cin, description);
+	Event *e = new Event(name, *date, location, description);
+	h->addEvent(*e);
+	cout << "Event added successfully!" << endl;
 }

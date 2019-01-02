@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <ctime>
 
 using namespace std;
 
@@ -63,6 +64,11 @@ public:
 	 * @brief Default destructor.
 	 */
 	~Date(){}
+
+	/**
+	 * @brief Member function to change to the system's current date
+	 */
+	void getCurrentDate();
 
 	/**
 	 * @brief Member function to get the date's day.
@@ -206,9 +212,9 @@ public:
 	 *
 	 * @param date The date that is being compared to
 	 *
-	 * @return True if the first date is realier than the one passed as an argument, false otherwise.
+	 * @return True if the first date is earlier than the one passed as an argument, false otherwise.
 	 */
-	bool operator < (Date date);
+	bool operator < (Date date) const;
 };
 
 
