@@ -132,6 +132,28 @@ Hotel* buildDemoHotel() {
 	c4->addReservation(r6);
 	h->addClient(c4);
 
+	//... creating vans
+	vector<Client*> cli;
+	cli.push_back(c1);
+	cli.push_back(c2);
+	Van *v1 = new Van();
+	v1->addGroup(cli);
+	h->addVan(*v1);
+
+	Van *v2 = new Van();
+	cli.push_back(c3);
+	cli.push_back(c4);
+	v2->addGroup(cli);
+	h->addVan(*v2);
+	cli.clear();
+
+	Van *v3 = new Van();
+	cli.push_back(c1);
+	cli.push_back(c2);
+	cli.push_back(c3);
+	v3->addGroup(cli);
+	h->addVan(*v3);
+
 	// Creating Events
 	Date *ev1d = new Date (19, 1, 2019);
 	Event *ev1 = new Event("Hotel's Birthday Party", *ev1d, "Hotel AEDA", "Join us and come have fun with your family and friends with the opening of the Hotels new bar and dining room");
@@ -176,14 +198,17 @@ int main() {
 		case 5: // Employees
 			employeesMenu(h);
 			break;
-		case 6:
+		case 6: // Vans
+			vansMenu(h);
+			break;
+		case 7: //Events
 			eventMenu(h);
 			break;
-		case 7:
+		case 8: //Next Day
 			(*currentDate)++;
 			break;
 		}
-		if (menuOption < 0 || menuOption > 7) {
+		if (menuOption < 0 || menuOption > 8) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption != 0);

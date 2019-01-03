@@ -9,6 +9,7 @@
 #include "employee.h"
 #include "AuxFunctions.h"
 #include "event.h"
+#include "van.h"
 #include <unordered_set>
 #include <queue>
 #include <stack>
@@ -79,8 +80,13 @@ class Hotel {
 	vector<Employee> employees;
 
 	/**
-	 * vector<Employee> events The hotel's events
+	 * vector<Van> excursions The hotel's excursions
 	 */
+	priority_queue<Van> vans;
+	
+	/**
+	* vector<Employee> events The hotel's events
+	*/
 	priority_queue<Event> events;
 
 	/**
@@ -97,6 +103,11 @@ class Hotel {
 	 * int meetingRooms The hotel's total number of meeting rooms
 	 */
 	int meetingrooms;
+
+	/**
+	 * int trips The hotel's total number of done trips
+	 */
+	int trips;
 
 	/**
 	 * string address The hotel's address
@@ -117,7 +128,7 @@ public:
 	 *
 	 * @param address The hotel's address.
 	 */
-	Hotel(int floors, string address);
+	Hotel(int floors, string address, int trips = 0);
 
 	/**
 	 * @brief Default destructor.
@@ -165,8 +176,6 @@ public:
 
 	/**
 	 * @brief Function to search a specific client given its name.
-	 *
-	 * @param vec Vector containing all the clients.
 	 *
 	 * @param name The desired clients's name.
 	 *
@@ -226,8 +235,6 @@ public:
 
 	/**
 	 * @brief Function to search a specific room given its number.
-	 *
-	 * @param vec Vector containing all the rooms.
 	 *
 	 * @param num The room's number.
 	 *
@@ -336,14 +343,68 @@ public:
 	/**
 	 * @brief Function to search a specific employee given its id.
 	 *
-	 * @param vec Vector containing all the employees.
-	 *
 	 * @param id The desired employee's id.
 	 *
 	 * @return The desired employee's index in the vector,
 	 * or -1 if not found
 	 */
 	int sequencialSearchEmployees(int id);
+
+	/**
+	 * @brief Member function to add a group to a van.
+	 *
+	 * @param group The group to be added to a hotel's van.
+	 */
+	void addGroup(vector<Client*>& group);
+
+	/**
+	 * @brief Const member function to get the vans's priority queue.
+	 *
+	 * @return The hotel's vans.
+	 */
+	priority_queue<Van> getVans() const;
+
+	/**
+	 * @brief Const member function to get the hotel's finished trips.
+	 *
+	 * @return The hotel's finished trips.
+	 */
+	unsigned getTrips() const;
+
+	/**
+	 * @brief Member function to end a van's trip.
+	 *
+	 * This function removes a van with the given id and adds 1 to the hotel's finished trips
+	 *
+	 * @param id The id of the van to be removed from the hotel's vans.
+	 */
+	void tripDone(int id);
+
+	/**
+	 * @brief Member function to cancel a van's trip.
+	 *
+	 * @param id The id of the van to be removed from the hotel's vans.
+	 */
+	void removeVan(int id);
+
+	/**
+	 * @brief Member function to print all vans information.
+	 */
+	void showVans();
+
+	/**
+	 * @brief Member function to add a new van.
+	 *
+	 * @param V The hotel's new van.
+	 */
+	void addVan(Van V);
+
+	/**
+	 * @brief Member function to get all the vans information from a file.
+	 *
+	 * @param filename The file location containing all the vans information.
+	 */
+	void importVans(string filename);
 
 	/**
 	 * @brief Const member function to get the hotel's events.

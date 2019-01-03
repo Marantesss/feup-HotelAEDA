@@ -13,12 +13,13 @@ int menu(Date *date) {
 	int menuOption;
 
 	cout << date->getExtendedDate() << endl;
+
 	do {
 		menuOption = showMenu();
-		if (menuOption < 0 || menuOption > 7) {
+		if (menuOption < 0 || menuOption > 8) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
-	} while (menuOption < 0 || menuOption > 7);
+	} while (menuOption < 0 || menuOption > 8);
 
 	return menuOption;
 }
@@ -33,8 +34,9 @@ int showMenu() {
 	cout << "| 3 - Reservations                   |" << endl;
 	cout << "| 4 - Rooms                          |" << endl;
 	cout << "| 5 - Employees                      |" << endl;
-	cout << "| 6 - Events                         |" << endl;
-	cout << "| 7 - Next Day                       |" << endl;
+	cout << "| 6 - Excursions                     |" << endl;
+	cout << "| 7 - Events                         |" << endl;
+	cout << "| 8 - Next Day                       |" << endl;
 	cout << "| 0 - Exit                           |" << endl;
 	cout << "|____________________________________|" << endl;
 	cout << "Option: ";
@@ -116,6 +118,7 @@ void removeHotelTopFloor(Hotel *h) {
 		cout << "Enter 1 to remove top floor or 0 to go back: ";
 		clearBuffer();
 		cin >> floorOperation;
+
 		if (floorOperation == 1) {
 			h->removeFloorReservations(h->getFloors());
 			h->removeRoomsFromTopFloor();
@@ -133,7 +136,6 @@ void clientMenu(Hotel *h) {
 	int menuOption;
 
 	do {
-
 		menuOption = showClientOptions(h);
 		switch (menuOption) {
 		case 0:
@@ -189,6 +191,7 @@ void addClient(Hotel *h) {
 	getline(cin, name);
 	cout << "Enter date(day month year): ";
 	cin >> day >> month >> year;
+
 	try {
 		*birthday = Date(day, month, year);
 	}
@@ -196,6 +199,7 @@ void addClient(Hotel *h) {
 		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
 		return;
 	}
+
 	Client *c = new Client(name, *birthday);
 	h->addClient(c);
 	cout << "Client " << c->getName() << " added successfully!" << endl;
@@ -207,17 +211,19 @@ void removeClient(Hotel *h) {
 	clearBuffer();
 	cout << "Name: ";
 	getline(cin, name);
+
 	try {
 		int ClientIndex = h->sequencialSearchClients(name);
 		cout << "Client found!" << endl;
 		vector<Reservation*> clientsReservations = h->getClients()[ClientIndex]->getReservations();
+
 		for (size_t i = 0; i < clientsReservations.size(); i++) {
 			h->removeReservation(clientsReservations[i]->getDate(), clientsReservations[i]->getRoom());
 		}
+
 		cout << name << "'s reservations removed successfully!" << endl;
 		h->removeClient(name);
 		cout << "Client " << name << " removed successfully!" << endl;
-
 	}
 	catch (NonExistingClient & nonClient) {
 		cout << "ERROR: Client " << nonClient.getName() << " does not exist!!!" << endl;
@@ -230,6 +236,7 @@ void searchClient(Hotel *h) {
 	clearBuffer();
 	cout << "Name: ";
 	getline(cin, name);
+
 	try {
 		int i = h->sequencialSearchClients(name);
 		cout << "Client found!" << endl;
@@ -288,6 +295,7 @@ void roomsMenu(Hotel *h) {
 int showRoomsOptions(Hotel *h) {
 	int menuOption;
 
+	cout << endl << endl << endl;
 	cout << "_____________________________________" << endl;
 	cout << "------------- ROOM MENU -------------" << endl;
 	cout << "No. of Rooms: " << h->getRooms().size() << endl;
@@ -318,6 +326,7 @@ void addRoom(Hotel *h) {
 		if (type != 'm' && type != 'b')
 			cout << "Invalid room type, please try again..." << endl;
 	} while (type != 'm' && type != 'b');
+
 	if (type == 'm') {
 		addMeetingRoom(h);
 	}
@@ -334,22 +343,31 @@ void addMeetingRoom(Hotel *h) {
 	clearBuffer();
 	cout << "Number: ";
 	cin >> num;
+
 	do {
 		clearBuffer();
 		cout << "Capacity (10/25/50): ";
 		cin >> capacity;
+
 		if (capacity != 10 && capacity != 25 && capacity != 50)
 			cout << "Invalid Capacity, please enter another capacity..." << endl;
+
 	} while (capacity != 10 && capacity != 25 && capacity != 50);
+
 	clearBuffer();
 	cout << "Video (y/n): ";
 	cin >> tmp;
+
 	if (tmp == 'y') video = true;
+
 	clearBuffer();
 	cout << "Audio (y/n): ";
 	cin >> tmp;
+
 	if (tmp == 'y') audio = true;
+
 	MeetingRoom *m = new MeetingRoom(num, capacity, video, audio);
+
 	try {
 		h->addRoom(m);
 	}
@@ -365,21 +383,29 @@ void addBedroom(Hotel *h) {
 	clearBuffer();
 	cout << "Number: ";
 	cin >> num;
+
 	do {
 		clearBuffer();
 		cout << "Capacity (1/2): ";
 		cin >> capacity;
+
 		if (capacity != 1 || capacity != 2)
 			cout << "Invalid Capacity, please enter another capacity..." << endl;
+
 	} while (capacity != 1 || capacity != 2);
+
 	do {
 		clearBuffer();
 		cout << "Location (Front/Back): ";
 		cin >> location;
+
 		if (location != "Front" || location != "Back")
 			cout << "Invalid location, make sure first letter is in caps..." << endl;
+
 	} while (location != "Front" || location != "Back");
+
 	Bedroom *b = new Bedroom(num, capacity, location);
+
 	try {
 		h->addRoom(b);
 	}
@@ -394,6 +420,7 @@ void removeRoom(Hotel *h) {
 	clearBuffer();
 	cout << "Room number: ";
 	cin >> num;
+
 	try {
 		h->removeRoom(num);
 		cout << "Room " << num << " removed successfully!" << endl;
@@ -409,6 +436,7 @@ void searchRoom(Hotel *h) {
 	clearBuffer();
 	cout << "Room number: ";
 	cin >> num;
+
 	try {
 		int i = h->sequencialSearchRooms(num);
 		cout << "Room found!" << endl;
@@ -458,6 +486,7 @@ void reservationMenu(Hotel *h) {
 int showReservationOptions(Hotel *h) {
 	int menuOption;
 
+	cout << endl << endl << endl;
 	cout << "_____________________________________" << endl;
 	cout << "--------- RESERVATION MENU ----------" << endl;
 	cout << "No. of Reservations: " << h->getReservations().size()  << endl;
@@ -483,6 +512,7 @@ void addReservation(Hotel *h) {
 	clearBuffer();
 	cout << "Client name: ";
 	getline(cin, name);
+
 	try {
 		clientIndex = h->sequencialSearchClients(name);
 		cout << "Client found!" << endl;
@@ -496,6 +526,7 @@ void addReservation(Hotel *h) {
 	// creating the reservation
 	cout << "Enter date(day month year): ";
 	cin >> day >> month >> year;
+
 	try {
 		*date = Date(day, month, year);
 	}
@@ -503,9 +534,11 @@ void addReservation(Hotel *h) {
 		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
 		return;
 	}
+
 	clearBuffer();
 	cout << "Room number: ";
 	cin >> roomNumber;
+
 	try {
 		roomIndex = h->sequencialSearchRooms(roomNumber);
 		roomPointer = h->getRooms()[roomIndex];
@@ -515,10 +548,12 @@ void addReservation(Hotel *h) {
 		cout << "ERROR: Room " << nonRoom.getNumber() << " does not exist!!!" << endl;
 		return;
 	}
+
 	clearBuffer();
 	cout << "Duration: ";
 	cin >> duration;
 	Reservation *r = new Reservation(*date, roomPointer, duration);
+
 	try {
 		h->addReservation(*r);
 		Client *c = h->getClients()[clientIndex];
@@ -539,6 +574,7 @@ void removeReservation(Hotel *h) {
 	// getting the date
 	cout << "Enter date(day month year): ";
 	cin >> day >> month >> year;
+
 	try {
 		*date = Date(day, month, year);
 	}
@@ -546,10 +582,12 @@ void removeReservation(Hotel *h) {
 		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
 		return;
 	}
+
 	//getting the room
 	clearBuffer();
 	cout << "Room number: ";
 	cin >> roomNumber;
+
 	try {
 		roomIndex = h->sequencialSearchRooms(roomNumber);
 		roomPointer = h->getRooms()[roomIndex];
@@ -559,10 +597,12 @@ void removeReservation(Hotel *h) {
 		cout << "ERROR: Room " << nonRoom.getNumber() << " does not exist!!!" << endl;
 		return;
 	}
+
 	try {
 		h->removeReservation(*date, roomPointer);
 		cout << "Reservation removed successfully!" << endl;
 		vector<Client*> tempClients = h->getClients();
+
 		for (size_t i = 0; i < tempClients.size(); i++) {
 			try {
 				tempClients[i]->removeReservation(*date, roomPointer);
@@ -612,6 +652,7 @@ void employeesMenu(Hotel *h) {
 int showEmployeeOptions(Hotel *h) {
 	int menuOption;
 
+	cout << endl << endl << endl;
 	cout << "_____________________________________" << endl;
 	cout << "----------- EMPLOYEE MENU -----------" << endl;
 	cout << "No. of Employees: " << h->getEmployees().size()  << endl;
@@ -644,8 +685,10 @@ void addEmployee(Hotel *h) {
 	clearBuffer();
 	cout << "Supervisor (y/n): ";
 	cin >> supervisor;
+
 	if (supervisor == 'y') {
 		Employee *e = new Employee(name, true);
+
 		try {
 			h->addEmployee(*e);
 		}
@@ -655,6 +698,7 @@ void addEmployee(Hotel *h) {
 	}
 	else {
 		Employee *e = new Employee(name, false);
+
 		try {
 			h->addEmployee(*e);
 		}
@@ -670,6 +714,7 @@ void removeEmployee (Hotel *h) {
 	clearBuffer();
 	cout << "ID: ";
 	cin >> id;
+
 	try {
 		h->removeEmployee(id);
 		cout << "Employee " << id << " removed successfully!" << endl;
@@ -685,6 +730,7 @@ void searchEmployee(Hotel *h) {
 	clearBuffer();
 	cout << "ID: ";
 	cin >> id;
+
 	try {
 		int i = h->sequencialSearchEmployees(id);
 		cout << h->getEmployees().at(i).getInfo() << endl;
@@ -702,6 +748,157 @@ void importEmployee(Hotel *h) {
 	cin >> filename;
 	h->importEmployees(filename);
 }
+
+void vansMenu(Hotel * h){
+	int menuOption;
+
+	do {
+		menuOption = showVanOptions(h);
+		switch (menuOption) {
+		case 0:
+			break;
+		case 1:
+			addGroup(h);
+			break;
+		case 2:
+			removeVan(h);
+			break;
+		case 3:
+			h->showVans();
+			break;
+		case 4:
+			searchVan(h);
+			break;
+		default:
+			clearBuffer();
+			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
+		}
+	} while (menuOption != 0);
+}
+
+int showVanOptions(Hotel * h){
+	int menuOption;
+	cout << endl << endl << endl;
+	cout << "______________________________________" << endl;
+	cout << "----------- EXCURSION MENU -----------" << endl;
+	cout << "No. of Vans in use: " << h->getVans().size() << endl;
+	cout << "______________________________________" << endl;
+	cout << " - What would you like to do? - " << endl;
+	cout << "1 - Add a Group" << endl;
+	cout << "2 - Remove Van" << endl;
+	cout << "3 - See Vans" << endl;
+	cout << "4 - Search Van by ID" << endl;
+	cout << "5 - Finish a excursion" << endl; //to do......................
+	cout << "0 - Back" << endl << endl;
+	cout << "Option: ";
+	cin >> menuOption;
+
+	return menuOption;
+}
+
+void addGroup(Hotel * h){
+	int clientIndex, size;
+	Client* clientPointer;
+	string name;
+	vector<Client*> group;
+
+	// reading the clients
+	do {
+		clearBuffer();
+		cout << "What's the size of the group? ";
+		cin >> size;
+		if (cin.fail()) {
+			cout << "The size of the group is suposed to be a number!!" << endl;
+		}
+	} while (cin.fail()); 
+	
+	for (int i = 0; i < size; i++) {
+		cout << "Client name: ";
+		getline(cin, name);
+
+		try {
+			clientIndex = h->sequencialSearchClients(name);
+			cout << "Client found!" << endl;
+			cout << h->getClients()[clientIndex]->getInfo2() << endl;
+			clientPointer = h->getClients()[clientIndex];
+			group.push_back(clientPointer);
+		}
+		catch (NonExistingClient & nonClient) {
+			cout << "ERROR: Client " << nonClient.getName() << " does not exist!!!" << endl;
+			return;
+		}
+	}
+	h->addGroup(group);
+}
+
+void removeVan(Hotel * h){
+	int id;
+
+	if (h->getVans().size() == 0)
+		cout << "There are no vans available";
+	else {
+		clearBuffer();
+		cout << "ID: ";
+		cin >> id;
+
+		try {
+			h->removeVan(id);
+			cout << "Van " << id << " removed successfully!" << endl;
+		}
+		catch (NonExistingVan & nonVan) {
+			cout << "ERROR: Van " << nonVan.getId() << " does not exist!!!" << endl;
+		}
+	}
+
+}
+
+void searchVan(Hotel * h){
+	int id, i = 0;
+	priority_queue<Van> vans=h->getVans();
+	vector<Van> vanVec;
+	bool wh = true;
+
+	if (h->getVans().size() == 0)
+		cout << "There are no vans available";
+	else {
+		do {
+			clearBuffer();
+			cout << "ID: ";
+			cin >> id;
+
+			if (cin.fail()) {
+				cout << "The ID of the van is suposed to be a number!!" << endl << endl << endl;
+			}
+		} while (cin.fail());
+		
+		try {
+			do {
+				vanVec.push_back(vans.top());
+				vans.pop();
+
+				if (id == vanVec[i].getId()) {
+					cout << vanVec[i].getInfo() << endl;
+					wh = false;
+				}
+
+				i++;
+			} while (!vans.empty() && wh);
+		}
+		catch (NonExistingVan & nonVan) {
+			cout << "ERROR: Van " << nonVan.getId() << " does not exist!!!" << endl;
+		}
+	}
+}
+
+void importVan(Hotel * h){
+	string filename;
+
+	clearBuffer();
+	cout << "File name: ";
+	cin >> filename;
+	h->importVans(filename);
+}
+
 
 /********** Employee Information **********/
 
@@ -730,7 +927,7 @@ int showEventOptions(Hotel *h) {
 
 	cout << "_____________________________________" << endl;
 	cout << "------------ EVENT MENU ------------" << endl;
-	cout << "No. of upcoming events: " << h->getEvents().size()  << endl;
+	cout << "No. of upcoming events: " << h->getEvents().size() << endl;
 	cout << "_____________________________________" << endl;
 	cout << " ---- What would you like to do? ---- " << endl;
 	cout << "1 - Add Event" << endl;
@@ -752,6 +949,7 @@ void addEvent(Hotel *h) {
 	getline(cin, name);
 	cout << "Enter date(day month year): ";
 	cin >> day >> month >> year;
+
 	try {
 		*date = Date(day, month, year);
 	}
@@ -759,6 +957,7 @@ void addEvent(Hotel *h) {
 		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
 		return;
 	}
+
 	clearBuffer();
 	cout << "Location: ";
 	getline(cin, location);

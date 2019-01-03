@@ -212,7 +212,7 @@ void removeReservation(Hotel *h);
 /********** Employee Information **********/
 
 /**
- * @brief Function to get room information menu options
+ * @brief Function to get employees information menu options
  *
  * Calls showEmployeeOptions() to print employees information menu options
  * @see showEmployeeOptions()
@@ -251,6 +251,47 @@ void searchEmployee(Hotel *h);
  * @brief Function to import employees from txt file
  */
 void importEmployee(Hotel *h);
+
+/**
+ * @brief Function to get vans information menu options
+ *
+ * Calls showVanOptions() to print vans information menu options
+ * @see showVanOptions()
+ */
+void vansMenu(Hotel *h);
+
+/**
+ * @brief Prints the various vans menu options available on screen
+ *
+ * @return The vans information menu option chosen by the user
+ */
+int showVanOptions(Hotel *h);
+
+/**
+ * @brief Function to add a group to a van
+ *
+ * Reads all the client's name and adds them to a hotel's van
+ */
+void addGroup(Hotel *h);
+
+/**
+ * @brief Function to find and remove an existing van
+ *
+ * Reads the van's id, searches it, and deletes it from the hotel's vans queue
+ */
+void removeVan(Hotel *h);
+
+/**
+ * @brief Function to find an existing van
+ *
+ * Reads the van's id and searches it, printing its information on screen
+ */
+void searchVan(Hotel *h);
+
+/**
+ * @brief Function to import vans from txt file
+ */
+void importVan(Hotel *h);
 
 /********** Employee Information **********/
 

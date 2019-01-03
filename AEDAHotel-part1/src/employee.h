@@ -33,7 +33,7 @@ protected:
 	bool isSupervisor;
 
 	/**
-	 * static int nextId The next client's id.
+	 * static int nextId The next employee's id.
 	 */
 	static int nextId;
 

@@ -8,13 +8,15 @@ Hotel::Hotel() {
 	this->floors = 0;
 	this->bedrooms = 0;
 	this->meetingrooms = 0;
+	this->trips = 0;
 	this->address = "";
 };
 
-Hotel::Hotel(int floors, string address) {
+Hotel::Hotel(int floors, string address, int trips) {
 	this->floors = floors;
 	this->bedrooms = 0;
 	this->meetingrooms = 0;
+	this->trips = 0;
 	this->address = address;
 }
 
@@ -89,7 +91,8 @@ void Hotel::importClientsandReservations(string filename) {
 		}
 		file.close();
 	}
-	else cout << "Unable to open file";
+	else cout << "Unable to open file" << endl;
+	this->importVans("vans.txt");
 }
 
 int Hotel::sequencialSearchClients(string name) {
@@ -327,7 +330,7 @@ void Hotel::importEmployees(string filename){
 		file.close();
 	}
 
-	else cout << "Unable to open file";
+	else cout << "Unable to open file" << endl;
 }
 
 int Hotel::sequencialSearchEmployees(int id) {
@@ -336,6 +339,130 @@ int Hotel::sequencialSearchEmployees(int id) {
 			return i;
 	throw (NonExistingEmployee(id));
 	return -1;
+}
+
+//... Vans
+void Hotel::addGroup(vector<Client*>& group) {
+	vector<Van> vanVec;
+	Van van = Van();
+	unsigned i = 0;
+	int gr = group.size();
+
+	if (vans.size() == 0)
+		addVan(van);
+
+	if (group.size() > 10) {
+		vector<Client*> gr = group;
+		gr.erase(gr.begin() + 10, gr.end());
+		group.erase(group.begin(), group.begin() + 10);
+		van.addGroup(gr);
+		vans.push(van);
+		this->addGroup(group);
+	}
+	else
+		do {
+			vanVec.push_back(vans.top());
+			vans.pop();
+			i++;
+
+			if (vans.empty())
+				vans.push(van);
+		} while (vanVec[i - 1].getVacancies() < gr);
+
+		vanVec[i - 1].addGroup(group);
+
+		for (int j = 0; j < vanVec.size(); j++) {
+			vans.push(vanVec[j]);
+		}
+		cout << "Group added to van " << vanVec[i - 1].getId();
+}
+
+priority_queue<Van> Hotel::getVans() const {
+	return vans;
+}
+
+unsigned Hotel::getTrips() const {
+	return trips;
+}
+
+void Hotel::tripDone(int id) {
+	this->removeVan(id);
+	this->trips++;
+}
+
+void Hotel::removeVan(int id) {
+	int total = vans.size();
+	vector<Van> van;
+	do {
+		van.push_back(vans.top());
+		vans.pop();
+	} while (!vans.empty());
+
+	vector<Van>::iterator it;
+	for (it = van.begin(); it != van.end(); it++) {
+		if (it->getId() == id) {
+			van.erase(it);
+
+			for (unsigned i = 0; i < van.size(); i++) {
+				vans.push(van[i]);
+			}
+			return;
+		}
+	}
+	for (unsigned i = 0; i < van.size(); i++) {
+		vans.push(van[i]);
+	}
+	throw (NonExistingVan(id));
+}
+
+void Hotel::showVans() {
+	vector<Van> van;
+	if (vans.size() == 0)
+		cout << "There are no vans available";
+	else {
+		do {
+			cout << vans.top().getInfo() << endl;
+			van.push_back(vans.top());
+			vans.pop();
+		} while (!vans.empty());
+
+		for (unsigned i = 0; i < van.size(); i++) {
+			vans.push(van[i]);
+		}
+	}
+}
+
+void Hotel::addVan(Van V) {
+	this->vans.push(V);
+}
+
+void Hotel::importVans(string filename) {
+	vector<Client*>cli;
+	string line, name;
+	ifstream file;
+	int id, noOnBoard;
+	Van v = Van();
+	file.open(filename);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			id = atoi(line.c_str());
+			v.setId(id);
+			getline(file, line);
+			noOnBoard = atoi(line.c_str());
+			for (int i = 0; i < noOnBoard; i++) {
+				getline(file, line);
+				name = line;
+				cli.push_back(this->getClients()[sequencialSearchClients(name)]);
+				v.addGroup(cli);
+			}
+			this->vans.push(v);
+		}
+		file.close();
+	}
+
+	else cout << "Unable to open file" << endl;
 }
 
 //... Events

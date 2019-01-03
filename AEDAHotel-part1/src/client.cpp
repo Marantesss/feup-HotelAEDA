@@ -76,6 +76,13 @@ string Client::getInfo() const {
 	return ss.str();
 }
 
+string Client::getInfo2() const {
+	stringstream ss;
+	ss << "ID: " << id << endl;
+	ss << "Name: " << name << endl;
+	return ss.str();
+}
+
 bool  Client::operator< (Client &c2) {
 	if (this->id < c2.id) return true;
 	else return false;

@@ -101,6 +101,15 @@ public:
 	string getInfo() const;
 
 	/**
+	 * @brief Const member function to get the client's information.
+	 *
+	 * The return string will contain the client's name and id
+	 *
+	 * @return The client's name and id.
+	 */
+	string getInfo2() const;
+
+	/**
 	 * @brief Member function to add a new reservation.
 	 *
 	 * All the reservations are pointers to the reservations vector

@@ -1,5 +1,4 @@
 #include "employee.h"
-#include <string>
 
 /********************/
 /***** Employee *****/

@@ -58,7 +58,7 @@ string calculateWeekday(int day, int month, int year) {
 	int s = year / 100; // two first digits of the year
 	int a = year % 100; // two last digits of the year
 	int c = getCCode(month, isLeap(year));
-	switch ((((5*a)/4) + c + day - (2*(s%4)) + 7) % 7) {
+	switch ((((5 * a) / 4) + c + day - (2 * (s % 4)) + 7) % 7) {
 	case 0:
 		return "Saturday";
 		break;
@@ -177,7 +177,7 @@ void Date::getCurrentDate() {
 
 	tm *ltm = localtime(&now);
 
-	Date currentDate = Date(ltm->tm_mday, 1 + ltm->tm_mon , 1900 + ltm->tm_year);
+	Date currentDate = Date(ltm->tm_mday, 1 + ltm->tm_mon, 1900 + ltm->tm_year);
 	(*this) = currentDate;
 }
 
