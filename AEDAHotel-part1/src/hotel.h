@@ -11,6 +11,7 @@
 #include "event.h"
 #include "van.h"
 #include "BST.h"
+#include "restaurant.h"
 #include <unordered_set>
 #include <queue>
 #include <stack>
@@ -89,6 +90,8 @@ class Hotel {
 	* vector<Employee> events The hotel's events
 	*/
 	priority_queue<Event> events;
+
+	BST<Restaurant> restaurants;
 
 	/**
 	 * int floors The hotel's total number of floors
@@ -478,6 +481,26 @@ public:
 	 * @param address The hotel's new address.
 	 */
 	void setAddress(string address);
+
+	int addRestaurant(Restaurant r);
+
+	int addRestaurant(string name, string type, int distance);
+	
+	vector<Restaurant> addRestaurants(vector<Restaurant> res);
+
+	Restaurant searchRestaurant(string name);
+
+	BST<Restaurant> getRestaurants();
+
+	int removeRestaurant(string name);
+
+	Restaurant getClosestRestaurant();
+
+	vector<Restaurant> getRestaurantsOfType(string type);
+
+	void importRestaurants(string filename);
+
+
 };
 
 #endif /* HOTEL_H_ */

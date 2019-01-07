@@ -13,13 +13,21 @@ class Restaurant {
 public:
 	Restaurant();
 	Restaurant(string name, string type, int distance);
-	string getName();
-	string getType();
-	int getDistance();
+	string getName() const;
+	string getType() const;
+	int getDistance() const;
 	void setName(string name);
 	void setType(string type);
 	void setDistance(int distance);
-	//bool operator < (Restaurant c);
+	bool operator < (const Restaurant &r) const;
+	bool operator == (const Restaurant &r) const;
+};
+
+class NonExistingRestaurant {
+	string name;
+public:
+	NonExistingRestaurant(string name);
+	string getName();
 };
 
 
