@@ -174,8 +174,8 @@ Date::Date(int day, int month, int year) {
 void Date::getCurrentDate() {
 	// current date/time based on current system
 	time_t now = time(0);
-
-	tm *ltm = localtime(&now);
+	tm *ltm = new tm() ;
+	localtime_s(ltm,&now);
 
 	Date currentDate = Date(ltm->tm_mday, 1 + ltm->tm_mon, 1900 + ltm->tm_year);
 	(*this) = currentDate;

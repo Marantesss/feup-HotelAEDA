@@ -10,6 +10,7 @@
 #include "AuxFunctions.h"
 #include "event.h"
 #include "van.h"
+#include "BST.h"
 #include <unordered_set>
 #include <queue>
 #include <stack>
