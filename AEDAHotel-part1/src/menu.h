@@ -310,6 +310,18 @@ void searchVan(Hotel *h);
  */
 void importVan(Hotel *h);
 
+/**
+ * @brief Member function to end a van's trip.
+ *
+ * Reads the van's id and deletes it, adding 1 to the done trips of the hotel.
+ */
+void tripDone(Hotel *h);
+
+/**
+* @brief Member function to print the van's route.
+*/
+void route();
+
 /********** Event Information **********/
 
 /**
