@@ -17,6 +17,8 @@ Restaurant::Restaurant(string name, string type, int distance) {
 	this->distance = distance;
 }
 
+Restaurant::~Restaurant() {}
+
 string Restaurant::getName() const {
 	return name;
 }
@@ -61,7 +63,7 @@ bool Restaurant::operator == (const Restaurant &r) const {
 NonExistingRestaurant::NonExistingRestaurant(string name) {
 	this->name = name;
 }
-string NonExistingRestaurant::getName() {
+string NonExistingRestaurant::getName() const {
 	return this->name;
 }
 
@@ -71,6 +73,6 @@ ExistingRestaurant::ExistingRestaurant(string name) {
 	this->name = name;
 }
 
-string ExistingRestaurant::getName() {
+string ExistingRestaurant::getName() const {
 	return this->name;
 }

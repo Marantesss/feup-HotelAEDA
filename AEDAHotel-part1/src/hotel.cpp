@@ -575,12 +575,11 @@ BST<Restaurant> Hotel::getRestaurants() {
 	return this->restaurants;
 }
 
-int Hotel::removeRestaurant(string name) {
+void Hotel::removeRestaurant(string name) {
 	BSTItrIn<Restaurant> it(restaurants);
 	while (!it.isAtEnd()) {
 		if (it.retrieve().getName() == name) {
 			this->restaurants.remove(it.retrieve());
-			return 1;
 		}
 		it.advance();
 	}

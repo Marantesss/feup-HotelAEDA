@@ -62,7 +62,7 @@ typedef unordered_set<Client, clientHash, clientHash> hashTabClients;
  */
 class Hotel {
 	/**
-	 * vector<Client> clients The hotel's clients
+	 * vector<Client*> clients The hotel's clients
 	 */
 	vector<Client*> clients;
 
@@ -72,7 +72,7 @@ class Hotel {
 	vector<Reservation> reservations;
 
 	/**
-	 * vector<Room> rooms The hotel's rooms
+	 * vector<Room*> rooms The hotel's rooms
 	 */
 	vector<Room*> rooms;
 
@@ -82,15 +82,18 @@ class Hotel {
 	vector<Employee> employees;
 
 	/**
-	 * vector<Van> excursions The hotel's excursions
+	 * priority_queue<Van> excursions The hotel's excursions
 	 */
 	priority_queue<Van> vans;
 	
 	/**
-	* vector<Employee> events The hotel's events
+	* priority_queue<Event> events The hotel's events
 	*/
 	priority_queue<Event> events;
 
+	/**
+	* BST<Restaurant> restaurants Binary search tree containing restaurants.
+	*/
 	BST<Restaurant> restaurants;
 
 	/**
@@ -482,30 +485,104 @@ public:
 	 */
 	void setAddress(string address);
 
+	/**
+	* @brief Member function to add a new restaurant.
+	*
+	* @param r The restaurant to be added.
+	*
+	* @return 0 if unsuccessfull and non-zero otherwise.
+	*/
 	int addRestaurant(Restaurant r);
 
+	/**
+	* @brief Member function to add a new restaurant.
+	*
+	* @param name The name of the restaurant to be added.
+	*
+	* @param type The type of the restaurant to be added.
+	*
+	* @param distance The distance between the hotel and the restaurant to be added.
+	*
+	*
+	* @return 0 if unsuccessfull and non-zero otherwise.
+	*/
 	int addRestaurant(string name, string type, int distance);
 	
+	/**
+	* @brief Member function to add a group of restaurants.
+	*
+	* @param res The vector containing all the restaurant objects to be added.
+	*
+	* @return The vector of restaurants which weren't successfully added to the hotel.
+	*/
 	vector<Restaurant> addRestaurants(vector<Restaurant> res);
 
+	/**
+	* @brief Member function to search for a restaurant on the binary search tree using it's name.
+	*
+	* @param name The name of the restaurant to search for.
+	*
+	* @return The Restaurant's object.
+	*/
 	Restaurant searchRestaurant(string name);
 
+	/**
+	* @brief Member function to get the binary search tree containing all the restaurants.
+	*
+	* @return The binary search tree containing all the restaurants.
+	*/
 	BST<Restaurant> getRestaurants();
 
-	int removeRestaurant(string name);
+	/**
+	* @brief Member function to remove a restaurant from the binary search tree.
+	*
+	* @param name The name of the restaurant to remove.
+	*/
+	void removeRestaurant(string name);
 
+	/**
+	* @brief Member function to get the object representing the restaurant located closer to the hotel.
+	*
+	* @return The objet that represents the restaurant located closer to the hotel.
+	*/
 	Restaurant getClosestRestaurant();
 
+	/**
+	* @brief Member function to get all the restaurants with a certain type.
+	*
+	* @param type The type of restaurant to search for.
+	*
+	* @return The vector of restaurants with the specified type.
+	*/
 	vector<Restaurant> getRestaurantsOfType(string type);
 
+	/**
+	* @brief Member function to import restaurants from a file.
+	*
+	* @param filename The name of the file to import the restaurants from.
+	*/
 	void importRestaurants(string filename);
 
+	/**
+	* @brief Member function to get the number of restaurants on the hotel's register.
+	*
+	* @return The number of restaurants on the hotel's register.
+	*/
 	int getNoRestaurants();
 
+	/**
+	* @brief Member function to get the information from all the restaurants on the hotel's register.
+	*
+	* @return A string with the information from all the restaurants on the hotel's register.
+	*/
 	string getRestaurantsInfo();
 
+	/**
+	* @brief Member function to get the types of restaurants on the hotel's register.
+	*
+	* @return A string with all the types of restaurants on the hotel's register.
+	*/
 	string getTypesOfRestaurants();
-
 };
 
 #endif /* HOTEL_H_ */
