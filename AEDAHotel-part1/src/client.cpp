@@ -27,6 +27,10 @@ int Client::getId() const {
 	return this->id;
 }
 
+void Client::setId(int id) {
+	this->id = id;
+}
+
 string Client::getName() const {
 	return this->name;
 }

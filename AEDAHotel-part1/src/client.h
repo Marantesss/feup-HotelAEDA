@@ -10,35 +10,43 @@
 using namespace std;
 
 /**
- *  A class used to represent a client.
+ * @defgroup client client
+ * @{
  *
- *  Each client object has a name and a reservations vector
+ *  Classes necessary to handle client
+ */
+
+/**
+ *  @brief A class used to represent a client.
+ *
+ *  Each client object has and id, a name, a reservations vector and a birthday
  *
  *  @see Reservation Class
+ *  @see Date Class
  */
 class Client {
 	/**
-	 * int id The clients's id
+	 * @brief id The clients's id
 	 */
 	int id;
 
 	/**
-	 * string name The client's name
+	 * @brief name The client's name
 	 */
 	string name;
 
 	/**
-	 * Date birthday The client's birthday
+	 * @brief birthday The client's birthday
 	 */
 	Date birthday;
 
 	/**
-	 * vector<Reservation*> reservations The client's hotel reservations.
+	 * @brief reservations The client's hotel reservations.
 	 */
 	vector<Reservation*> reservations;
 
 	/**
-	 * static int nextId The next client's id.
+	 * @brief nextId The next client's id.
 	 */
 	static int nextId;
 
@@ -75,9 +83,7 @@ public:
 	 *
 	 * @param The client's new id.
 	 */
-	void setId(int id) {
-		this->id = id;
-	}
+	void setId(int id);
 
 	/**
 	 * @brief Const member function to get the client's name.
@@ -170,18 +176,18 @@ public:
 };
 
 /**
- *  A class used to represent an exception.
+ *  @brief A class used to represent an exception.
  *
  *  The exception object contains the invalid client.
  */
 class NonExistingClient {
 	/**
-	 * string name The NonExistingClient's name.
+	 * @brief name The NonExistingClient's name.
 	 */
 	string name;
 
 	/**
-	 * string id The NonExistingClient's id.
+	 * @brief id The NonExistingClient's id.
 	 */
 	int id;
 public:
@@ -217,5 +223,7 @@ public:
 	 */
 	int getId() const;
 };
+
+/**@}*/
 
 #endif /* CLIENT_H_ */

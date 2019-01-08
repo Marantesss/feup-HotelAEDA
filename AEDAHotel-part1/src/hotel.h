@@ -12,12 +12,20 @@
 #include "van.h"
 #include "BST.h"
 #include "restaurant.h"
+#include <algorithm>
 #include <unordered_set>
 #include <queue>
 #include <stack>
 
 /**
- *  A struct used to represent hash functions.
+ * @defgroup hotel hotel
+ * @{
+ *
+ *  Classes and Data Structures necessary to handle an hotel
+ */
+
+/**
+ *  @brief A structure used to represent hash functions.
  */
 struct clientPointerHash {
 	/**
@@ -44,10 +52,13 @@ struct clientPointerHash {
 	}
 };
 
+/**
+ * @brief Hash Table based on unordered_set
+ */
 typedef unordered_set<Client*, clientPointerHash, clientPointerHash> hashTabClientRecords;
 
 /**
- *  A class used to represent a hotel.
+ *  @brief A class used to represent a hotel.
  *
  *  Each hotel object has a clients vector, a reservations vector, a rooms vector,
  *  an employees vector, the number of floors, the number of bedrooms,
@@ -57,67 +68,73 @@ typedef unordered_set<Client*, clientPointerHash, clientPointerHash> hashTabClie
  *  @see Reservation Class
  *  @see Room Class
  *  @see Employee Class
+ *  @see Event Class
+ *  @see Van Class
+ *  @see Restaurant Class
  */
 class Hotel {
 	/**
-	 * vector<Client*> clients The hotel's clients
+	 * @brief clients The hotel's checked-in clients
 	 */
 	vector<Client*> clientsCheckedIn;
 
 	/**
-	 * hashTabClientRecord clientRecords The hotel's clients' records
+	 * @brief clientRecords The hotel's clients' records
 	 */
 	hashTabClientRecords clientRecords;
 
 	/**
-	 *  vector<Reservation> reservations The hotel's reservations
+	 * @brief reservations The hotel's reservations
 	 */
 	vector<Reservation> reservations;
 
 	/**
-	 * vector<Room> rooms The hotel's rooms
+	 * @brief rooms The hotel's rooms
 	 */
 	vector<Room*> rooms;
 
 	/**
-	 * vector<Employee> employees The hotel's employees
+	 * @brief employees The hotel's employees
 	 */
 	vector<Employee> employees;
 
 	/**
-	 * vector<Van> excursions The hotel's excursions
+	 * @brief excursions The hotel's excursions
 	 */
 	priority_queue<Van> vans;
 	
 	/**
-	* vector<Employee> events The hotel's events
+	* @brief events The hotel's events
 	*/
 	priority_queue<Event> events;
 
+	/**
+	 * @brief
+	 */
 	BST<Restaurant> restaurants;
 
 	/**
-	 * int floors The hotel's total number of floors
+	 * @brief floors The hotel's total number of floors
 	 */
 	int floors;
 
 	/**
-	 * int bedrooms The hotel's total number of bedrooms
+	 * @brief bedrooms The hotel's total number of bedrooms
 	 */
 	int bedrooms;
 
 	/**
-	 * int meetingRooms The hotel's total number of meeting rooms
+	 * @brief meetingRooms The hotel's total number of meeting rooms
 	 */
 	int meetingrooms;
 
 	/**
-	 * int trips The hotel's total number of done trips
+	 * @brief trips The hotel's total number of done trips
 	 */
 	int trips;
 
 	/**
-	 * string address The hotel's address
+	 * @brief address The hotel's address
 	 */
 	string address;
 public:
@@ -561,5 +578,7 @@ public:
 	string getTypesOfRestaurants();
 
 };
+
+/**@}*/
 
 #endif /* HOTEL_H_ */

@@ -4,40 +4,46 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <time.h>
 #include <ctime>
 
 using namespace std;
 
-// Date Class
 /**
- *  A class used to represent a date.
+ * @defgroup date date
+ * @{
  *
- *  Each date object has a day, a month a year a season and a weekday.
+ *  Classes necessary to handle dates
+ */
+
+/**
+ *  @brief A class used to represent a date.
+ *	Each date object has a day, a month a year a season and a weekday.
  */
 class Date {
 
 	/**
-	 * int day The date's day
+	 * @brief day The date's day
 	 */
 	int day;
 
 	/**
-	 * int month The date's month
+	 * @brief month The date's month
 	 */
 	int month;
 
 	/**
-	 * int year The date's year
+	 * @brief year The date's year
 	 */
 	int year;
 
 	/**
-	 * string season The date's season
+	 * @brief season The date's season
 	 */
 	string season;
 
 	/**
-	 * string weekday The date's weekday
+	 * @brief weekday The date's weekday
 	 */
 	string weekday;
 
@@ -220,23 +226,23 @@ public:
 
 // InvalidDate exception
 /**
- *  A class used to represent an exception.
+ *  @brief A class used to represent an exception.
  *
  *  The exception object contains the invalid date.
  */
 class InvalidDate {
 	/**
-	* int id The InvalidDate's day.
+	* @brief id The InvalidDate's day.
 	*/
 	int day;
 
 	/**
-	 * int id The InvalidDate's month.
+	 * @brief id The InvalidDate's month.
 	 */
 	int month;
 
 	/**
-	 * int id The InvalidDate's year.
+	 * @brief id The InvalidDate's year.
 	 */
 	int year;
 
@@ -275,5 +281,7 @@ public:
 	 */
 	int getYear();
 };
+
+/**@}*/
 
 #endif /* DATE_H_ */

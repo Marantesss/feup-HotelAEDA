@@ -8,26 +8,34 @@
 #include "date.h"
 
 /**
- *  A class used to represent an event
+ * @defgroup event event
+ * @{
+ *
+ *  Class necessary to handle events
+ */
+
+/**
+ *  @brief A class used to represent an event
+ *  Each event object has a name, a date, a location and a description.
  */
 class Event {
 	/**
-	 * string name The event's name
+	 * @brief name The event's name
 	 */
 	string name;
 
 	/**
-	 * Date date The event's date
+	 * @brief date The event's date
 	 */
 	Date date;
 
 	/**
-	 * string location The event's location
+	 * @brief location The event's location
 	 */
 	string location;
 
 	/**
-	 * string description The event's description
+	 * @brief description The event's description
 	 */
 	string description;
 public:
@@ -100,5 +108,7 @@ public:
 	 */
 	bool operator < (Event ev) const;
 };
+
+/**@}*/
 
 #endif /* EVENT_H_ */
