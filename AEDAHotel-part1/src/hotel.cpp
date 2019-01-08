@@ -738,7 +738,7 @@ string Hotel::getTypesOfRestaurants() {
 		ss << "\t-" << types[i] << "\n";
 	}
 
-	if (types.size() == 0)  ss << "No restaurants available\n";
+	if (types.size() == 0)  ss << "\tNo restaurants available\n";
 
 	return ss.str();
 }

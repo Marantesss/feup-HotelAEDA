@@ -7,6 +7,12 @@
 
 using namespace std;
 
+/** @defgroup restaurant restaurant
+ * @{
+ *
+ * Classes to represent a restaurant
+ */
+
 /**
  *  A class used to represent a restaurant.
  *
@@ -14,17 +20,17 @@ using namespace std;
  */
 class Restaurant {
 	/**
-	 * string name The restaurant's name.
+	 * @brief name The restaurant's name.
 	 */
 	string name;
 
 	/**
-	 * string type The restaurant's type.
+	 * @brief type The restaurant's type.
 	 */
 	string type;
 
 	/**
-	 * int distance The distance between the hotel and the restaurant.
+	 * @brief distance The distance between the hotel and the restaurant.
 	 */
 	int distance;
 public:
@@ -129,7 +135,7 @@ public:
  */
 class NonExistingRestaurant {
 	/**
-	 * string name The NonExistingRestaurant's name.
+	 * @brief name The NonExistingRestaurant's name.
 	 */
 	string name;
 public:
@@ -157,7 +163,7 @@ public:
  */
 class ExistingRestaurant {
 	/**
-	 * string name The ExistingRestaurant's name.
+	 * @brief name The ExistingRestaurant's name.
 	 */
 	string name;
 public:
@@ -178,5 +184,6 @@ public:
 	string getName() const;
 };
 
+/**@}*/
 
 #endif /* CLIENT_H_ */

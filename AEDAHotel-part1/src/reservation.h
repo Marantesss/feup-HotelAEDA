@@ -6,6 +6,12 @@
 #include "date.h"
 #include "room.h"
 
+/** @defgroup reservation reservation
+ * @{
+ *
+ * Classes to represent a reservation
+ */
+
 /**
  *  A class used to represent a reservation.
  *
@@ -18,17 +24,17 @@
 class Reservation {
 
 	/**
-	 * Date date The reservation's date
+	 * @brief date The reservation's date
 	 */
 	Date date;
 
 	/**
-	 * Room* room The reservation's room
+	 * @brief room The reservation's room
 	 */
 	Room* room;
 
 	/**
-	 * int duration The reservation's duration
+	 * @brief duration The reservation's duration
 	 *
 	 * In hours for MeetingRooms
 	 * In days for Bedrooms
@@ -36,7 +42,7 @@ class Reservation {
 	int duration;
 
 	/**
-	 * double price The reservation's price
+	 * @brief price The reservation's price
 	 */
 	double price;
 
@@ -157,12 +163,12 @@ class NonExistingReservation {
 
 protected:
 	/**
-	 * Date date The NonExistingReservation's date.
+	 * @brief date The NonExistingReservation's date.
 	 */
 	Date date;
 
 	/**
-	 *  Room* room The NonExistingReservation's room.
+	 * @brief room The NonExistingReservation's room.
 	 */
 	Room* room;
 
@@ -192,5 +198,7 @@ public:
 	 */
 	Room *getRoom() const;
 };
+
+/**@}*/
 
 #endif /* RESERVATION_H_ */
