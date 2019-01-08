@@ -4,7 +4,7 @@
 /** Hotel Class **/
 /*****************/
 
-Hotel::Hotel() {
+Hotel::Hotel():restaurants(Restaurant()) {
 	this->floors = 0;
 	this->bedrooms = 0;
 	this->meetingrooms = 0;
@@ -12,7 +12,7 @@ Hotel::Hotel() {
 	this->address = "";
 };
 
-Hotel::Hotel(int floors, string address, int trips) {
+Hotel::Hotel(int floors, string address, int trips):restaurants(Restaurant()) {
 	this->floors = floors;
 	this->bedrooms = 0;
 	this->meetingrooms = 0;
@@ -396,7 +396,7 @@ void Hotel::addGroup(vector<Client*>& group) {
 	vector<Van> vanVec;
 	Van van = Van();
 	unsigned i = 0;
-	int gr = group.size();
+	int gr = (int) group.size();
 
 	if (vans.size() == 0)
 		addVan(van);
@@ -441,7 +441,7 @@ void Hotel::tripDone(int id) {
 }
 
 void Hotel::removeVan(int id) {
-	int total = vans.size();
+	int total = (int) vans.size();
 	vector<Van> van;
 	do {
 		van.push_back(vans.top());
@@ -536,7 +536,7 @@ void Hotel::updateEvents(Date date) {
 string Hotel::getEventsInfo() {
 	stack<Event> tempEvents;
 	stringstream ss;
-	int numberOfEvents = events.size();
+	int numberOfEvents = (int) events.size();
 
 	// Getting every event's information
 	for (int i = 1; i <= numberOfEvents; i++) {
@@ -583,4 +583,163 @@ string Hotel::getAddress() const {
 
 void Hotel::setAddress(string address) {
 	this->address = address;
+}
+
+
+//... Restaurants
+
+int Hotel::addRestaurant(Restaurant r) {
+	Restaurant res = restaurants.find(r);
+	Restaurant resNotFound("", "", 0);
+	if (res == resNotFound) {
+		this->restaurants.insert(r);
+		return 1;
+	}
+	else return 0;
+}
+
+int Hotel::addRestaurant(string name, string type, int distance) {
+	Restaurant r = Restaurant(name, type, distance);
+	Restaurant res = restaurants.find(r);
+	Restaurant resNotFound("", "", 0);
+	if (res == resNotFound) {
+		this->restaurants.insert(r);
+		return 1;
+	}
+	else return 0;
+}
+
+vector<Restaurant> Hotel::addRestaurants(vector<Restaurant> res) {
+	vector<Restaurant> nAddedRestaurants;
+	for (size_t i = 0; i < res.size(); i++) {
+		if (addRestaurant(res.at(i)) == 0) nAddedRestaurants.push_back((res.at(i)));
+	}
+	return nAddedRestaurants;
+}
+
+Restaurant Hotel::searchRestaurant(string name) {
+	BSTItrIn<Restaurant> it(restaurants);
+	while (!it.isAtEnd()) {
+		if (it.retrieve().getName() == name) return it.retrieve();
+		it.advance();
+	}
+	throw(NonExistingRestaurant(name));
+}
+
+BST<Restaurant> Hotel::getRestaurants() {
+	return this->restaurants;
+}
+
+int Hotel::removeRestaurant(string name) {
+	BSTItrIn<Restaurant> it(restaurants);
+	while (!it.isAtEnd()) {
+		if (it.retrieve().getName() == name) {
+			this->restaurants.remove(it.retrieve());
+			return 1;
+		}
+		it.advance();
+	}
+	throw(NonExistingRestaurant(name));
+}
+
+Restaurant Hotel::getClosestRestaurant() {
+	BSTItrIn<Restaurant> it(restaurants);
+	Restaurant r = it.retrieve();
+	int minDistance = it.retrieve().getDistance();
+	it.advance();
+
+	while (!it.isAtEnd()) {
+		if (it.retrieve().getDistance() < minDistance) {
+			minDistance = it.retrieve().getDistance();
+			r = it.retrieve();
+			it.advance();
+		}
+		else it.advance();
+	}
+	return r;
+}
+
+vector<Restaurant> Hotel::getRestaurantsOfType(string type) {
+	vector<Restaurant> res;
+	BSTItrIn<Restaurant> it(restaurants);
+	while (!it.isAtEnd()) {
+		if (it.retrieve().getType() == type) {
+			res.push_back(it.retrieve());
+			it.advance();
+		}
+		else it.advance();
+	}
+	return res;
+}
+
+//needs testing
+void Hotel::importRestaurants(string filename) {
+	vector<Restaurant*> res;
+	string line, name, type;
+	ifstream file;
+	int distance;
+	Restaurant r = Restaurant("","",0);
+	file.open(filename);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			name = line;
+			r.setName(name);
+			getline(file, line);
+			type = line;
+			r.setType(type);
+			getline(file, line);
+			distance = atoi(line.c_str());
+			r.setDistance(distance);
+			addRestaurant(r);
+		}
+		file.close();
+	}
+
+	else cout << "Unable to open file" << endl;
+}
+
+
+int Hotel::getNoRestaurants() {
+	int counter = 0;
+	BSTItrIn<Restaurant> it(restaurants);
+	while (!it.isAtEnd()) {
+		counter++;
+		it.advance();
+	}
+	return counter;
+}
+
+string Hotel::getRestaurantsInfo() {
+	if (getNoRestaurants() != 0) {
+		BSTItrIn<Restaurant> it(restaurants);
+		stringstream ss;
+		while (!it.isAtEnd()) {
+			ss << it.retrieve().getInfo() << "\n";
+			it.advance();
+		}
+		return ss.str();
+	}
+	else return "No Restaurants available! Press enter...";
+	cin.get();
+}
+
+string Hotel::getTypesOfRestaurants() {
+	stringstream ss;
+	vector<string> types;
+	BSTItrIn<Restaurant> it(restaurants);
+	while (!it.isAtEnd()) {
+		types.push_back(it.retrieve().getType());
+		it.advance();
+	}
+	unique(types.begin(), types.end());
+	
+	for (size_t i = 0; i < types.size(); i++) {
+		ss << "\t-" << types[i] << "\n";
+	}
+
+	if (types.size() == 0)  ss << "No restaurants available\n";
+
+	return ss.str();
 }

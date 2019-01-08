@@ -242,13 +242,16 @@ int main() {
 		case 7: //Events
 			eventMenu(h);
 			break;
-		case 8: //Next Day
+		case 8:
+			restaurantMenu(h);
+			break;
+		case 9: //Next Day
 			(*currentDate)++;
 			sendHappyBirthayEmail(*currentDate, h);
 			h->updateEvents(*currentDate);
 			break;
 		}
-		if (menuOption < 0 || menuOption > 8) {
+		if (menuOption < 0 || menuOption > 9) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption != 0);
