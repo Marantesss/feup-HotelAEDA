@@ -833,6 +833,12 @@ void vansMenu(Hotel * h){
 		case 4:
 			searchVan(h);
 			break;
+		case 5:
+			tripDone(h);
+			break;
+		case 6:
+			route();
+			break;
 		default:
 			clearBuffer();
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
@@ -842,17 +848,18 @@ void vansMenu(Hotel * h){
 
 int showVanOptions(Hotel * h){
 	int menuOption;
-	cout << endl << endl << endl;
 	cout << "______________________________________" << endl;
 	cout << "----------- EXCURSION MENU -----------" << endl;
 	cout << "No. of Vans in use: " << h->getVans().size() << endl;
+	cout << "Hotel's trips done: " << h->getTrips() << endl;
 	cout << "______________________________________" << endl;
 	cout << " - What would you like to do? - " << endl;
 	cout << "1 - Add a Group" << endl;
 	cout << "2 - Remove Van" << endl;
 	cout << "3 - See Vans" << endl;
 	cout << "4 - Search Van by ID" << endl;
-	cout << "5 - Finish a excursion" << endl; //to do......................
+	cout << "5 - Send a van" << endl;
+	cout << "6 - See route" << endl;
 	cout << "0 - Back" << endl << endl;
 	cout << "Option: ";
 	cin >> menuOption;
@@ -875,6 +882,8 @@ void addGroup(Hotel * h){
 			cout << "The size of the group is suposed to be a number!!" << endl;
 		}
 	} while (cin.fail()); 
+
+	clearBuffer();
 	
 	for (int i = 0; i < size; i++) {
 		cout << "Client name: ";
@@ -899,7 +908,7 @@ void removeVan(Hotel * h){
 	int id;
 
 	if (h->getVans().size() == 0)
-		cout << "There are no vans available";
+		cout << "There are no vans available" << endl;
 	else {
 		clearBuffer();
 		cout << "ID: ";
@@ -961,6 +970,41 @@ void importVan(Hotel * h){
 	cout << "File name: ";
 	cin >> filename;
 	h->importVans(filename);
+}
+
+void tripDone(Hotel * h){
+	int id;
+
+	if (h->getVans().size() == 0)
+		cout << "There are no vans available" << endl;
+	else {
+		clearBuffer();
+		cout << "ID: ";
+		cin >> id;
+
+		try {
+			h->tripDone(id);
+			cout << "Van " << id << " ended it's ride!" << endl;
+		}
+		catch (NonExistingVan & nonVan) {
+			cout << "ERROR: Van " << nonVan.getId() << " does not exist!!!" << endl;
+		}
+	}
+}
+
+void route(){
+	cout << " -------- Van's route -------- " << endl;
+	cout << "1 - Rua da Alegria 20 (Hotel)" << endl;
+	cout << "2 - Via Futebol Clube do Porto (Estadio do Dragao)" << endl;
+	cout << "3 - R. Dr. Roberto Frias (FEUP/Universidades)" << endl;
+	cout << "4 - NorteShopping (Almoco)" << endl;
+	cout << "5 - Estrada Interior da Circunvalaçao (Parque da Cidade do Porto)" << endl;
+	cout << "6 - R. Dom Joao de Castro 210 (Parque de Serralves)" << endl;
+	cout << "7 - Rotunda da Boavista (Casa da Musica)" << endl;
+	cout << "8 - R. de Dom Manuel II (Jardins do Palacio de Cristal)" << endl;
+	cout << "9 - Av. dos Aliados (Torre dos Clerigos/Livraria Lello/Igreja da Santissima Trindade/Se do Porto)" << endl;
+	cout << "10 - Av. da Republica (Jardim do Morro/Mosteiro da Serra do Pilar)" << endl;
+	cout << "11 - Rua da Alegria 20 (Hotel)" << endl << endl;
 }
 
 

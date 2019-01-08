@@ -421,10 +421,11 @@ void Hotel::addGroup(vector<Client*>& group) {
 
 		vanVec[i - 1].addGroup(group);
 
-		for (int j = 0; j < vanVec.size(); j++) {
-			vans.push(vanVec[j]);
+		for (unsigned t = 0; t < vanVec.size(); t++) {
+			vans.push(vanVec[t]);
 		}
-		cout << "Group added to van " << vanVec[i - 1].getId();
+
+		cout << "Group added to van " << vanVec[i - 1].getId() << endl;
 }
 
 priority_queue<Van> Hotel::getVans() const {
@@ -630,12 +631,11 @@ BST<Restaurant> Hotel::getRestaurants() {
 	return this->restaurants;
 }
 
-int Hotel::removeRestaurant(string name) {
+void Hotel::removeRestaurant(string name) {
 	BSTItrIn<Restaurant> it(restaurants);
 	while (!it.isAtEnd()) {
 		if (it.retrieve().getName() == name) {
 			this->restaurants.remove(it.retrieve());
-			return 1;
 		}
 		it.advance();
 	}
@@ -739,7 +739,7 @@ string Hotel::getTypesOfRestaurants() {
 		ss << "\t-" << types[i] << "\n";
 	}
 
-	if (types.size() == 0)  ss << "No restaurants available\n";
+	if (types.size() == 0)  ss << "\tNo restaurants available\n";
 
 	return ss.str();
 }

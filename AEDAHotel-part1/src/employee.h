@@ -8,6 +8,12 @@
 
 using namespace std;
 
+/** @defgroup employee
+ * @{
+ *
+ *	Classes to represent an employee object.
+ */
+
 // Employee Class
 /**
  *  An abstract class used to represent an employee.
@@ -147,7 +153,7 @@ public:
  */
 class NonExistingEmployee {
 	/**
-	 * int id The NonExistingEmployee's id.
+	 * @brief id The NonExistingEmployee's id.
 	 */
 	int id;
 
@@ -168,5 +174,7 @@ public:
 	 */
 	int getId() const;
 };
+
+/**@}*/
 
 #endif /* EMPLOYEE_H_ */
