@@ -16,7 +16,17 @@ using namespace std;
 void clearBuffer();
 
 /**
- * @brief Function to get menu options.
+ * @brief Function to send happy birthday e-mails to clients
+ */
+void sendHappyBirthayEmail(Date date, Hotel* h);
+
+/**
+ * @brief Function to print e-mail content
+ */
+void writeHappyBirthdayEmail(vector<Client*> clients, Hotel* h);
+
+/**
+ * @brief Function to get menu options
  *
  * Displays date passed as argument.
  * Calls showMenu() to print menu options.
@@ -92,14 +102,21 @@ int showClientOptions(Hotel *h);
  *
  * Reads the new client's name and adds it to the hotel's client vector.
  */
-void addClient(Hotel *h);
+void addNewClient(Hotel *h);
+
+/**
+ * @brief Function to add an old client to the current client vector
+ *
+ * Reads the old client's id and adds it to the hotel's client vector
+ */
+void checkInOldClient(Hotel *h);
 
 /**
  * @brief Function to find and remove an existing client.
  *
  * Reads the client's name, searches it, and deletes it from the hotel's client vector.
  */
-void removeClient(Hotel *h);
+void checkoutClient(Hotel *h);
 
 /**
  * @brief Function to find an existing client.

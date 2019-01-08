@@ -99,8 +99,14 @@ bool Client::operator == (Client c) {
 /* NonExistingClient exception **/
 /********************************/
 
-NonExistingClient::NonExistingClient(string nm): name(nm) {}
+NonExistingClient::NonExistingClient(string nm): name(nm), id(0) {}
+
+NonExistingClient::NonExistingClient(int id): name(""), id(id) {}
 
 string NonExistingClient::getName() const {
 	return this->name;
+}
+
+int NonExistingClient::getId() const {
+	return this->id;
 }

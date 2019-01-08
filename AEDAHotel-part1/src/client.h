@@ -54,6 +54,7 @@ public:
 	 * The constructor creates a Client object with the data passed as argument.
 	 *
 	 * @param name The client's name.
+	 * @param birthday The Client's birthday
 	 */
 	Client(string name, Date birthday);
 
@@ -68,6 +69,15 @@ public:
 	 * @return The client's id.
 	 */
 	int getId() const;
+
+	/**
+	 * @brief Member function to set the client's new id.
+	 *
+	 * @param The client's new id.
+	 */
+	void setId(int id) {
+		this->id = id;
+	}
 
 	/**
 	 * @brief Const member function to get the client's name.
@@ -169,6 +179,11 @@ class NonExistingClient {
 	 * string name The NonExistingClient's name.
 	 */
 	string name;
+
+	/**
+	 * string id The NonExistingClient's id.
+	 */
+	int id;
 public:
 	/**
 	 * @brief Constructor.
@@ -180,11 +195,27 @@ public:
 	NonExistingClient(string nm);
 
 	/**
+	 * @brief Constructor.
+	 *
+	 * The constructor creates a NonExistingClient object with the supplied ID.
+	 *
+	 * @param The ID of the NonExistingClient.
+	 */
+	NonExistingClient(int id);
+
+	/**
 	 * @brief Const member function to get the object's name.
 	 *
 	 * @return The name that originated the creation of this object.
 	 */
 	string getName() const;
+
+	/**
+	 * @brief Const member function to get the object's ID.
+	 *
+	 * @return The ID that originated the creation of this object.
+	 */
+	int getId() const;
 };
 
 #endif /* CLIENT_H_ */

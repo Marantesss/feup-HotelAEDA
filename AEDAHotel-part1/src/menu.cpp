@@ -5,7 +5,43 @@ void clearBuffer() {
 	cin.ignore(1000, '\n');
 }
 
+void sendHappyBirthayEmail(Date date, Hotel* h) {
+	vector<Client*> clients = h->checkBirthdays(date);
 
+	if (clients.size() != 0) {
+		cout << "Birthdays: ";
+		for (size_t i = 0; i < clients.size(); i++) {
+			if (i + 1 == clients.size())
+				cout << clients[i]->getName() << endl;
+			else
+				cout << clients[i]->getName() << ", ";
+		}
+		writeHappyBirthdayEmail(clients, h);
+	}
+	else
+		cout << "No birthday's today!" << endl;
+}
+
+void writeHappyBirthdayEmail(vector<Client*> clients, Hotel* h) {
+	cout << " ____________________________________ " << endl;
+	cout << " ---------- Email content ---------- " << endl;
+
+	cout << "To: ";
+	for (size_t i = 0; i < clients.size(); i++) {
+		if (i + 1 == clients.size())
+			cout << clients[i]->getName() << endl;
+		else
+			cout << clients[i]->getName() << ", ";
+	}
+
+	cout << "From: AEDA Hotel Management" << endl;
+	cout << "Happy birthday esteemed client" << endl;
+	cout << "As a present for choosing us to spend quality time we invite you to our future events" << endl;
+	cout << endl << h->getEventsInfo();
+	cout << "Please feel free to visit us again!" << endl;
+	cout << "Hotel AEDA Management" << endl;
+	cout << " ____________________________________ " << endl;
+}
 
 /********** Hotel Information **********/
 
@@ -80,7 +116,7 @@ int showHotelInformationOptions(Hotel *h) {
 	cout << "Total Rooms: " << h->getBedrooms() + h->getMeetingRooms() << endl;
 	cout << "Bedrooms: " << h->getBedrooms() << ", ";
 	cout << "Meeting Rooms: " << h->getMeetingRooms() << endl;
-	cout << "Total Clients: " << h->getClients().size() << endl;
+	cout << "Total Clients: " << h->getClientsCheckedIn().size() << endl;
 	cout << "Total Employees: " << h->getEmployees().size() << endl;
 	cout << "_____________________________________" << endl;
 	cout << " ---- What would you like to do? ---- " << endl;
@@ -130,7 +166,6 @@ void removeHotelTopFloor(Hotel *h) {
 }
 
 
-
 /********** Client Information **********/
 
 void clientMenu(Hotel *h) {
@@ -142,18 +177,24 @@ void clientMenu(Hotel *h) {
 		case 0:
 			break;
 		case 1:
-			addClient(h);
+			addNewClient(h);
 			break;
 		case 2:
-			removeClient(h);
+			checkInOldClient(h);
 			break;
 		case 3:
-			h->showClients();
+			checkoutClient(h);
 			break;
 		case 4:
-			searchClient(h);
+			h->showClientsCheckedIn();
 			break;
 		case 5:
+			h->showClientRecords();
+			break;
+		case 6:
+			searchClient(h);
+			break;
+		case 7:
 			importClient(h);
 			break;
 		default:
@@ -167,14 +208,17 @@ int showClientOptions(Hotel *h) {
 
 	cout << "_____________________________________" << endl;
 	cout << " ----------- CLIENT MENU ----------- " << endl;
-	cout << "Clients - " << h->getClients().size() << endl;
+	cout << "Clients Checked-In - " << h->getClientsCheckedIn().size() << endl;
+	cout << "Clients - " << h->getClientRecords().size() << endl;
 	cout << "_____________________________________" << endl;
 	cout << "What would you like to do?" << endl;
-	cout << "1 - Add Client" << endl;
-	cout << "2 - Remove Client" << endl;
-	cout << "3 - See Clients" << endl;
-	cout << "4 - Search Client by name" << endl;
-	cout << "5 - Import Clients/Reservations" << endl;
+	cout << "1 - Add and check-in new client" << endl;
+	cout << "2 - Check-in old client" << endl;
+	cout << "3 - Check-out client" << endl;
+	cout << "4 - See checked-in clients" << endl;
+	cout << "5 - See client records" << endl;
+	cout << "6 - Search client by name" << endl;
+	cout << "7 - Import clients/Reservations [NOT IMPLEMENTED]" << endl;
 	cout << "0 - Back" << endl << endl;
 	cout << "Option: ";
 	cin >> menuOption;
@@ -182,7 +226,7 @@ int showClientOptions(Hotel *h) {
 	return menuOption;
 }
 
-void addClient(Hotel *h) {
+void addNewClient(Hotel *h) {
 	string name;
 	int day, month, year;
 	Date *birthday = new Date;
@@ -202,11 +246,32 @@ void addClient(Hotel *h) {
 	}
 
 	Client *c = new Client(name, *birthday);
-	h->addClient(c);
+	h->checkInClient(c);
+	h->addClientRecord(c);
 	cout << "Client " << c->getName() << " added successfully!" << endl;
 }
 
-void removeClient(Hotel *h) {
+void checkInOldClient(Hotel *h) {
+	int id;
+
+	clearBuffer();
+	cout << "ID: ";
+	cin >> id;
+
+	Client c = Client();
+	c.setId(id);
+
+	try {
+		Client* client = h->getClientRecord(&c);
+		h->checkInClient(client);
+		cout << "Client " << client->getName() << " checked-in!" << endl;
+	}
+	catch (NonExistingClient & nonClient) {
+		cout << "ERROR: Client " << nonClient.getId() << " does not exist!!!" << endl;
+	}
+}
+
+void checkoutClient(Hotel *h) {
 	string name;
 
 	clearBuffer();
@@ -216,15 +281,11 @@ void removeClient(Hotel *h) {
 	try {
 		int ClientIndex = h->sequencialSearchClients(name);
 		cout << "Client found!" << endl;
-		vector<Reservation*> clientsReservations = h->getClients()[ClientIndex]->getReservations();
+		vector<Reservation*> clientsReservations = h->getClientsCheckedIn()[ClientIndex]->getReservations();
 
-		for (size_t i = 0; i < clientsReservations.size(); i++) {
-			h->removeReservation(clientsReservations[i]->getDate(), clientsReservations[i]->getRoom());
-		}
-
-		cout << name << "'s reservations removed successfully!" << endl;
-		h->removeClient(name);
-		cout << "Client " << name << " removed successfully!" << endl;
+		cout << name << "'s reservations checked out successfully!" << endl;
+		h->checkoutClient(name);
+		cout << "Client " << name << " checked out successfully!" << endl;
 	}
 	catch (NonExistingClient & nonClient) {
 		cout << "ERROR: Client " << nonClient.getName() << " does not exist!!!" << endl;
@@ -239,9 +300,9 @@ void searchClient(Hotel *h) {
 	getline(cin, name);
 
 	try {
-		int i = h->sequencialSearchClients(name);
-		cout << "Client found!" << endl;
-		cout << h->getClients()[i]->getInfo() << endl;
+		Client* client = h->getClientRecord(name);
+		h->checkInClient(client);
+		cout << "Client " << client->getInfo() << endl;
 	}
 	catch (NonExistingClient & nonClient) {
 		cout << "ERROR: Client " << nonClient.getName() << " does not exist!!!" << endl;
@@ -517,7 +578,7 @@ void addReservation(Hotel *h) {
 	try {
 		clientIndex = h->sequencialSearchClients(name);
 		cout << "Client found!" << endl;
-		cout << h->getClients()[clientIndex]->getInfo() << endl;
+		cout << h->getClientsCheckedIn()[clientIndex]->getInfo() << endl;
 	}
 	catch (NonExistingClient & nonClient) {
 		cout << "ERROR: Client " << nonClient.getName() << " does not exist!!!" << endl;
@@ -535,6 +596,8 @@ void addReservation(Hotel *h) {
 		cout << "ERROR: Date " << date.getDay() << "/" << date.getMonth() << "/" << date.getYear() << " is invalid!" << endl;
 		return;
 	}
+
+
 
 	clearBuffer();
 	cout << "Room number: ";
@@ -557,7 +620,7 @@ void addReservation(Hotel *h) {
 
 	try {
 		h->addReservation(*r);
-		Client *c = h->getClients()[clientIndex];
+		Client *c = h->getClientsCheckedIn()[clientIndex];
 		c->addReservation(r);
 		cout << "Reservation added successfully!" << endl;
 	}
@@ -602,7 +665,7 @@ void removeReservation(Hotel *h) {
 	try {
 		h->removeReservation(*date, roomPointer);
 		cout << "Reservation removed successfully!" << endl;
-		vector<Client*> tempClients = h->getClients();
+		vector<Client*> tempClients = h->getClientsCheckedIn();
 
 		for (size_t i = 0; i < tempClients.size(); i++) {
 			try {
@@ -820,8 +883,8 @@ void addGroup(Hotel * h){
 		try {
 			clientIndex = h->sequencialSearchClients(name);
 			cout << "Client found!" << endl;
-			cout << h->getClients()[clientIndex]->getInfo2() << endl;
-			clientPointer = h->getClients()[clientIndex];
+			cout << h->getClientsCheckedIn()[clientIndex]->getInfo2() << endl;
+			clientPointer = h->getClientsCheckedIn()[clientIndex];
 			group.push_back(clientPointer);
 		}
 		catch (NonExistingClient & nonClient) {

@@ -19,34 +19,32 @@
 /**
  *  A struct used to represent hash functions.
  */
-struct clientHash {
+struct clientPointerHash {
 	/**
-	 * @brief Hash function.
+	 * @brief Hash function for Client*.
 	 *
-	 * @param Client & c The client to be added in the hash table
+	 * @param Client c Pointer to a Client to be added to the hash table
 	 *
 	 * @return The added client's index in the hash table, which will be equal to its ID
 	 */
-	int operator() (const Client & c) const {
-		return c.getId();
+	int operator() (const Client* c) const {
+		return c->getId();
 	}
+
 	/**
-	 * @brief Equal function.
-	 *
-	 * @param Client & c1 The first client to be compared
-	 *
-	 * @param Client & c2 The second client to be compared
-	 *
-	 * @return true if both clients have the same ID, false if otherwise
-	 */
-	bool operator() (const Client & c1, const Client & c2) const {
-		return c1.getId() == c2.getId();
+	* @brief Comparison Function for Client*
+	*
+	* @param c1 Pointer to a Client object.
+	* @param c2 Pointer to a Client object.
+	*
+	* @return true if Client c1 and c2 have the same ID
+	*/
+	bool operator() (const Client* c1, const Client* c2) const {
+		return c1->getId() == c2->getId();
 	}
 };
 
-// TODO
-typedef unordered_set<Client, clientHash, clientHash> hashTabClients;
-
+typedef unordered_set<Client*, clientPointerHash, clientPointerHash> hashTabClientRecords;
 
 /**
  *  A class used to represent a hotel.
@@ -64,7 +62,12 @@ class Hotel {
 	/**
 	 * vector<Client*> clients The hotel's clients
 	 */
-	vector<Client*> clients;
+	vector<Client*> clientsCheckedIn;
+
+	/**
+	 * hashTabClientRecord clientRecords The hotel's clients' records
+	 */
+	hashTabClientRecords clientRecords;
 
 	/**
 	 *  vector<Reservation> reservations The hotel's reservations
@@ -134,6 +137,8 @@ public:
 	 * @param floors The hotel's total number of floors.
 	 *
 	 * @param address The hotel's address.
+	 *
+	 * @param trips ... TODO
 	 */
 	Hotel(int floors, string address, int trips = 0);
 
@@ -147,26 +152,59 @@ public:
 	 *
 	 * @return The hotel's clients.
 	 */
-	vector<Client*> getClients() const;
+	vector<Client*> getClientsCheckedIn() const;
+
+	/**
+	 * @brief Const member function to get the clients' records Hash Table.
+	 *
+	 * @return The hotel's clients' records.
+	 */
+	hashTabClientRecords getClientRecords() const;
 
 	/**
 	 * @brief Member function to add a new client.
 	 *
 	 * @param c The hotel's new client.
 	 */
-	void addClient(Client *c);
+	void checkInClient(Client *c);
 
+	/**
+	 * @brief Member function to add a new client.
+	 *
+	 * @param c The hotel's new client.
+	 */
+	void addClientRecord(Client *c);
+
+	/**
+	 * @brief Member function to get an existing client information.
+	 *
+	 * @param c The hotel's client.
+	 */
+	Client* getClientRecord(Client *c);
+
+	/**
+	 * @brief Member function to get an existing client information.
+	 *
+	 * @param name The hotel's client's name.
+	 */
+	Client* getClientRecord(string name);
 	/**
 	 * @brief Member function to remove a client.
 	 *
 	 * @param name The hotel's removed client's name.
 	 */
-	void removeClient(string name);
+	void checkoutClient(string name);
 
 	/**
 	 * @brief Member function to print all clients' information.
 	 */
-	void showClients();
+	void showClientsCheckedIn();
+
+
+	/**
+	 * @brief Member function to print all clients' information.
+	 */
+	void showClientRecords();
 
 	/**
 	 * @brief Member function to sort the vector clients.
@@ -190,6 +228,15 @@ public:
 	 * or -1 if not found
 	 */
 	int sequencialSearchClients(string name);
+
+	/**
+	 * @brief Function to search all Clients whose birthday is on date passed as argument.
+	 *
+	 * @param date The current date.
+	 *
+	 * @return Vector containing pointers to clients whose birthday is on date
+	 */
+	vector<Client*> checkBirthdays(Date date);
 
 	/**
 	 * @brief Const member function to get the room's vector.
@@ -431,6 +478,13 @@ public:
 	 * @brief Member function to remove the earliest event.
 	 */
 	void removeEvent();
+
+	/**
+	 * @brief Member function to remove event before date.
+	 *
+	 * @param date The current.
+	 */
+	void updateEvents(Date date);
 
 	/**
 	 * @brief Member function to get all the event's information.

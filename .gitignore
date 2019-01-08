@@ -11,3 +11,5 @@ AEDAHotel-part2/boost
 AEDAHotel-part2/Debug
 Debug/*
 .vs/*
+AEDAHotel-part1/src/.vs/*
+AEDAHotel-part1/src/Debug/*

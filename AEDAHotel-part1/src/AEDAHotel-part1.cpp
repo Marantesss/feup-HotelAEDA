@@ -1,11 +1,3 @@
-//============================================================================
-// Name        : AEDAHotel-part1.cpp
-// Author      : Goncalo Marantes, Joao Santos, Luis Goncalves
-// Version     : 1.0
-// Copyright   : MIT License
-// Description : AEDAHotel
-//============================================================================
-
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -14,6 +6,7 @@
 #include "reservation.h"
 #include "room.h"
 #include "date.h"
+#include "van.h"
 #include "AuxFunctions.h"
 #include "menu.h"
 
@@ -79,58 +72,101 @@ Hotel* buildDemoHotel() {
 
 	//... Creating Reservations
 	// winter
-	Date *winter1 = new Date(12, 12, 2018);
+	Date *winter1 = new Date(12, 12, 2019);
 	Reservation *r1 = new Reservation(*winter1, b305, 2);
 	h->addReservation(*r1);
 	Date *winter2 = new Date(12, 2, 2019);
 	Reservation *r2 = new Reservation(*winter2, b205, 1);
 	h->addReservation(*r2);
+	Date *winter3 = new Date(20, 2, 2018);
+	Reservation *r3 = new Reservation(*winter3, b205, 4);
+	h->addReservation(*r3);
 	// Spring
 	Date *spring1 = new Date(21, 4, 2019);
-	Reservation *r3 = new Reservation(*spring1, b102, 1);
-	h->addReservation(*r3);
-	Date *spring2 = new Date(3, 5, 2019);
-	Reservation *r4 = new Reservation(*spring2, b203, 3);
+	Reservation *r4 = new Reservation(*spring1, b102, 1);
 	h->addReservation(*r4);
+	Date *spring2 = new Date(3, 5, 2019);
+	Reservation *r5 = new Reservation(*spring2, b203, 3);
+	h->addReservation(*r5);
+	Date *spring3 = new Date(19, 5, 2018);
+	Reservation *r6 = new Reservation(*spring3, b303, 3);
+	h->addReservation(*r6);
 	// Summer
 	Date *summer1 = new Date(20, 6, 2019);
-	Reservation *r5 = new Reservation(*summer1, b105, 4);
-	h->addReservation(*r5);
+	Reservation *r7 = new Reservation(*summer1, b105, 4);
+	h->addReservation(*r7);
 	Date *summer2 = new Date(14, 7, 2019);
-	Reservation *r6 = new Reservation(*summer2, b202, 5);
-	h->addReservation(*r6);
+	Reservation *r8 = new Reservation(*summer2, b202, 5);
+	h->addReservation(*r8);
+	Date *summer3 = new Date(4, 7, 2018);
+	Reservation *r9 = new Reservation(*summer3, b101, 2);
+	h->addReservation(*r9);
 	// Autumn
 	Date *autumn1 = new Date(11, 9, 2019);
-	Reservation *r7 = new Reservation(*autumn1, b301, 10);
-	h->addReservation(*r7);
+	Reservation *r10 = new Reservation(*autumn1, b301, 10);
+	h->addReservation(*r10);
 	Date *autumn2 = new Date(17, 10, 2019);
-	Reservation *r8 = new Reservation(*autumn2, b203, 2);
-	h->addReservation(*r8);
+	Reservation *r11 = new Reservation(*autumn2, b203, 2);
+	h->addReservation(*r11);
+	Date *autumn3 = new Date(20, 9, 2018);
+	Reservation *r12 = new Reservation(*autumn3, b205, 2);
+	h->addReservation(*r12);
 
-	//... creating clients
-	Date *bd1 = new Date(11, 9, 1990);
-	Client *c1 = new Client("Luis Goncalves", *bd1);
-	c1->addReservation(r1);
-	c1->addReservation(r5);
-	h->addClient(c1);
+	//... creating old clients
+	Date *bd1 = new Date(22, 3, 1977);
+	Client *c1 = new Client("Sofia Pimenta", *bd1);
+	c1->addReservation(r3);
+	h->addClientRecord(c1);
 
-	Date *bd2 = new Date(21, 4, 1996);
-	Client *c2 = new Client("Joao Francisco", *bd2);
-	c2->addReservation(r3);
-	c2->addReservation(r2);
-	h->addClient(c2);
+	Date *bd2 = new Date(2, 2, 1999);
+	Client *c2 = new Client("Miguel Simões", *bd2);
+	c2->addReservation(r6);
+	h->addClientRecord(c2);
 
-	Date *bd3 = new Date(7, 12, 1978);
-	Client *c3 = new Client("Maria Almeida", *bd3);
-	c3->addReservation(r8);
-	c3->addReservation(r4);
-	h->addClient(c3);
+	Date *bd3 = new Date(14, 8, 1995);
+	Client *c3 = new Client("Diogo Mota", *bd3);
+	c3->addReservation(r9);
+	h->addClientRecord(c3);
 
-	Date *bd4 = new Date(2, 9, 1986);
-	Client *c4 = new Client("Carlos Marques", *bd4);
-	c4->addReservation(r7);
-	c4->addReservation(r6);
-	h->addClient(c4);
+	Date *bd4 = new Date(13, 1, 1997);
+	Client *c4 = new Client("Goncalo Ribeiro", *bd4);
+	c4->addReservation(r12);
+	h->addClientRecord(c4);
+
+	//... creating new clients
+	Date *bd5 = new Date(11, 9, 1990);
+	Client *c5 = new Client("Luis Goncalves", *bd5);
+	c5->addReservation(r1);
+	c5->addReservation(r5);
+	h->checkInClient(c5);
+	h->addClientRecord(c5);
+
+	Date *bd6 = new Date(21, 4, 1996);
+	Client *c6 = new Client("Joao Francisco", *bd6);
+	c6->addReservation(r3);
+	c6->addReservation(r2);
+	h->checkInClient(c6);
+	h->addClientRecord(c6);
+
+	Date *bd7 = new Date(7, 12, 1978);
+	Client *c7 = new Client("Maria Almeida", *bd7);
+	c7->addReservation(r8);
+	c7->addReservation(r4);
+	h->checkInClient(c7);
+	h->addClientRecord(c7);
+
+	Date *bd8 = new Date(2, 9, 1986);
+	Client *c8 = new Client("Carlos Marques", *bd8);
+	c8->addReservation(r7);
+	c8->addReservation(r6);
+	h->checkInClient(c8);
+	h->addClientRecord(c8);
+
+	Date *bd9 = new Date(13, 1, 1987);
+	Client *c9 = new Client("José Pedro Castro", *bd9);
+	c9->addReservation(r9);
+	h->checkInClient(c9);
+	h->addClientRecord(c9);
 
 	//... creating vans
 	vector<Client*> cli;
@@ -168,6 +204,7 @@ Hotel* buildDemoHotel() {
 	h->addEvent(*ev3);
 
 	return h;
+
 }
 
 int main() {
@@ -180,6 +217,7 @@ int main() {
 	cout << "=======================================" << endl;
 	cout << "======== Welcome to Hotel AEDA ========" << endl;
 	cout << "=======================================" << endl;
+	sendHappyBirthayEmail(*currentDate, h);
 	do {
 		menuOption = menu(currentDate);
 		switch(menuOption) {
@@ -209,6 +247,8 @@ int main() {
 			break;
 		case 9: //Next Day
 			(*currentDate)++;
+			sendHappyBirthayEmail(*currentDate, h);
+			h->updateEvents(*currentDate);
 			break;
 		}
 		if (menuOption < 0 || menuOption > 9) {
