@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ public:
 	void setName(string name);
 	void setType(string type);
 	void setDistance(int distance);
+	string getInfo() const;
 	bool operator < (const Restaurant &r) const;
 	bool operator == (const Restaurant &r) const;
 };
@@ -27,6 +29,13 @@ class NonExistingRestaurant {
 	string name;
 public:
 	NonExistingRestaurant(string name);
+	string getName();
+};
+
+class ExistingRestaurant {
+	string name;
+public:
+	ExistingRestaurant(string name);
 	string getName();
 };
 

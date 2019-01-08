@@ -500,6 +500,11 @@ public:
 
 	void importRestaurants(string filename);
 
+	int getNoRestaurants();
+
+	string getRestaurantsInfo();
+
+	string getTypesOfRestaurants();
 
 };
 

@@ -16,10 +16,10 @@ int menu(Date *date) {
 
 	do {
 		menuOption = showMenu();
-		if (menuOption < 0 || menuOption > 8) {
+		if (menuOption < 0 || menuOption > 9) {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
-	} while (menuOption < 0 || menuOption > 8);
+	} while (menuOption < 0 || menuOption > 9);
 
 	return menuOption;
 }
@@ -36,7 +36,8 @@ int showMenu() {
 	cout << "| 5 - Employees                      |" << endl;
 	cout << "| 6 - Excursions                     |" << endl;
 	cout << "| 7 - Events                         |" << endl;
-	cout << "| 8 - Next Day                       |" << endl;
+	cout << "| 8 - Restaurants                    |" << endl;
+	cout << "| 9 - Next Day                       |" << endl;
 	cout << "| 0 - Exit                           |" << endl;
 	cout << "|____________________________________|" << endl;
 	cout << "Option: ";
@@ -900,7 +901,7 @@ void importVan(Hotel * h){
 }
 
 
-/********** Employee Information **********/
+/********** Event Information **********/
 
 void eventMenu(Hotel *h) {
 	int menuOption;
@@ -947,6 +948,7 @@ void addEvent(Hotel *h) {
 	clearBuffer();
 	cout << "Name: ";
 	getline(cin, name);
+	clearBuffer();
 	cout << "Enter date(day month year): ";
 	cin >> day >> month >> year;
 
@@ -966,4 +968,148 @@ void addEvent(Hotel *h) {
 	Event *e = new Event(name, *date, location, description);
 	h->addEvent(*e);
 	cout << "Event added successfully!" << endl;
+}
+
+/********** Restaurant Information **********/
+
+void restaurantMenu(Hotel *h) {
+	int menuOption;
+
+	do {
+		menuOption = showRestaurantOptions(h);
+		switch (menuOption) {
+		case 0:
+			break;
+		case 1:
+			addRestaurant(h);
+			break;
+		case 2:
+			cout << h->getRestaurantsInfo();
+			break;
+		case 3:
+			searchRestaurant(h);
+			break;
+		case 4:
+			showRestaurantsOfType(h);
+			break;
+		case 5:
+			showClosestRestaurant(h);
+			break;
+		case 6:
+			deleteRestaurant(h);
+			break;
+		default:
+			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
+		}
+	} while (menuOption != 0);
+}
+
+int showRestaurantOptions(Hotel *h) {
+	int menuOption;
+
+	cout << "_____________________________________" << endl;
+	cout << "---------- RESTAURANT MENU ----------" << endl;
+	cout << "No. of restaurants: " << h->getNoRestaurants() << endl;
+	cout << "Restaurant Types: " << endl << h->getTypesOfRestaurants();
+	cout << "_____________________________________" << endl;
+	cout << " ---- What would you like to do? ---- " << endl;
+	cout << "1 - Add Restaurant" << endl;
+	cout << "2 - See Restaurants" << endl;
+	cout << "3 - Search for Restaurant" << endl;
+	cout << "4 - Search for Restaurant Types" << endl;
+	cout << "5 - See Closest Restaurant" << endl;
+	cout << "6 - Delete Restaurant" << endl;
+	cout << "0 - Back" << endl << endl;
+	cout << "Option: ";
+	cin >> menuOption;
+	clearBuffer();
+
+	return menuOption;
+}
+
+void addRestaurant(Hotel *h) {
+	string name, type;
+	int distance;
+	
+	cout << "Name: ";
+	cin >> name;
+	clearBuffer();
+	cout << "Type: ";
+	cin >> type;
+	clearBuffer();
+	cout << "Distance(Km): ";
+	cin >> distance;
+
+	Restaurant r = Restaurant(name, type, distance);
+	try {
+		h->addRestaurant(r);
+	}
+	catch (ExistingRestaurant& ExRes) {
+		cout << "Error: There's already a restaurant with the name " << ExRes.getName() << "!" << endl;
+	}
+}
+
+void searchRestaurant(Hotel *h) {
+	string name;
+	cout << "Search for Restaurant:\nName - ";
+	cin >> name;
+	clearBuffer();
+	try {
+		cout << h->searchRestaurant(name).getInfo() << endl << "Press enter...";
+		cin.get();
+	}
+	catch (NonExistingRestaurant res) {
+		cout << "Restaurant " << res.getName() << " not found! Press enter...";
+		cin.get();
+	}
+}
+
+void showClosestRestaurant(Hotel *h) {
+	cout << "Closest Restaurant:\n";
+	if (h->getNoRestaurants() != 0) {
+		cout << h->getClosestRestaurant().getInfo();
+		cout << "\nPress enter...";
+		cin.get();
+	}
+	else {
+		cout << "No restaurants available! Press enter...";
+		cin.get();
+	}
+}
+
+void deleteRestaurant(Hotel *h) {
+	string name;
+	cout << "Delete Restaurant:\nName - ";
+	cin >> name;
+	clearBuffer();
+	try {
+		h->removeRestaurant(name);
+		cout << "Restaurant " << name << " removed! Press enter...";
+		cin.get();
+	}
+	catch (NonExistingRestaurant res) {
+		cout << "Restaurant " << res.getName() << " not found! Press enter...";
+		cin.get();
+	}
+}
+
+void showRestaurantsOfType(Hotel *h) {
+	string type;
+	vector<Restaurant> res;
+	cout << "Search Type of Restaurant:\nType - ";
+	cin >> type;
+	clearBuffer();
+
+	res = h->getRestaurantsOfType(type);
+	if (res.size() != 0){
+		for (size_t i = 0; i < res.size(); i++) {
+			cout << res[i].getInfo() << endl;
+		}
+		cout << "Press enter...";
+		cin.get();
+	}
+	else {
+		cout << "No restaurant of the type " << type << " found! Press enter...";
+		cin.get();
+	}
 }

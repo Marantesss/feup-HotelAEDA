@@ -293,7 +293,7 @@ void searchVan(Hotel *h);
  */
 void importVan(Hotel *h);
 
-/********** Employee Information **********/
+/********** Event Information **********/
 
 /**
  * @brief Function to get event information menu options
@@ -316,5 +316,22 @@ int showEventOptions(Hotel *h);
  * Reads the new events's name, date, location and description and adds it to the hotel's event container
  */
 void addEvent(Hotel *h);
+
+
+/********** Restaurant Information **********/
+
+void restaurantMenu(Hotel *h);
+
+int showRestaurantOptions(Hotel *h);
+
+void addRestaurant(Hotel *h);
+
+void searchRestaurant(Hotel *h);
+
+void showRestaurantsOfType(Hotel *h);
+
+void showClosestRestaurant(Hotel *h);
+
+void deleteRestaurant(Hotel *h);
 
 #endif /* MENU_H_ */
