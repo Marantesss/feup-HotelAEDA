@@ -421,10 +421,11 @@ void Hotel::addGroup(vector<Client*>& group) {
 
 		vanVec[i - 1].addGroup(group);
 
-		for (int j = 0; j < vanVec.size(); j++) {
-			vans.push(vanVec[j]);
+		for (unsigned t = 0; t < vanVec.size(); t++) {
+			vans.push(vanVec[t]);
 		}
-		cout << "Group added to van " << vanVec[i - 1].getId();
+
+		cout << "Group added to van " << vanVec[i - 1].getId() << endl;
 }
 
 priority_queue<Van> Hotel::getVans() const {
