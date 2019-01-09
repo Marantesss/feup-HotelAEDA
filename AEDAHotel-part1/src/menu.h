@@ -9,6 +9,13 @@
 using namespace std;
 
 /**
+ * @defgroup menu menu
+ * @{
+ *
+ *  Class necessary to handle menu
+ */
+
+/**
  * @brief Function to clear input buffer.
  *
  * Calls cin.clear() and cin.ignore().
@@ -396,5 +403,7 @@ void showClosestRestaurant(Hotel *h);
  * Reads the restaurants's name inputed by the user and deletes it from the binary search tree containing the restaurants.
  */
 void deleteRestaurant(Hotel *h);
+
+/**@}*/
 
 #endif /* MENU_H_ */

@@ -172,13 +172,19 @@ Date::Date(int day, int month, int year) {
 // get
 
 void Date::getCurrentDate() {
-	// current date/time based on current system
+	/* current date/time based on current system */
+	/* LocalTime for MinGW compiler */
 	time_t now = time(0);
+	tm* ltm = localtime(&now);
+
+	/* LocalTime for Microsoft Visual Studio compiler */
+	/*time_t now = time(0);
 	tm *ltm = new tm() ;
-	localtime_s(ltm,&now);
+	localtime_s(ltm,&now);*/
 
 	Date currentDate = Date(ltm->tm_mday, 1 + ltm->tm_mon, 1900 + ltm->tm_year);
 	(*this) = currentDate;
+
 }
 
 int Date::getDay() const {
