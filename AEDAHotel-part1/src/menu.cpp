@@ -1167,7 +1167,7 @@ void searchRestaurant(Hotel *h) {
 		cout << h->searchRestaurant(name).getInfo() << endl << "Press enter...";
 		cin.get();
 	}
-	catch (NonExistingRestaurant res) {
+	catch (NonExistingRestaurant & res) {
 		cout << "Restaurant " << res.getName() << " not found! Press enter...";
 		cin.get();
 	}
@@ -1196,7 +1196,7 @@ void deleteRestaurant(Hotel *h) {
 		cout << "Restaurant " << name << " removed! Press enter...";
 		cin.get();
 	}
-	catch (NonExistingRestaurant res) {
+	catch (NonExistingRestaurant & res) {
 		cout << "Restaurant " << res.getName() << " not found! Press enter...";
 		cin.get();
 	}

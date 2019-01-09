@@ -8,7 +8,7 @@
 
 using namespace std;
 
-/** @defgroup employee
+/** @defgroup employee employee
  * @{
  *
  *	Classes to represent an employee object.

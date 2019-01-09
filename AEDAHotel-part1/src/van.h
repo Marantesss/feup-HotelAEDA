@@ -60,7 +60,7 @@ public:
 	/**
 	 * @brief Member function to set the van's new id.
 	 *
-	 * @param The van's new id.
+	 * @param id The van's new id.
 	 */
 	void setId(int id);
 
@@ -127,6 +127,11 @@ public:
 
 };
 
+/**
+ *  @brief A class used to represent an exception.
+ *
+ *  The exception object contains the invalid van.
+ */
 class NonExistingVan {
 	/**
 	 * int id The NonExistingVan's id.

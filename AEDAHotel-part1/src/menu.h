@@ -39,7 +39,7 @@ void writeHappyBirthdayEmail(vector<Client*> clients, Hotel* h);
  * Calls showMenu() to print menu options.
  * @see showMenu()
  *
- * @param Pointer to date's memory location.
+ * @param date Pointer to date's memory location.
  *
  * @return The menu option chosen by the user.
  */

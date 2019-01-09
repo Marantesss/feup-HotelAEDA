@@ -81,7 +81,7 @@ public:
 	/**
 	 * @brief Member function to set the client's new id.
 	 *
-	 * @param The client's new id.
+	 * @param id The client's new id.
 	 */
 	void setId(int id);
 
@@ -167,7 +167,7 @@ public:
 	/**
 	 * @brief Overload of Operator == for class Client.
 	 *
-	 * @param name The other client's name to be compared to.
+	 * @param c The other client's name to be compared to.
 	 *
 	 * @return true, if the Clients name is the same as the parameter
 	 * 		  false, if otherwise
@@ -196,7 +196,7 @@ public:
 	 *
 	 * The constructor creates a NonExistingClient object with the supplied name.
 	 *
-	 * @param The name of the NonExistingClient.
+	 * @param nm The name of the NonExistingClient.
 	 */
 	NonExistingClient(string nm);
 
@@ -205,7 +205,7 @@ public:
 	 *
 	 * The constructor creates a NonExistingClient object with the supplied ID.
 	 *
-	 * @param The ID of the NonExistingClient.
+	 * @param id The ID of the NonExistingClient.
 	 */
 	NonExistingClient(int id);
 

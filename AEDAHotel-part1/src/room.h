@@ -234,7 +234,7 @@ public:
 	/**
 	 * @brief Member function to change the meeting room's existance of audio.
 	 *
-	 * @param video The meeting room's new existance of audio.
+	 * @param audio The meeting room's new existance of audio.
 	 */
 	void setAudio(bool audio);
 
@@ -278,7 +278,7 @@ public:
 	 *
 	 * @param capacity The bedroom's capacity.
 	 *
-	 * @param video The bedroom's location.
+	 * @param location The bedroom's location.
 	 */
 	Bedroom(int number, int capacity, string location);
 

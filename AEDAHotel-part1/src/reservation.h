@@ -124,7 +124,7 @@ public:
 	 *
 	 * @param duration The reservation's duration.
 	 *
-	 * @param droom The reservation's room.
+	 * @param room The reservation's room.
 	 */
 	void setPrice(int duration, Room *room);
 

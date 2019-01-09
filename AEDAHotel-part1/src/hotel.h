@@ -31,7 +31,7 @@ struct clientPointerHash {
 	/**
 	 * @brief Hash function for Client*.
 	 *
-	 * @param Client c Pointer to a Client to be added to the hash table
+	 * @param c Pointer to a Client to be added to the hash table
 	 *
 	 * @return The added client's index in the hash table, which will be equal to its ID
 	 */
@@ -153,7 +153,7 @@ public:
 	 *
 	 * @param address The hotel's address.
 	 *
-	 * @param trips ... TODO
+	 * @param trips The hotel's number of done trips
 	 */
 	Hotel(int floors, string address, int trips = 0);
 
@@ -270,7 +270,7 @@ public:
 	/**
 	 * @brief Member function to remove a room.
 	 *
-	 * @param number The number of the hotel's removed room.
+	 * @param num The number of the hotel's removed room.
 	 */
 	void removeRoom(int num);
 
@@ -297,8 +297,6 @@ public:
 
 	/**
 	 * @brief Member function to remove the rooms from a floor.
-	 *
-	 * @param floor The number of the floor of the hotel's removed rooms.
 	 */
 	void removeRoomsFromTopFloor();
 

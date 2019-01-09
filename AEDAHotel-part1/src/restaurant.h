@@ -144,7 +144,7 @@ public:
 	 *
 	 * The constructor creates a NonExistingRestaurant object with the supplied name.
 	 *
-	 * @param The name of the NonExistingRestaurant.
+	 * @param name The name of the NonExistingRestaurant.
 	 */
 	NonExistingRestaurant(string name);
 
@@ -172,7 +172,7 @@ public:
 	*
 	* The constructor creates an ExistingRestaurant object with the supplied name.
 	*
-	* @param The name of the ExistingRestaurant.
+	* @param name The name of the ExistingRestaurant.
 	*/
 	ExistingRestaurant(string name);
 
