@@ -76,7 +76,7 @@ void Hotel::showClientsCheckedIn() {
 void Hotel::showClientRecords() {
 	Client c = Client();
 	for (size_t i = 1; i <= clientRecords.size(); i++) {
-		c.setId(i);
+		c.setId((int)i);
 		cout << getClientRecord(&c)->getInfo() << endl;
 	}
 }
@@ -142,7 +142,7 @@ vector<Client*> Hotel::checkBirthdays(Date date) {
 
 	Client c = Client();
 	for (size_t i = 1; i <= clientRecords.size(); i++) {
-		c.setId(i);
+		c.setId((int)i);
 		int day = getClientRecord(&c)->getBirthday().getDay();
 		int month = getClientRecord(&c)->getBirthday().getMonth();
 		if (day == date.getDay() && month == date.getMonth()) {
@@ -672,7 +672,7 @@ vector<Restaurant> Hotel::getRestaurantsOfType(string type) {
 	return res;
 }
 
-//needs testing
+
 void Hotel::importRestaurants(string filename) {
 	vector<Restaurant*> res;
 	string line, name, type;
@@ -692,14 +692,30 @@ void Hotel::importRestaurants(string filename) {
 			getline(file, line);
 			distance = atoi(line.c_str());
 			r.setDistance(distance);
+			getline(file, line);
 			addRestaurant(r);
 		}
 		file.close();
 	}
-
 	else cout << "Unable to open file" << endl;
 }
 
+
+void Hotel::saveRestaurants(string filename) {
+	ofstream file;
+	file.open(filename);
+	BSTItrIn<Restaurant> it(restaurants);
+	if (file.is_open()) {
+		while (!it.isAtEnd()) {
+			file << it.retrieve().getName() << "\n";
+			file << it.retrieve().getType() << "\n";
+			file << it.retrieve().getDistance() << "\n\n";
+			it.advance();
+		}
+		file.close();
+	}
+	else cout << "Unable to open file" << endl;
+}
 
 int Hotel::getNoRestaurants() {
 	int counter = 0;

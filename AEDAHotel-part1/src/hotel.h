@@ -611,11 +611,18 @@ public:
 	vector<Restaurant> getRestaurantsOfType(string type);
 
 	/**
-	* @brief Member function to import restaurants from a file.
+	* @brief Member function to import restaurants from a txt file.
 	*
 	* @param filename The name of the file to import the restaurants from.
 	*/
 	void importRestaurants(string filename);
+
+	/**
+	* @brief Member function to save the restaurants in a txt file.
+	*
+	* @param filename The name of the file to save the restaurants to.
+	*/
+	void saveRestaurants(string filename);
 
 	/**
 	* @brief Member function to get the number of restaurants on the hotel's register.
