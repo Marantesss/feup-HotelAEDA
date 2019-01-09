@@ -214,6 +214,10 @@ int main() {
 	Date *currentDate = new Date();
 	currentDate->getCurrentDate();
 
+	//h->importClientsandReservations("clients.txt");
+	h->importRestaurants("restaurants.txt");
+	//h->importVans("vans.txt");
+
 	cout << "=======================================" << endl;
 	cout << "======== Welcome to Hotel AEDA ========" << endl;
 	cout << "=======================================" << endl;
@@ -255,6 +259,8 @@ int main() {
 			cout << "ERROR: Not a valid Operation! Please try again..." << endl;
 		}
 	} while (menuOption != 0);
+
+	h->saveRestaurants("restaurants.txt");
 
 	return 0;
 }

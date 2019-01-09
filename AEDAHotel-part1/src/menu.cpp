@@ -1092,6 +1092,8 @@ void restaurantMenu(Hotel *h) {
 			break;
 		case 2:
 			cout << h->getRestaurantsInfo();
+			cout << "Press enter...";
+			cin.get();
 			break;
 		case 3:
 			searchRestaurant(h);
