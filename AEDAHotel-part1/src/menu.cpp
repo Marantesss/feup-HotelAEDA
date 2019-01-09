@@ -218,7 +218,7 @@ int showClientOptions(Hotel *h) {
 	cout << "4 - See checked-in clients" << endl;
 	cout << "5 - See client records" << endl;
 	cout << "6 - Search client by name" << endl;
-	cout << "7 - Import clients/Reservations [NOT IMPLEMENTED]" << endl;
+	cout << "7 - Import clients/Reservations" << endl;
 	cout << "0 - Back" << endl << endl;
 	cout << "Option: ";
 	cin >> menuOption;
@@ -370,7 +370,7 @@ int showRoomsOptions(Hotel *h) {
 	cout << "3 - See Rooms" << endl;
 	cout << "4 - Distribute supervisors"<< endl;
 	cout << "5 - Search Room by number" << endl;
-	cout << "6 - Import Rooms [NOT IMPLEMENTED YET]" << endl;
+	cout << "6 - Import Rooms" << endl;
 	cout << "0 - Back" << endl << endl;
 	cout << "Option: ";
 	cin >> menuOption;
