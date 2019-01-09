@@ -50,7 +50,14 @@ enunciados.
 
 ## UML Diagrams
 
-* [Class Diagram](https://www.lucidchart.com/invitations/accept/88c9b8c1-f1f1-413f-8a78-2902d4b6901d) 
+All diagrams were made using [Lucid Chart](https://www.lucidchart.com/)
+
+<img src="https://github.com/Marantesss/feup-HotelAEDA/blob/master/AEDAHotel-part1/doc/Images/Class%20Diagram%20for%20Hotel%20Management.png" width="500"><br>
+**Fig. 1: Class Diagram For Hotel Management** <br><br>
+
+<img src="https://github.com/Marantesss/feup-HotelAEDA/blob/master/AEDAHotel-part1/doc/Images/Class%20Diagram%20for%20Hotel%20Management%20Simplified.png" width="500"><br>
+**Fig. 1: Class Diagram For Hotel Management - Simplified** <br><br>
+
 
 ## License
 
