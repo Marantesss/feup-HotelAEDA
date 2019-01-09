@@ -9,7 +9,14 @@
 using namespace std;
 
 /**
- *  An abstract class used to represent a room.
+ * @defgroup room room
+ * @{
+ *
+ *  Class necessary to handle rooms
+ */
+
+/**
+ *  @brief An abstract class used to represent a room.
  *
  *  Each room object has a room number, a room capacity and an assigned supervisor.
  *
@@ -18,30 +25,30 @@ using namespace std;
 class Room {
 protected:
 	/**
-	 * int number The room's number
+	 * @brief number The room's number.
 	 */
 	int number;
 
 	/**
-	 *  int capacity The room's maximum capacity
+	 *  @brief capacity The room's maximum capacity.
 	 */
 	int capacity;
 
 	/**
-	 * Employee supervisor The room's assigned supervisor
+	 * @brief supervisor The room's assigned supervisor.
 	 */
 	Employee supervisor;
 
 	/**
-	 * double price The room's assigned price
+	 * @brief price The room's assigned price.
 	 *
 	 * Price is measured per night in case of Bedroom
-	 * or per hour in case of MeetingRoom
+	 * or per hour in case of MeetingRoom.
 	 */
 	double price;
 
 	/**
-	 * bool isBedroom flag that tells if room is bedroom or meetingroom
+	 * @brief isBedroom flag that tells if room is bedroom or meetingroom.
 	 */
 	bool isBedroom;
 
@@ -105,7 +112,7 @@ public:
 	/**
 	 * @brief Const virtual member function to get the rooms's information.
 	 *
-	 * Different implementations for Bedroom and MeetingRoom
+	 * Different implementations for Bedroom and MeetingRoom.
 	 * @see Bedroom
 	 * @see MeetingRoom
 	 *
@@ -140,7 +147,7 @@ public:
 	 * @param number The number to be compared to.
 	 *
 	 * @return true, if the room's number is equal to the parameter number
-	 *		  false, if otherwise
+	 *		  false, if otherwise.
 	 */
 	bool operator== (int number);
 
@@ -150,27 +157,27 @@ public:
 	 * @param room The other room to be compared to.
 	 *
 	 * @return true, if the first room's number is is lower
-	 *		  false, if otherwise
+	 *		  false, if otherwise.
 	 */
 	bool operator< (Room & room);
 };
 
 /**
- * A subclass of the Room class to represent meeting rooms
+ * @brief A subclass of the Room class to represent meeting rooms.
  *
- * Each meeting room has the possibility of having video, audio
+ * Each meeting room has the possibility of having video, audio.
  *
- * Each meeting room has a price
+ * Each meeting room has a price.
  */
 class MeetingRoom: public Room {
 	/**
-	 * bool video The existance of video in the meeting room
+	 * @brief video The existance of video in the meeting room.
 	 */
 	bool video;
 
 	/**
-	* bool audio The existance of audio in the meeting room
-	*/
+	 * @brief audio The existance of audio in the meeting room.
+	 */
 	bool audio;
 
 public:
@@ -198,7 +205,7 @@ public:
 	 * @brief Const member function to get the meeting room's existance of video.
 	 *
 	 * @return true if the meeting room has video
-	 *		  false, if otherwise
+	 *		  false, if otherwise.
 	 */
 	bool getVideo() const;
 
@@ -206,14 +213,14 @@ public:
 	 * @brief Const member function to get the meeting room's existance of audio.
 	 *
 	 * @return true if the meeting room has audio
-	 *		  false, if otherwise
+	 *		  false, if otherwise.
 	 */
 	bool getAudio() const;
 
 	/**
 	 * @brief Const member function to get the meeting room's info.
 	 *
-	 * @return a string with the meeting room's info, and the video, audio and price
+	 * @return a string with the meeting room's info, and the video, audio and price.
 	 */
 	string getInfo();
 
@@ -246,13 +253,13 @@ public:
 
 
 /**
- *  A subclass of the Room class to represent bedrooms
+ *  @brief A subclass of the Room class to represent bedrooms.
  *
- *  Each bedroom has a location and a price
+ *  Each bedroom has a location and a price.
  */
 class Bedroom: public Room {
 	/**
-	 *  string location The bedroom's location
+	 *  @brief location The bedroom's location.
 	 */
 	string location;
 
@@ -285,7 +292,7 @@ public:
 	/**
 	 * @brief Const member function to get the bedroom's info.
 	 *
-	 * @return a string with the bedroom's info, and the location and price
+	 * @return a string with the bedroom's info, and the location and price.
 	 */
 	string getInfo();
 
@@ -311,13 +318,13 @@ public:
 
 
 /**
- *  A class used to represent an exception.
+ *  @brief A class used to represent an exception.
  *
  *  The exception object contains the invalid room.
  */
 class NonExistingRoom {
 	/**
-	 * int number The NonExistingRoom's number
+	 * @brief number The NonExistingRoom's number.
 	 */
 	int number;
 
@@ -338,5 +345,7 @@ public:
 	 */
 	int getNumber() const;
 };
+
+/**@}*/
 
 #endif /* ROOM_H_ */
